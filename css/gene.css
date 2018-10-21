@@ -1,0 +1,201 @@
+.clr{
+	clear: both;
+	width: 0px;
+	height: 0px;
+}
+#ct{
+	background-color: white;
+	margin: auto;
+	width: 1000px;
+	font-family: "微软雅黑";
+}
+#top{
+	height: 150px;
+	background-color: #245269;
+}
+#middle{
+	margin-top: 5px;
+	background-color: #EEEEEE;
+}
+#buttom{
+	margin-top: 5px;
+	background-color: #245269;
+	height: 50px;
+}
+#m_bp{
+
+}
+.space{
+	height: 30px;
+}
+#fusion_img{
+
+}
+#fusion_btn{
+	width: 200px;
+	margin-left:80px ;
+	margin-top: 20px;
+	background-color: #245269;
+	color: white;
+}
+
+#fusion_ct{
+	width:100%;
+	/*background-color: #222222;*/
+	font-family: "微软雅黑";
+}	
+#right_g{
+	width:50%;
+/*	height: 500px;*/
+	/*background-color:  #2B542C;*/
+	float: right;
+
+}
+#left_g{
+	width:50%;
+	/*height: 500px;*/
+	/*background-color: #269ABC;*/
+	float: left;
+
+}
+.gene_title{
+	width:100%;
+	height: 70px;
+	/*background-color: #398439;*/
+	font-size: 23px;
+	text-align: center;
+}
+.gene_bar{
+	width:100%;
+	height: 70px;
+	
+}
+.bar_bp{
+	height: 33%;
+	width: 100%;
+	/*background-color: #D58512;*/
+}
+#bp_label{
+	margin-left:257px ;
+}
+#bp_posi{
+	color: red;
+}
+#bp_label_2{
+	margin-left:49px ;
+}
+#bp_posi2{
+	color: red;
+}
+.bar_length{
+	height: 33%;
+	width: 100%;
+}
+#gene_1_start{
+		float: left;
+}
+#gene_1_lenth{
+	margin-left: 350px;
+	float: left;
+
+}
+#gene_2_lenth{
+
+	float: right;
+}
+#gene_2_start{
+	margin-right: 295px;
+	float: right;
+}
+
+
+.bar_draw{
+	height: 33%;
+	width: 100%;
+	/*background-color: #FFFF00*/
+}
+#bar_blue{
+	background-color:  darkcyan;
+	width:339px ;
+	float: right;
+	height: 100%;
+}
+#bar_red{
+	background-color: indianred;
+	width: 386px;
+	height: 100%;
+}
+#bp_line{
+	width: 800px;
+	height:200px;
+	position: absolute;
+	z-index: 10;
+	float: right;
+	/*background-color: #000000;*/
+}
+#line_draw{
+	margin-left: 278px;
+	margin-right: 331px;
+	width: 190.4px;
+	margin-top:95px ;
+	height: 54%;
+	border-right: 2px solid red;
+	border-left: 2px solid red;
+	z-index:-10;
+	background-color: rgba(0,0,0,0.2);
+}
+#line_1{
+	position: absolute;
+	margin-left: 278px;
+	width: 2px;
+	background-color: red;
+	height: 100%;
+	
+}
+#line_2{
+	position: absolute;
+	margin-left: 500px;
+	width: 2px;
+	background-color: red;
+	z-index:10 ;
+	height: 100%;
+}
+#line_box{
+	position: absolute;
+	z-index:10 ;
+	background-color: rgba(0,0,0,0.2);
+}
+.f{
+	height: 15px;
+}
+.fa{
+	height: 15px;
+}
+.fb{
+	height: 15px;
+}
+#b_f_1{
+	width: 39px;
+	background-color: orange;
+	margin-left: 256px;
+}
+#b_f_2{
+	width: 16px;
+	background-color: orange;
+	margin-left: 116px;
+}
+#b_f_3{
+	width: 5px;
+	background-color: green;
+	margin-left: 56px;
+}
+#a_f_1{
+	width: 20px;
+	background-color: orange;
+	margin-left: 256px;
+}
+#a_f_2{
+	width: 46px;
+	background-color: dodgerblue;
+	margin-left: 116px;
+}

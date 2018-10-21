@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="css/gene.css" rel="stylesheet">
+	</head>
+	<body>
+	<div id="ct">
+	  <div id="top"></div>
+	  <div id="middle" >
+	  	  <div class="space">
+	  	  </div>
+		  <div id="m_bp" style="width:400px ;margin: auto;">
+			  <form>
+			  <div>
+			  	Fusion Gene1:
+				    <select id="sect_g1" onchange="changeGeneO()">
+					  <option value="BCR">BCR</option>
+					  <option value="ABL1">ABL1</option>
+			        </select>
+			    BP:<input id="g1_bp" type="text" placeholder="Input breakpoint" maxlength="10000" />
+			  </div>
+			  <div>
+			  	Fusion Gene2:
+				    <select id="sect_g2" onchange="changeGeneT()">
+				      <option value="ABL1">ABL1</option>
+					  <option value="BCR">BCR</option>
+			        </select>
+			    BP:<input id="g2_bp" placeholder="Input breakpoint" maxlength="10000" />
+			  </div>
+			  <input id="fusion_btn" type="button" value="Draw"/>
+			 <!-- <button id="fusion_bt">Draw Fusion Gene</button>-->
+			  </form>
+			  </div>
+			  <div id="fusion_img" style="width:800px ;margin: auto; visibility: hidden;">
+			    <div class="space">
+	  	        </div>
+	  	        <div id="fusion_ct">
+	  	            <!--<div id="bp_line">
+	  	        		<div id="line_draw"></div>
+	  	        	</div>-->
+	  	        	<div id="line_1"></div>
+	  	        	<div id="line_box"></div>
+	  	        	<div id="line_2"></div>
+	  	        	<div id="left_g">
+	  	        		<div class="gene_title">
+	  	        			<div class="gene_t" id="g1_name">BCR</div>
+	  	        			<div class="gene_rank" id="g1_code">ENST00000305877</div>
+	  	        		</div>
+	  	        		<div class="gene_bar">
+	  	        			<div class="bar_bp">
+	  	        				
+	  	        				<span id="bp_label">BP:<span id="bp_posi">927</span></span>
+	  	        			</div>
+	  	        			<div class="bar_length">
+	  	        				<div id="gene_1_start">1</div>
+	  	        				<div id="gene_1_lenth">1272</div>
+	  	        			</div>
+	  	        			<div class="bar_draw">
+	  	        				<div id="bar_red"></div>
+	  	        			</div>
+	  	        		</div>
+	  	        		<div id="f_bar1" class="feature_bar">
+	  	        			<!--<div class="f" id="b_f_1"></div>
+	  	        			<div class="f" id="b_f_2"></div>
+	  	        			<div class="f" id="b_f_3"></div>-->
+	  	        		</div>
+	  	        	</div>
+	  	        	<div id="right_g">
+	  	        		<div class="gene_title">
+	  	        			<div class="gene_t" id="g2_name">BCR</div>
+	  	        			<div class="gene_rank" id="g2_code">ENST00000305877</div>
+	  	        		</div>
+	  	        		<div class="gene_bar">
+	  	        			<div class="bar_bp">
+	  	        				<span id="bp_label_2">BP:<span id="bp_posi2">26</span></span>
+	  	        			</div>
+	  	        			<div class="bar_length">
+	  	        				<div id="gene_2_lenth">1131</div>
+	  	        				<!--<div id="gene_2_start">1</div>-->
+	  	        				<div id="gene_2_begin">1</div>
+	  	        			</div>
+	  	        			<div class="bar_draw">
+	  	        				<div id="bar_blue"></div>
+	  	        			</div>
+	  	        		</div>
+	  	        		<div id="f_bar2" class="feature_bar">
+	  	        			<!--<div class="f" id="a_f_1"></div>
+	  	        			<div class="f" id="a_f_2"></div>
+	  	        			<div class="f" id="a_f_3"></div>-->
+	  	        		</div>
+	  	        	</div>
+
+	  	        	<div class="clr"></div>
+	  	        	
+	  	        </div>
+		      </div>
+	</div>
+	<div id="buttom"></div>
+	</div>
+
+	</body>
+</html> 
+<script type="text/javascript">
+	var bcr_info=[{name:"Chain",start:1,end:1271,desc:"ID=PRO_0000080933;Note=Breakpoint cluster region protein"},
+	{name:"Domain",start:498,end:691,desc:"Note=DH;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00062"},
+	{name:"Domain",start:708,end:866,desc:"Note=PH;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00145"},
+	{name:"Domain",start:870,end:1002,desc:"Note=C2;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00041"},
+	{name:"Domain",start:1054,end:1248,desc:"Note=Rho-GAP;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00172"},
+	{name:"Region",start:1,end:426,desc:"Note=Kinase"},
+	{name:"Region",start:197,end:385,desc:"Note=Binding to ABL SH2-domain"},
+	{name:"Compositional bias",start:824,end:829,desc:"Note=Poly-Leu"},
+	{name:"Site",start:426,end:427,desc:"Note=Breakpoint for translocation to form BCR-ABL oncogene"}]
+	
+	var abl1_info=[{name:"Chain",start:1,end:1130,desc:"ID=PRO_0000088050;Note=Tyrosine-protein kinase ABL1"},
+	{name:"Domain",start:61,end:121,desc:"Note=SH3;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00192"},
+	{name:"Domain",start:127,end:217,desc:"Note=SH2;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00191"},
+	{name:"Domain",start:242,end:493,desc:"Note=Protein kinase;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00159"},
+	{name:"Nucleotide binding",start:248,end:256,desc:"Note=ATP"},
+	{name:"Region",start:1,end:60,desc:"Note=CAP"},
+	{name:"Region",start:869,end:968,desc:"Note=DNA-binding;Ontology_term=ECO:0000250;evidence=ECO:0000250"},
+	{name:"Compositional bias",start:605,end:609,desc:"Note=Poly-Lys"},
+	{name:"Motif",start:381,end:405,desc:"Note=Kinase activation loop"}, 
+	{name:"Site",start:26,end:27,desc:"Note=Breakpoint for translocation to form BCR-ABL oncogene"}] 
+
+    var f_color=[{name:"Signal",color:"#00AEEF"},{name:"Transit peptide",color:"#9EDDF9"},{name:"Propeptide",color:"#104A7F"},{name:"Chain",color:"#6E7BA2"},
+    {name:"Peptide",color:"#DAF1FC"},{name:"Transmembrane",color:"#BE1E2D"},{name:"Intramembrane",color:"#FAD2D9"},{name:"Domain",color:"#ED1C24"},{name:"Repeat",color:"#EA7075"},
+    {name:"Calcium binding",color:"#F8AFB3"},{name:"Zinc finger",color:"#D97D25"},{name:"DNA binding",color:"#F89420"},{name:"Nucleotide binding",color:"#F6B667"},{name: "Region",color:"#F9ED32"},
+    {name:"Coiled coil",color:"#FBE3C7"},
+    {name:"Motif",color:"#C1A72F"},{name:"Compositional bias",color:"#E8C51D"},{name:"Active site",color:"#542C88"},{name:"Metal binding",color:"#A084BD"},
+    {name:"Binding site",color:"#B2509E"},
+    {name:"Site",color:"#D49DC7"},{name:"Non-standard residue",color:"#ED2891"},{name:"Modified residue",color:"#542C88"},{name:"Lipidation",color:"#A084BD"},{name:"Glycosylation",color:"#D3C3E0"},
+    {name:"Disulfide bond",color:"#B2509E"},{name:"Cross-link",color:"#D49DC7"},{name:"Alternative sequence",color:"#CACCDB"},{name:"Natural variant",color:"#CCD1D1"},{name:"Helix",color:"#3953A4"},
+    {name:"Turn",color:"#754C29"},{name:"Beta strand",color:"#CEAC8F"},{name:"Topological domain",color:"#7E1918"}]
+
+    var flag=0; 
+	var sect_g1=document.getElementById('sect_g1');
+	var g1_bp=document.getElementById('g1_bp');
+	var g2_bp=document.getElementById('g2_bp');
+	var fusion_btn=document.getElementById('fusion_btn');
+	var g1_name=document.getElementById('g1_name');
+	var g1_code=document.getElementById('g1_code');
+	var g2_name=document.getElementById('g2_name');
+	var g2_code=document.getElementById('g2_code');
+    var fusion_img=document.getElementById('fusion_img');
+    var sect_g2=document.getElementById('sect_g2');
+    var bp_label=document.getElementById('bp_label');
+    var bp_label_2=document.getElementById('bp_label_2');
+    var bp_posi=document.getElementById('bp_posi'); 
+    var bp_posi2=document.getElementById('bp_posi2'); 
+    var gene_1_start=document.getElementById('gene_1_start');
+    var gene_2_start=document.getElementById('gene_2_start');
+    var gene_1_lenth=document.getElementById('gene_1_lenth');
+    var gene_2_start=document.getElementById('gene_2_lenth');
+    var bar_red=document.getElementById('bar_red');
+    var bar_blue=document.getElementById('bar_blue');
+    var gene_2_begin=document.getElementById('gene_2_begin');
+    var line_draw=document.getElementById('line_draw');
+    var bcr_len=1272;
+    var abl1_len=1131;
+    var f_bar1=document.getElementById('f_bar1');
+    var f_bar2=document.getElementById('f_bar2');
+    var line_1=document.getElementById('line_1');
+    var line_2=document.getElementById('line_2');
+    var line_box=document.getElementById('line_box');
+	sect_g1.onchange=function(){
+		if(sect_g1.value=='BCR'){
+			console.log(sect_g1.value)
+			//alert('g1选择了BCR');
+			
+		}else{
+			//alert('g1选择了ABL1');
+			console.log(sect_g1.value)
+		}
+	}
+	sect_g2.onchange=function(){
+		if(sect_g2.value=='BCR'){
+			console.log(sect_g2.value)
+			//alert('g2选择了BCR');
+		}else{
+			//alert('g2选择了ABL1');
+			console.log(sect_g2.value)
+		}
+	}
+	fusion_btn.onclick=function(){
+//		console.log(f_color.length);
+//		for(var i=0;i<bcr_info.length;i++){
+//			console.log(bcr_info[i].name);
+//		}
+//		for(var i=0;i<abl1_info.length;i++){
+//			console.log(abl1_info[i].name);
+//		}
+		removediv();
+		/*while(f_bar2.hasChildNodes()||f_bar1.hasChildNodes()){
+			f_bar2.removeChild(f_bar2.firstChild);
+			f_bar1.removeChild(f_bar1.firstChild);
+		}
+        window.location.reload();*/
+        if(flag==1){
+       	
+        }
+		if(sect_g1.value==sect_g2.value){
+			alert('Gene 1 and Gene 2 cannot be the same, please re-select!');
+			flag=0;
+		}else{
+            flag=1;
+            fusion_img.style.visibility='visible';
+            bp_posi.innerHTML=g1_bp.value;
+            bp_label.style.marginLeft=g1_bp.value*0.3+"px";
+            line_1.style.marginLeft=g1_bp.value*0.3+"px";
+            line_box.style.marginLeft=g1_bp.value*0.3+2+"px";
+
+            bp_posi2.innerHTML=g2_bp.value;
+            
+		    g1_name.innerHTML=sect_g1.value;
+		    if(g1_name.innerText=='BCR'){
+		    	g1_code.innerHTML='ENST00000305877';
+		    	gene_1_lenth.innerHTML='1272';
+		    	gene_1_lenth.style.marginLeft=bcr_len*0.3-50+"px";
+		    	bar_red.style.width=bcr_len*0.3+"px";
+		    	bcr_Draw(0,f_bar1);
+		    }else{
+		    	g1_code.innerHTML='ENST00000318560';
+		    	gene_1_lenth.innerHTML='1131';
+		    	gene_1_lenth.style.marginLeft=abl1_len*0.3-45+"px";
+		    	bar_red.style.width=abl1_len*0.3+"px";
+		    	abl1_Draw(0,f_bar1);
+		    }
+		    g2_name.innerHTML=sect_g2.value;
+		    if(g2_name.innerText=='ABL1'){
+		    	g2_code.innerHTML='ENST00000318560';
+		    	gene_2_lenth.innerHTML='1131';
+		    	bp_label_2.style.marginLeft=400-abl1_len*0.3+g2_bp.value*0.3+"px";
+		    	line_2.style.marginLeft=800-abl1_len*0.3+g2_bp.value*0.3+"px";
+		    	line_box.style.width=800-abl1_len*0.3+g2_bp.value*0.3-g1_bp.value*0.3-2+"px";
+		    	//line_draw.style.width=800-abl1_len*0.3+g2_bp.value*0.3-g1_bp.value*0.3-2+"px";
+		    	//gene_2_start.style.marginRight=abl1_len*0.3-40+"px";
+		    	bar_blue.style.width=abl1_len*0.3+"px";
+		    	gene_2_begin.style.marginLeft='60px';
+		    	abl1_Draw(1,f_bar2);
+		    }else{
+		    	g2_code.innerHTML='ENST00000305877';
+		    	gene_2_lenth.innerHTML='1272';
+		    	//gene_2_start.style.marginRight="0px";
+		    	gene_2_begin.style.marginLeft='15px';
+		    	gene_2_lenth.style.marginRight="0px";
+		    	bar_blue.style.width=bcr_len*0.3+"px";
+		    	line_2.style.marginLeft=800-bcr_len*0.3+g2_bp.value*0.3+"px";
+		    	line_box.style.width=800-bcr_len*0.3+g2_bp.value*0.3-g1_bp.value*0.3+"px";
+		    	//line_2.style.width=800-abl1_len*0.3+g2_bp.value*0.3-g1_bp.value*0.3-2+"px";
+		    	bcr_Draw(1,f_bar2);
+	      }
+		  line_1.style.height=15*abl1_info.length+48+"px";
+		  line_1.style.marginTop="90px";
+		  line_2.style.height=15*abl1_info.length+48+"px";
+		  line_2.style.marginTop="90px";
+		  line_box.style.height=15*abl1_info.length+48+"px";
+		  line_box.style.marginTop="90px";
+		  
+		  
+		}
+		
+		clickfeature();
+		line_box.style.visibility="visible";
+		
+	}
+	function removediv(){
+			while(f_bar2.hasChildNodes()){ 
+			f_bar2.removeChild(f_bar2.firstChild);
+	
+		}
+		while(f_bar1.hasChildNodes()){
+			f_bar1.removeChild(f_bar1.firstChild);
+	
+		}
+       // window.location.reload();*/
+	}
+	line_box.onclick=function(){
+		line_box.style.visibility="hidden";
+	}
+	function abl1_Draw(r,fbar){
+		var back=0;
+		if(r==1){
+			back=60.7;
+		}
+		for(var i=0;i<abl1_info.length;i++){
+		var div=document.createElement("div");
+		div.className="fa";
+		div.id="fa"+i;
+		console.log(div.id);
+		fbar.appendChild(div);
+		//div.style.backgroundColor="#31B0D5";
+		div.style.marginLeft=abl1_info[i].start*0.3+back+"px";
+		div.style.width=abl1_info[i].end*0.3-abl1_info[i].start*0.3+"px";
+//		if(div.style.width==0.3+"px"){
+//			div.style.width=0.6+"px";
+//			div.style.borderRadius="50%";
+//		}
+		//console.log(abl1_info[i].name);
+
+		for(var j=0;j<f_color.length;j++){
+			//console.log(f_color.length); 
+			//console.log(bcr_info[i].name);
+			if(abl1_info[i].name==f_color[j].name){
+				div.style.backgroundColor=f_color[j].color;			
+			}
+		}
+		if(div.style.width==0.3+"px"){
+			div.style.width="5px";
+		    var circle=document.createElement("div");
+		    circle.style.width="5px";
+		    circle.style.height="5px";
+		    circle.style.borderRadius="50%";
+		    circle.style.backgroundColor=div.style.backgroundColor;
+		    div.style.backgroundColor=null;
+		    div.appendChild(circle);
+			
+		}
+//		document.getElementById(div.id).onclick=function(){
+//      	aclickdiv(div.id);
+//      }
+//		document.getElementById(div.id).addEventListener("click",function(){
+//		
+//		aclickdiv(div.id);
+//		
+//		},false);
+//		document.getElementById(div.id).addEventListener("click",function(){
+//
+//			alert(1);
+//
+//		},false);
+//		if(i==abl1_info.length-1){
+//			div.innerHTML='111';
+//		}
+		}
+		//aclickdiv()
+}
+	function bcr_Draw(r,fbar){
+		var back=0;
+		if(r==1){
+			back=18.4;
+		}
+		for(var i=0;i<bcr_info.length;i++){ 
+		var div=document.createElement("div");
+		div.className="fb";
+		fbar.appendChild(div);
+		//div.style.backgroundColor="#204D74";
+		div.style.marginLeft=bcr_info[i].start*0.3+back+"px";
+		div.style.width=bcr_info[i].end*0.3-bcr_info[i].start*0.3+"px";
+		//div.style.width=bcr_info[i].end*0.3-bcr_info[i].start*0.3+"px";
+		//div.label=bcr_info[i].name;
+		//console.log(div.label);
+		for(var j=0;j<f_color.length;j++){
+			//console.log(f_color.length); 
+			//console.log(bcr_info[i].name);
+			if(bcr_info[i].name==f_color[j].name){
+				div.style.backgroundColor=f_color[j].color;			
+			}
+		} 
+		if(div.style.width==0.3+"px"){
+			div.style.width="5px";
+		    var circle=document.createElement("div");
+		    circle.style.width="5px";
+		    circle.style.height="5px";
+		    circle.style.borderRadius="50%";
+		    circle.style.backgroundColor=div.style.backgroundColor;
+		    div.style.backgroundColor=null;
+		    div.appendChild(circle);
+			
+		}
+//		if(i==bcr_info.length-1){
+//			//alert('yes');
+//			div.style.width="1px";
+//			console.log(div.style.backgroundColor);
+//			div.innerHTML='111';
+//		}
+		}
+
+//		for (var i=0;i<bcr_info.length;i++){ 
+//		var div=document.createElement('div');
+//		//div.setAttribute('f1'+i,'f');// div.id = "example";div.className = "slogan";
+//		div.className='f';
+//		div.style.width='20px';
+//		//div.style.width=bcr_info[i].end-bcr_info[i].start+"px";
+//		div.style.marginLeft='100px'
+//		//div.style.marginLeft=bcr_info[i].start*0.3+"px";
+//		div.style.backgroundColor="Green";
+//		//f_bar.appendChild(div);
+//		//console.log(div.id);
+////		for(var j=0;j<f_color.length;j++){
+////			console.log(f_color.length); 
+////			//console.log(bcr_info[i].name);
+//////			if(bcr_info[i].name==f_color[j].name){
+//////				div.style.backgroundColor=f_color[j].color;
+//////			}
+////		}
+//	    }
+	}
+	
+	function getElementsByClassName(n) {
+	    var classElements = [],allElements = document.getElementsByTagName('*');
+	    for (var i=0; i< allElements.length; i++ )
+	   {
+	       if (allElements[i].className == n ) {
+	           classElements[classElements.length] = allElements[i];
+	        }
+	   }
+	   return classElements;
+	}
+	
+	function clickfeature(){
+//		f_bar2.onclick=function(){
+//			alert('yes！');
+//		}
+        
+        
+       	var list_obja = getElementsByClassName("fa");  
+		var list_objb = getElementsByClassName("fb");
+		console.log(list_objb.length);	
+		for(var i = 0; i<list_objb.length; i++){
+			
+	        list_objb[i].onclick = (function(i){
+	                return function () {
+	                	var infob=bcr_info[i].name+":"+bcr_info[i].desc;
+	                       alert(infob);
+	                }
+	        })(i);
+        }
+		for(var i = 0; i<list_obja.length; i++){
+			
+	        list_obja[i].onclick = (function(i){
+	                return function () {
+	                	var infoa=abl1_info[i].name+":"+abl1_info[i].desc;
+	                    alert(infoa);
+	                }
+	        })(i);
+        }
+//      list_objb[list_objb.length-1].onclick=function(){
+//      	alert('YYYYYes!');
+//      }
+
+	}
+</script>
