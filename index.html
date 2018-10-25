@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<script src="js/eml4.js"></script>
+		<script src="js/alk.js"></script>
 		<link href="css/gene.css" rel="stylesheet">
 	</head>
 	<body>
@@ -18,6 +20,8 @@
 				    <select id="sect_g1" onchange="changeGeneO()">
 					  <option value="BCR">BCR</option>
 					  <option value="ABL1">ABL1</option>
+					  <option value="EML4">EML4</option>
+					  <option value="ALK">ALK</option>
 			        </select>
 			    BP:<input id="g1_bp" type="text" placeholder="Input breakpoint" maxlength="10000" />
 			  </div>
@@ -26,6 +30,8 @@
 				    <select id="sect_g2" onchange="changeGeneT()">
 				      <option value="ABL1">ABL1</option>
 					  <option value="BCR">BCR</option>
+					  <option value="EML4">EML4</option>
+					  <option value="ALK">ALK</option>
 			        </select>
 			    BP:<input id="g2_bp" placeholder="Input breakpoint" maxlength="10000" />
 			  </div>
@@ -40,14 +46,18 @@
 	  	            <!--<div id="bp_line">
 	  	        		<div id="line_draw"></div>
 	  	        	</div>-->
+	  	        	<div id="line_4"></div>
 	  	        	<div id="line_1"></div>
 	  	        	<div id="line_box"></div>
+	  	        	<div id="line_3"></div>
 	  	        	<div id="line_2"></div>
 	  	        	<div id="left_g">
 	  	        		<div class="gene_title">
 	  	        			<div class="gene_t" id="g1_name">BCR</div>
 	  	        			<div class="gene_rank" id="g1_code">ENST00000305877</div>
 	  	        		</div>
+	  	        		<!--<div id="link_line1" class="space">
+	  	                 </div>-->
 	  	        		<div class="gene_bar">
 	  	        			<div class="bar_bp">
 	  	        				
@@ -58,7 +68,9 @@
 	  	        				<div id="gene_1_lenth">1272</div>
 	  	        			</div>
 	  	        			<div class="bar_draw">
-	  	        				<div id="bar_red"></div>
+	  	        				<div id="bar_red">
+	  	        					<div id="red_bp"></div>
+	  	        				</div>
 	  	        			</div>
 	  	        		</div>
 	  	        		<div id="f_bar1" class="feature_bar">
@@ -72,6 +84,8 @@
 	  	        			<div class="gene_t" id="g2_name">BCR</div>
 	  	        			<div class="gene_rank" id="g2_code">ENST00000305877</div>
 	  	        		</div>
+	  	        		<!--<div id="link_line2" class="space">
+	  	                 </div>-->
 	  	        		<div class="gene_bar">
 	  	        			<div class="bar_bp">
 	  	        				<span id="bp_label_2">BP:<span id="bp_posi2">26</span></span>
@@ -82,7 +96,9 @@
 	  	        				<div id="gene_2_begin">1</div>
 	  	        			</div>
 	  	        			<div class="bar_draw">
-	  	        				<div id="bar_blue"></div>
+	  	        				<div id="bar_blue">
+	  	        					<div id="blue_bp"></div>
+	  	        				</div>
 	  	        			</div>
 	  	        		</div>
 	  	        		<div id="f_bar2" class="feature_bar">
@@ -99,30 +115,198 @@
 	</div>
 	<div id="buttom"></div>
 	</div>
-
+    <div id="back_box">
+    	<div id="dialog">
+    		<div id="f_show">
+	    	<p id="feature_title">Protein feature information:</p>
+	    	<p>Name:<span id="f_name"></span></p>
+	    	<p>Start:<span id="f_start">256</span></p>
+	    	<p>End:<span id="f_end">265</span></p>
+	    	<p>Describe:</p>
+	    	<textarea id="f_desc"></textarea>
+    		</div>
+    		<div id="g_show" hidden="hidden">
+	    	<p id="gene_title">Broken protein's sequence:</p>
+	    	<p>★Broken <span id="g_name1"></span>'s AA sequence:</p>
+	    	<textarea id="aas"></textarea>
+	    	<p>★Broken <span id="g_name2"></span>'s transcript sequence:</p>
+	    	<textarea id="trs"></textarea>
+    		</div>
+    		<button id="infobtn">确定</button>
+    	</div>
+    </div>
+    
 	</body>
 </html> 
 <script type="text/javascript">
-	var bcr_info=[{name:"Chain",start:1,end:1271,desc:"ID=PRO_0000080933;Note=Breakpoint cluster region protein"},
-	{name:"Domain",start:498,end:691,desc:"Note=DH;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00062"},
-	{name:"Domain",start:708,end:866,desc:"Note=PH;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00145"},
-	{name:"Domain",start:870,end:1002,desc:"Note=C2;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00041"},
-	{name:"Domain",start:1054,end:1248,desc:"Note=Rho-GAP;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00172"},
-	{name:"Region",start:1,end:426,desc:"Note=Kinase"},
-	{name:"Region",start:197,end:385,desc:"Note=Binding to ABL SH2-domain"},
-	{name:"Compositional bias",start:824,end:829,desc:"Note=Poly-Leu"},
-	{name:"Site",start:426,end:427,desc:"Note=Breakpoint for translocation to form BCR-ABL oncogene"}]
-	
-	var abl1_info=[{name:"Chain",start:1,end:1130,desc:"ID=PRO_0000088050;Note=Tyrosine-protein kinase ABL1"},
-	{name:"Domain",start:61,end:121,desc:"Note=SH3;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00192"},
-	{name:"Domain",start:127,end:217,desc:"Note=SH2;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00191"},
-	{name:"Domain",start:242,end:493,desc:"Note=Protein kinase;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00159"},
-	{name:"Nucleotide binding",start:248,end:256,desc:"Note=ATP"},
-	{name:"Region",start:1,end:60,desc:"Note=CAP"},
-	{name:"Region",start:869,end:968,desc:"Note=DNA-binding;Ontology_term=ECO:0000250;evidence=ECO:0000250"},
-	{name:"Compositional bias",start:605,end:609,desc:"Note=Poly-Lys"},
-	{name:"Motif",start:381,end:405,desc:"Note=Kinase activation loop"}, 
-	{name:"Site",start:26,end:27,desc:"Note=Breakpoint for translocation to form BCR-ABL oncogene"}] 
+    var abl1_info=[{start:"1",end:"1130",name:"Chain",desc:"ID=PRO_0000088050;Note=Tyrosine-protein kinase ABL1"},{start:"61",end:"121",name:"Domain",desc:"Note=SH3;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00192"},
+        {start:"127",end:"217",name:"Domain",desc:"Note=SH2;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00191"},{start:"242",end:"493",name:"Domain",desc:"Note=Protein kinase;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00159"},
+        {start:"248",end:"256",name:"Nucleotide binding",desc:"Note=ATP"},{start:"316",end:"322",name:"Nucleotide binding",desc:"Note=ATP"},
+        {start:"1",end:"60",name:"Region",desc:"Note=CAP"},{start:"869",end:"968",name:"Region",desc:"Note=DNA-binding;Ontology_term=ECO:0000250;evidence=ECO:0000250"},
+        {start:"953",end:"1130",name:"Region",desc:"Note=F-actin-binding"},
+        {start:"381",end:"405",name:"Motif",desc:"Note=Kinase activation loop"},
+        {start:"605",end:"609",name:"Compositional bias",desc:"Note=Poly-Lys"},
+        {start:"709",end:"715",name:"Motif",desc:"Note=Nuclear localization signal 2;Ontology_term=ECO:0000255;evidence=ECO:0000255"},
+        {start:"762",end:"769",name:"Motif",desc:"Note=Nuclear localization signal 3;Ontology_term=ECO:0000255;evidence=ECO:0000255"},
+        {start:"1090",end:"1100",name:"Motif",desc:"Note=Nuclear export signal;Ontology_term=ECO:0000250;evidence=ECO:0000250"},
+        {start:"18",end:"22",name:"Compositional bias",desc:"Note=Poly-Ser"},{start:"605",end:"609",name:"Compositional bias",desc:"Note=Poly-Lys"},
+        {start:"782",end:"1019",name:"Compositional bias",desc:"Note=Pro-rich"},
+        {start:"897",end:"903",name:"Compositional bias",desc:"Note=Poly-Pro"},
+        {start:"363",end:"363",name:"Active site",desc:"Note=Proton acceptor;Ontology_term=ECO:0000255,ECO:0000255;evidence=ECO:0000255|PROSITE-:PRU00159,ECO:0000255|PROSITE-ProRule:PRU10028"},
+        {start:"271",end:"271",name:"Binding site",desc:"Note=ATP"},
+        {start:"26",end:"27",name:"Site",desc:"Note=Breakpoint for translocation to form BCR-ABL oncogene"},{start:"50",end:"50",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244,ECO:0000244,ECO:0000269;evidence=ECO:0000244|PubMed:18691976,ECO:0000244|PubMed:19690332,ECO:0000269|PubMed:16543148;Dbxref=PMID:18691976,PMID:19690332,PMID:16543148"},
+        {start:"70",end:"70",name:"Modified residue",desc:"Note=Phosphotyrosine%3B by autocatalysis;Ontology_term=ECO:0000269,ECO:0000269;evidence=ECO:0000269|PubMed:16912036,ECO:0000269|PubMed:18775435;Dbxref=PMID:16912036,PMID:18775435"},
+        {start:"115",end:"115",name:"Modified residue",desc:"Note=Phosphotyrosine;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:16912036;Dbxref=PMID:16912036"},
+        {start:"128",end:"128",name:"Modified residue",desc:"Note=Phosphotyrosine;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:16912036;Dbxref=PMID:16912036"},
+        {start:"139",end:"139",name:"Modified residue",desc:"Note=Phosphotyrosine;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:16912036;Dbxref=PMID:16912036"},
+        {start:"172",end:"172",name:"Modified residue",desc:"Note=Phosphotyrosine;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:16912036;Dbxref=PMID:16912036"},
+        {start:"185",end:"185",name:"Modified residue",desc:"Note=Phosphotyrosine;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:16912036;Dbxref=PMID:16912036"},
+        {start:"215",end:"215",name:"Modified residue",desc:"Note=Phosphotyrosine;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:16912036;Dbxref=PMID:16912036"},
+        {start:"226",end:"226",name:"Natural variant",desc:"ID=VAR_079482;Note=In CHDSKM%3B increases kinase activity%3B no effect on protein levels. Y->C;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:28288113;Dbxref=dbSNP:rs1060499547,PMID:28288113"},
+        {start:"229",end:"229",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000250;evidence=ECO:0000250|UniProtKB:P42684"},
+        {start:"253",end:"253",name:"Modified residue",desc:"Note=Phosphotyrosine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+        {start:"257",end:"257",name:"Modified residue",desc:"Note=Phosphotyrosine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+        {start:"393",end:"393",name:"Modified residue",desc:"Note=Phosphotyrosine%3B by autocatalysis and SRC-type Tyr-kinases;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:16912036;Dbxref=PMID:16912036"},
+        {start:"413",end:"413",name:"Modified residue",desc:"Note=Phosphotyrosine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+        {start:"446",end:"446",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000250;evidence=ECO:0000250|UniProtKB:P00520"},
+        {start:"559",end:"559",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+        {start:"569",end:"569",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244,ECO:0000244,ECO:0000244,ECO:0000244,ECO:0000244,ECO:0000244,ECO:0000244;evidence=ECO:0000244|PubMed:17081983,ECO:0000244|PubMed:18669648,ECO:0000244|PubMed:18691976,ECO:0000244|PubMed:19369195,ECO:0000244|PubMed:19690332,ECO:0000244|PubMed:23186163,ECO:0000244|PubMed:24275569;Dbxref=PMID:17081983,PMID:18669648,PMID:18691976,PMID:19369195,PMID:19690332,PMID:23186163,PMID:24275569"},
+        {start:"618",end:"618",name:"Modified residue",desc:"Note=Phosphoserine%3B by PAK2;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:18161990;Dbxref=PMID:18161990"},
+        {start:"619",end:"619",name:"Modified residue",desc:"Note=Phosphoserine%3B by PAK2;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:18161990;Dbxref=PMID:18161990"},
+        {start:"620",end:"620",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+        {start:"659",end:"659",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:18691976;Dbxref=PMID:18691976"},
+        {start:"683",end:"683",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+        {start:"711",end:"711",name:"Modified residue",desc:"Note=N6-acetyllysine%3B by EP300;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:16648821;Dbxref=PMID:16648821"},
+        {start:"718",end:"718",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+        {start:"751",end:"751",name:"Modified residue",desc:"Note=Phosphothreonine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+        {start:"781",end:"781",name:"Modified residue",desc:"Note=Phosphothreonine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+        {start:"814",end:"814",name:"Modified residue",desc:"Note=Phosphothreonine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:18691976;Dbxref=PMID:18691976"},
+        {start:"823",end:"823",name:"Modified residue",desc:"Note=Phosphothreonine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+        {start:"844",end:"844",name:"Modified residue",desc:"Note=Phosphothreonine;Ontology_term=ECO:0000244,ECO:0000244;evidence=ECO:0000244|PubMed:18691976,ECO:0000244|PubMed:23186163;Dbxref=PMID:18691976,PMID:23186163"},
+        {start:"852",end:"852",name:"Natural variant",desc:"ID=VAR_025044;Note=T->P;Ontology_term=ECO:0000269;evidence=ECO:0000269|Ref.4"},
+        {start:"855",end:"855",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+        {start:"917",end:"917",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244,ECO:0000244;evidence=ECO:0000244|PubMed:18669648,ECO:0000244|PubMed:23186163;Dbxref=PMID:18669648,PMID:23186163"},
+        {start:"977",end:"977",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:18691976;Dbxref=PMID:18691976"},
+        {start:"1",end:"26",name:"Alternative sequence",desc:"ID=VSP_004957;Note=In isoform IB. MLEICLKLVGCKSKKGLSSSSSCYLE->MGQQPGKVLGDQRRPSLPALHFIKGAGKKESSRHGGPHCNVFVEH;Ontology_term=ECO:0000303;evidence=ECO:0000303|PubMed:15489334;Dbxref=PMID:15489334"},
+        {start:"47",end:"47",name:"Natural variant",desc:"ID=VAR_032676;Note=In a lung large cell carcinoma sample%3B somatic mutation. R->G;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=PMID:17344846"},
+        {start:"140",end:"140",name:"Natural variant",desc:"ID=VAR_051692;Note=L->P;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:3021337;Dbxref=dbSNP:rs1064152,PMID:3021337"},
+        {start:"166",end:"166",name:"Natural variant",desc:"ID=VAR_032677;Note=In a melanoma sample%3B somatic mutation. R->K;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=PMID:17344846"},
+        {start:"226",end:"226",name:"Natural variant",desc:"ID=VAR_079482;Note=In CHDSKM%3B increases kinase activity%3B no effect on protein levels. Y->C;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:28288113;Dbxref=dbSNP:rs1060499547,PMID:28288113"},
+        {start:"247",end:"247",name:"Natural variant",desc:"ID=VAR_051693;Note=K->R;Dbxref=dbSNP:rs34549764"},
+        {start:"337",end:"337",name:"Natural variant",desc:"ID=VAR_079483;Note=In CHDSKM%3B increases kinase activity%3B no effect on protein levels. A->T;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:28288113;Dbxref=dbSNP:rs1060499548,PMID:28288113"},
+        {start:"706",end:"706",name:"Natural variant",desc:"ID=VAR_025043;Note=G->V;Ontology_term=ECO:0000269,ECO:0000269;evidence=ECO:0000269|PubMed:17344846,ECO:0000269|Ref.4;Dbxref=dbSNP:rs34634745,PMID:17344846"},
+        {start:"810",end:"810",name:"Natural variant",desc:"ID=VAR_032678;Note=P->L;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs2229071,PMID:17344846"},
+        {start:"852",end:"852",name:"Natural variant",desc:"ID=VAR_025044;Note=T->P;Ontology_term=ECO:0000269;evidence=ECO:0000269|Ref.4"},
+        {start:"900",end:"900",name:"Natural variant",desc:"ID=VAR_025045;Note=P->S;Ontology_term=ECO:0000269;evidence=ECO:0000269|Ref.4;Dbxref=dbSNP:rs35266696"},
+        {start:"968",end:"968",name:"Natural variant",desc:"ID=VAR_051694;Note=S->P;Dbxref=dbSNP:rs1064165"},
+        {start:"972",end:"972",name:"Natural variant",desc:"ID=VAR_025046;Note=S->L;Ontology_term=ECO:0000269,ECO:0000269;evidence=ECO:0000269|PubMed:17344846,ECO:0000269|Ref.4;Dbxref=dbSNP:rs2229067,PMID:17344846"},
+{start:"26",end:"32",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:6AMV"},{start:"39",end:"44",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:6AMV"},
+{start:"45",end:"47",name:"Turn",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:6AMV"},{start:"49",end:"53",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:2FO0"},
+{start:"58",end:"60",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:2FO0"},
+{start:"65",end:"70",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OAZ"},
+{start:"76",end:"79",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:3EG3"},{start:"87",end:"93",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OAZ"},
+{start:"97",end:"104",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OAZ"},{start:"107",end:"112",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OAZ"},
+{start:"113",end:"115",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OAZ"},{start:"116",end:"118",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OAZ"},
+{start:"122",end:"124",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5DC4"},{start:"128",end:"131",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5DC4"},
+{start:"134",end:"140",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5DC4"},{start:"141",end:"143",name:"Turn",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5DC4"},
+{start:"148",end:"153",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5DC4"},
+{start:"155",end:"157",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5DC4"},{start:"161",end:"167",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5DC4"},
+{start:"170",end:"175",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5DC4"},
+{start:"177",end:"179",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:4XEY"},{start:"180",end:"182",name:"Turn",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:4XEY"},
+{start:"184",end:"187",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5DC4"},{start:"190",end:"194",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5DC4"},
+{start:"195",end:"202",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5DC4"},{start:"209",end:"211",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5DC4"},
+{start:"226",end:"228",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5MO4"},{start:"229",end:"231",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:2GQG"},
+{start:"233",end:"235",name:"Turn",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:2G1T"},{start:"239",end:"241",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"242",end:"247",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"248",end:"251",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},{start:"254",end:"261",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"262",end:"264",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"266",end:"271",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},{start:"275",end:"277",name:"Turn",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"280",end:"290",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},{start:"301",end:"305",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"307",end:"310",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},{start:"312",end:"316",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"319",end:"322",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:2HZI"},{start:"323",end:"329",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"332",end:"334",name:"Turn",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},{start:"337",end:"356",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"359",end:"361",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:2G2H"},{start:"366",end:"368",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"369",end:"371",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},{start:"373",end:"375",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"377",end:"379",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},{start:"381",end:"383",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:2G2F"},
+{start:"384",end:"387",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:2G1T"},{start:"390",end:"392",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:2G1T"},
+{start:"393",end:"396",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:3QRJ"},{start:"399",end:"401",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"403",end:"405",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},{start:"408",end:"413",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"418",end:"433",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},{start:"445",end:"447",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"448",end:"453",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},{start:"466",end:"475",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"480",end:"482",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},{start:"486",end:"496",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5HU9"},
+{start:"498",end:"500",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:1OPL"},{start:"503",end:"506",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:2G1T"},
+{start:"510",end:"512",name:"Turn",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:2F4J"},
+{start:"1029",end:"1045",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:1ZZP"},{start:"1046",end:"1048",name:"Turn",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:1ZZP"},
+{start:"1053",end:"1070",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:1ZZP"},{start:"1071",end:"1073",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:1ZZP"},
+{start:"1080",end:"1097",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:1ZZP"},{start:"1101",end:"1104",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:1ZZP"},
+{start:"1106",end:"1108",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:1ZZP"},{start:"1115",end:"1128",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:1ZZP"}]
+	var bcr_info=[{start:"1",end:"1271",name:"Chain",desc:"ID=PRO_0000080933;Note=Breakpoint cluster region protein"},{start:"498",end:"691",name:"Domain",desc:"Note=DH;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00062"},
+	{start:"708",end:"866",name:"Domain",desc:"Note=PH;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00145"},{start:"870",end:"1002",name:"Domain",desc:"Note=C2;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00041"},
+	{start:"1054",end:"1248",name:"Domain",desc:"Note=Rho-GAP;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00172"},{start:"1",end:"426",name:"Region",desc:"Note=Kinase"},
+	{start:"197",end:"385",name:"Region",desc:"Note=Binding to ABL SH2-domain"},{start:"824",end:"827",name:"Compositional bias",desc:"Note=Poly-Leu"},
+	{start:"426",end:"427",name:"Site",desc:"Note=Breakpoint for translocation to form BCR-ABL oncogene"},{start:"1",end:"1",name:"Modified residue",desc:"Note=N-acetylmethionine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:22223895;Dbxref=PMID:22223895"},
+	{start:"122",end:"122",name:"Modified residue",
+	desc:"Note=Phosphoserine;Ontology_term=ECO:0000244,ECO:0000244;evidence=ECO:0000244|PubMed:21406692,ECO:0000244|PubMed:23186163;Dbxref=PMID:21406692,PMID:23186163"},
+	{start:"139",end:"139",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+	{start:"177",end:"177",name:"Mutagenesis",desc:"Note=Abolishes interaction with FES and GRB2.Y->F;Ontology_term=ECO:0000269,ECO:0000269;evidence=ECO:0000269|PubMed:15302586,ECO:0000269|PubMed:9407116;Dbxref=PMID:15302586,PMID:9407116"},
+	{start:"202",end:"202",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+	{start:"215",end:"215",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244,ECO:0000244;evidence=ECO:0000244|PubMed:21406692,ECO:0000244|PubMed:23186163;Dbxref=PMID:21406692,PMID:23186163"},
+	{start:"222",end:"222",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+	{start:"236",end:"236",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000250;evidence=ECO:0000250|UniProtKB:Q6PAJ1"},
+	{start:"246",end:"246",name:"Modified residue",desc:"Note=Phosphotyrosine%3B by FES;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:15302586;Dbxref=PMID:15302586"},
+	{start:"356",end:"356",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+	{start:"377",end:"377",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+	{start:"382",end:"382",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000250;evidence=ECO:0000250|UniProtKB:Q6PAJ1"},
+	{start:"385",end:"385",name:"Modified residue",desc:"Note=Phosphothreonine;Ontology_term=ECO:0000250;evidence=ECO:0000250|UniProtKB:Q6PAJ1"},
+	{start:"459",end:"459",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244,ECO:0000244,ECO:0000244,ECO:0000244,ECO:0000244;evidence=ECO:0000244|PubMed:18669648,ECO:0000244|PubMed:19690332,ECO:0000244|PubMed:21406692,ECO:0000244|PubMed:23186163,ECO:0000244|PubMed:24275569;Dbxref=PMID:18669648,PMID:19690332,PMID:21406692,PMID:23186163,PMID:24275569"},
+	{start:"463",end:"463",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+	{start:"471",end:"471",name:"Modified residue",desc:"Note=Omega-N-methylarginine;Ontology_term=ECO:0000250;evidence=ECO:0000250|UniProtKB:Q6PAJ1"},
+	{start:"473",end:"473",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+	{start:"488",end:"488",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+	{start:"554",end:"554",name:"Modified residue",desc:"Note=Phosphotyrosine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+	{start:"641",end:"641",name:"Modified residue",desc:"Note=Phosphothreonine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+	{start:"644",end:"644",name:"Modified residue",desc:"Note=Phosphotyrosine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+	{start:"693",end:"693",name:"Modified residue",desc:"Note=Phosphothreonine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+	{start:"894",end:"894",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244;evidence=ECO:0000244|PubMed:23186163;Dbxref=PMID:23186163"},
+	{start:"1264",end:"1264",name:"Modified residue",desc:"Note=Phosphoserine;Ontology_term=ECO:0000244,ECO:0000244;evidence=ECO:0000244|PubMed:15144186,ECO:0000244|PubMed:19690332;Dbxref=PMID:15144186,PMID:19690332"},
+	{start:"961",end:"1004",name:"Alternative sequence",desc:"ID=VSP_024352;Note=In isoform 2. Missing;Ontology_term=ECO:0000303;evidence=ECO:0000303|PubMed:3285291;Dbxref=PMID:3285291"},
+	{start:"400",end:"400",name:"Natural variant",desc:"ID=VAR_041883;Note=In a bladder transitional cell carcinoma sample%3B somatic mutation. S->P;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=PMID:17344846"},
+	{start:"413",end:"413",name:"Natural variant",desc:"ID=VAR_041884;Note=I->M;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs56321828,PMID:17344846"},
+	{start:"558",end:"558",name:"Natural variant",desc:"ID=VAR_051983;Note=K->T;Dbxref=dbSNP:rs4437065"},{start:"752",end:"752",name:"Natural variant",desc:"ID=VAR_041885;Note=D->E;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs12484731,PMID:17344846"},
+	{start:"796",end:"796",name:"Natural variant",desc:"ID=VAR_031552;Note=N->S;Ontology_term=ECO:0000269,ECO:0000269,ECO:0000269,ECO:0000269,ECO:0000269;evidence=ECO:0000269|PubMed:17344846,ECO:0000269|PubMed:2407300,ECO:0000269|PubMed:3107980,ECO:0000269|PubMed:3285291,ECO:0000269|Ref.3;Dbxref=dbSNP:rs140504,PMID:17344846,PMID:2407300,PMID:3107980,PMID:3285291"},
+	{start:"910",end:"910",name:"Natural variant",desc:"ID=VAR_041886;Note=Y->C;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs35537221,PMID:17344846"},
+	{start:"949",end:"949",name:"Natural variant",desc:"ID=VAR_041887;Note=V->I;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs2229038,PMID:17344846"},
+	{start:"1037",end:"1037",name:"Natural variant",desc:"ID=VAR_031553;Note=E->K;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs776552570,PMID:17344846"},
+	{start:"1091",end:"1091",name:"Natural variant",desc:"ID=VAR_041888;Note=V->M;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs778229520,PMID:17344846"},
+	{start:"1096",end:"1096",name:"Natural variant",desc:"ID=VAR_041889;Note=T->A;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs745459086,PMID:17344846"},
+	{start:"1104",end:"1104",name:"Natural variant",desc:"ID=VAR_041890;Note=A->G;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs11558696,PMID:17344846"},
+	{start:"1106",end:"1106",name:"Natural variant",desc:"ID=VAR_041891;Note=D->N;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs879255379,PMID:17344846"},
+	{start:"1127",end:"1127",name:"Natural variant",desc:"ID=VAR_031554;Note=T->M;Dbxref=dbSNP:rs35812689"},{start:"1149",end:"1149",name:"Natural variant",desc:"ID=VAR_041892;Note=A->T;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs200099830,PMID:17344846"},
+	{start:"1161",end:"1161",name:"Natural variant",desc:"ID=VAR_041893;Note=E->K;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=PMID:17344846"},
+	{start:"1187",end:"1187",name:"Natural variant",desc:"ID=VAR_041894;Note=K->E;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=PMID:17344846"},
+	{start:"1189",end:"1189",name:"Natural variant",desc:"ID=VAR_041895;Note=V->M;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs55816482,PMID:17344846"},
+	{start:"1204",end:"1204",name:"Natural variant",desc:"ID=VAR_041896;Note=A->G;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs56265970,PMID:17344846"},
+	{start:"1235",end:"1235",name:"Natural variant",desc:"ID=VAR_041897;Note=W->R;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:17344846;Dbxref=dbSNP:rs55719322,PMID:17344846"},
+	{start:"177",end:"177",name:"Mutagenesis",desc:"Note=Abolishes interaction with FES and GRB2. Y->F;Ontology_term=ECO:0000269,ECO:0000269;evidence=ECO:0000269|PubMed:15302586,ECO:0000269|PubMed:9407116;Dbxref=PMID:15302586,PMID:9407116"},
+	{start:"1269",end:"1271",name:"Mutagenesis",desc:"Note=Abolishes interaction with PDZK1. Missing;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:15494376;Dbxref=PMID:15494376"},
+	{start:"1271",end:"1271",name:"Mutagenesis",desc:"Note=Reduces interaction with PDZK1.V->A;Ontology_term=ECO:0000269;evidence=ECO:0000269|PubMed:15494376;Dbxref=PMID:15494376"},
+	{start:"4",end:"14",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:1K1F"},{start:"28",end:"64",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:1K1F"},
+	{start:"492",end:"521",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N7E"},{start:"524",end:"531",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N7E"},
+	{start:"533",end:"535",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N7E"},{start:"540",end:"546",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N7E"},
+	{start:"547",end:"549",name:"Turn",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N7E"},
+	{start:"550",end:"569",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N7E"},{start:"578",end:"586",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N7E"},
+	{start:"588",end:"611",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N7E"},{start:"613",end:"618",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N7E"},
+	{start:"630",end:"634",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N6R"},
+	{start:"639",end:"651",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N7E"},{start:"653",end:"661",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N7E"},
+	{start:"670",end:"687",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N7E"},
+	{start:"694",end:"697",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5N6R"},
+	{start:"709",end:"719",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OC7"},{start:"722",end:"740",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OC7"},
+	{start:"751",end:"758",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OC7"},{start:"759",end:"761",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OC7"},
+	{start:"762",end:"767",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OC7"},
+	{start:"830",end:"838",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OC7"},
+	{start:"843",end:"847",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OC7"},{start:"851",end:"865",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OC7"},
+	{start:"876",end:"885",name:"Helix",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:5OC7"},
+	{start:"1268",end:"1271",name:"Beta strand",desc:"Ontology_term=ECO:0000244;evidence=ECO:0000244|PDB:2AIN"}]
 
     var f_color=[{name:"Signal",color:"#00AEEF"},{name:"Transit peptide",color:"#9EDDF9"},{name:"Propeptide",color:"#104A7F"},{name:"Chain",color:"#6E7BA2"},
     {name:"Peptide",color:"#DAF1FC"},{name:"Transmembrane",color:"#BE1E2D"},{name:"Intramembrane",color:"#FAD2D9"},{name:"Domain",color:"#ED1C24"},{name:"Repeat",color:"#EA7075"},
@@ -133,8 +317,12 @@
     {name:"Site",color:"#D49DC7"},{name:"Non-standard residue",color:"#ED2891"},{name:"Modified residue",color:"#542C88"},{name:"Lipidation",color:"#A084BD"},{name:"Glycosylation",color:"#D3C3E0"},
     {name:"Disulfide bond",color:"#B2509E"},{name:"Cross-link",color:"#D49DC7"},{name:"Alternative sequence",color:"#CACCDB"},{name:"Natural variant",color:"#CCD1D1"},{name:"Helix",color:"#3953A4"},
     {name:"Turn",color:"#754C29"},{name:"Beta strand",color:"#CEAC8F"},{name:"Topological domain",color:"#7E1918"}]
-
-    var flag=0; 
+    var bcr_seq={aaseq:"MVDPVGFAEAWKAQFPDSEPPRMELRSVGDIEQELERCKASIRRLEQEVNQERFRMIYLQTLLAKEKKSTDRQRWGFRRAAQAPDGASEPRASASRPQPAPADGADPPPAEEPEARPDGEGSPGKARPGTARRPGAAASGERDDRGPPASVAALRSNFERIRKGHGQPGADAEKPFYVNVEFHHERGLVKVNDKEVSDRISSLGSQAMQMERKKSQHGAGSSVGDASRPPYRGRSSESSCGVDGDYEDAELNPRFLKDNLIDANGGSRPPWPPLEYQPYQSIYVGGMMEGEGKGPLLRSQSTSEQEKRLTWPRRSYSPRSFEDCGGGTTPDCSSNENLTSSEEDFSSGQSSRVSPSPTTYRMFRDKSRSPSQNSQQSFDSSSPPTPQCHKRHRHCPVVVSEATIVGVRKTGQIWPNDGEGAFHGDADGSFGTPPGYGCAADRAEEQRRHQDGLPYIDDSPSSSPHLSSKGRGSRDALVSGALESTKASELDLEKGLEMRKWVLSGILASEETYLSHLEALLLPMKPLKAAATTSQPVLTSQQIETIFFKVPELYEIHKEFTDGLFPRVQQWSHQQRVGDLFQKLASQLGVYRAFVDNYGVAMEMAEKCCQANAQFAEISENLRARSNKDAKDPTTKNSLETLLYKPVDRVTRSTLVLHDLLKHTPASHPDHPLLQDALRISQNFLSSINEEITPRRQSMTVKKGEHRQLLKDSFMVELVEGARKLRHVFLFTDLLLCTKLKKQSGGKTQQTDCKWYIPLTDLSFQMVDELEAVPNIPLVPDEELDALKIKISQIKNDIQREKRANKGSKATERLKKKLSEQESLLLLMSPSMAFRVHSRNGKSYTFLISSDTERAEWRENIREQQKKCFRSFSLTSVELQMLTNSCVKLQTVHSIPLTINKEDDESPGLTGFLNVIVHSATGFKQS",
+transeq:"ATGGTGGACCCGGTGGGCTTCGCGGAGGCGTGGAAGGCGCAGTTCCCGGACTCAGAGCCCCCGCGCATGGAGCTGCGCTCAGTGGGCGACATCGAGCAGGAGCTGGAGCGCTGCAAGGCCTCCATTCGGCGCCTGGAGCAGGAGGTGAACCAGGAGCGCTTCCGCATGATCTACCTGCAGACGTTGCTGGCCAAGGAAAAGAAGAGCTATGACCGGCAGCGATGGGGCTTCCGGCGCGCGGCGCAGGCCCCCGACGGCGCCTCCGAGCCCCGAGCGTCCGCGTCGCGCCCGCAGCCAGCGCCCGCCGACGGAGCCGACCCGCCGCCCGCCGAGGAGCCCGAGGCCCGGCCCGACGGCGAGGGTTCTCCGGGTAAGGCCAGGCCCGGGACCGCCCGCAGGCCCGGGGCAGCCGCGTCGGGGGAACGGGACGACCGGGGACCCCCCGCCAGCGTGGCGGCGCTCAGGTCCAACTTCGAGCGGATCCGCAAGGGCCATGGCCAGCCCGGGGCGGACGCCGAGAAGCCCTTCTACGTGAACGTCGAGTTTCACCACGAGCGCGGCCTGGTGAAGGTCAACGACAAAGAGGTGTCGGACCGCATCAGCTCCCTGGGCAGCCAGGCCATGCAGATGGAGCGCAAAAAGTCCCAGCACGGCGCGGGCTCGAGCGTGGGGGATGCATCCAGGCCCCCTTACCGGGGACGCTCCTCGGAGAGCAGCTGCGGCGTCGACGGCGACTACGAGGACGCCGAGTTGAACCCCCGCTTCCTGAAGGACAACCTGATCGACGCCAATGGCGGTAGCAGGCCCCCTTGGCCGCCCCTGGAGTACCAGCCCTACCAGAGCATCTACGTCGGGGGCATGATGGAAGGGGAGGGCAAGGGCCCGCTCCTGCGCAGCCAGAGCACCTCTGAGCAGGAGAAGCGCCTTACCTGGCCCCGCAGGTCCTACTCCCCCCGGAGTTTTGAGGATTGCGGAGGCGGCTATACCCCGGACTGCAGCTCCAATGAGAACCTCACCTCCAGCGAGGAGGACTTCTCCTCTGGCCAGTCCAGCCGCGTGTCCCCAAGCCCCACCACCTACCGCATGTTCCGGGACAAAAGCCGCTCTCCCTCGCAGAACTCGCAACAGTCCTTCGACAGCAGCAGTCCCCCCACGCCGCAGTGCCATAAGCGGCACCGGCACTGCCCGGTTGTCGTGTCCGAGGCCACCATCGTGGGCGTCCGCAAGACCGGGCAGATCTGGCCCAACGATGGCGAGGGCGCCTTCCATGGAGACGCAGATGGCTCGTTCGGAACACCACCTGGATACGGCTGCGCTGCAGACCGGGCAGAGGAGCAGCGCCGGCACCAAGATGGGCTGCCCTACATTGATGACTCGCCCTCCTCATCGCCCCACCTCAGCAGCAAGGGCAGGGGCAGCCGGGATGCGCTGGTCTCGGGAGCCCTGGAGTCCACTAAAGCGAGTGAGCTGGACTTGGAAAAGGGCTTGGAGATGAGAAAATGGGTCCTGTCGGGAATCCTGGCTAGCGAGGAGACTTACCTGAGCCACCTGGAGGCACTGCTGCTGCCCATGAAGCCTTTGAAAGCCGCTGCCACCACCTCTCAGCCGGTGCTGACGAGTCAGCAGATCGAGACCATCTTCTTCAAAGTGCCTGAGCTCTACGAGATCCACAAGGAGTTCTATGATGGGCTCTTCCCCCGCGTGCAGCAGTGGAGCCACCAGCAGCGGGTGGGCGACCTCTTCCAGAAGCTGGCCAGCCAGCTGGGTGTGTACCGGGCCTTCGTGGACAACTACGGAGTTGCCATGGAAATGGCTGAGAAGTGCTGTCAGGCCAATGCTCAGTTTGCAGAAATCTCCGAGAACCTGAGAGCCAGAAGCAACAAAGATGCCAAGGATCCAACGACCAAGAACTCTCTGGAAACTCTGCTCTACAAGCCTGTGGACCGTGTGACGAGGAGCACGCTGGTCCTCCATGACTTGCTGAAGCACACTCCTGCCAGCCACCCTGACCACCCCTTGCTGCAGGACGCCCTCCGCATCTCACAGAACTTCCTGTCCAGCATCAATGAGGAGATCACACCCCGACGGCAGTCCATGACGGTGAAGAAGGGAGAGCACCGGCAGCTGCTGAAGGACAGCTTCATGGTGGAGCTGGTGGAGGGGGCCCGCAAGCTGCGCCACGTCTTCCTGTTCACCGACCTGCTTCTCTGCACCAAGCTCAAGAAGCAGAGCGGAGGCAAAACGCAGCAGTATGACTGCAAATGGTACATTCCGCTCACGGATCTCAGCTTCCAGATGGTGGATGAACTGGAGGCAGTGCCCAACATCCCCCTGGTGCCCGATGAGGAGCTGGACGCTTTGAAGATCAAGATCTCCCAGATCAAGAATGACATCCAGAGAGAGAAGAGGGCGAACAAGGGCAGCAAGGCTACGGAGAGGCTGAAGAAGAAGCTGTCGGAGCAGGAGTCACTGCTGCTGCTTATGTCTCCCAGCATGGCCTTCAGGGTGCACAGCCGCAACGGCAAGAGTTACACGTTCCTGATCTCCTCTGACTATGAGCGTGCAGAGTGGAGGGAGAACATCCGGGAGCAGCAGAAGAAGTGTTTCAGAAGCTTCTCCCTGACATCCGTGGAGCTGCAGATGCTGACCAACTCGTGTGTGAAACTCCAGACTGTCCACAGCATTCCGCTGACCATCAATAAGGAAGATGATGAGTCTCCGGGGCTCTATGGGTTTCTGAATGTCATCGTCCACTCAGCCACTGGATTTAAGCAGAGTTCAA"}
+    var abl1_seq={aaseq:"KALQRPVASDFEPQGLSEAARWNSKENLLAGPSENDPNLFVALTDFVASGDNTLSITKGEKLRVLGTNHNGEWCEAQTKNGQGWVPSNYITPVNSLEKHSWYHGPVSRNAAETLLSSGINGSFLVRESESSPGQRSISLRYEGRVYHYRINTASDGKLYVSSESRFNTLAELVHHHSTVADGLITTLHTPAPKRNKPTVTGVSPNYDKWEMERTDITMKHKLGGGQYGEVYEGVWKKYSLTVAVKTLKEDTMEVEEFLKEAAVMKEIKHPNLVQLLGVCTREPPFTIITEFMTYGNLLDYLRECNRQEVNAVVLLYMATQISSAMEYLEKKNFIHRDLAARNCLVGENHLVKVADFGLSRLMTGDTYTAHAGAKFPIKWTAPESLAYNKFSIKSDVWAFGVLLWEIATTGMSPYPGIDLSQVTELLEKDYRMERPEGCPEKVTELMRACWQWNPSDRPSFAEIHQAFETMFQESSISDEVEKELGKQGVRGAVSTLLQAPELPTKTRTSRRAAEHRDTTDVPEMPHSKGQGESDPLDHEPAVSPLLPRKERGPPEGGLNEDERLLPKDKKTNLFSALIKKKKKTAPTPPKRSSSFREMDGQPERRGAGEEEGRDISNGALAFTPLDTADPAKSPKPSNGAGVPNGALRESGGSGFRSPHLWKKSSTLTSSRLATGEEEGGGSSSKRFLRSCSASCVPHGAKDTEWRSVTLPRDLQSTGRQFDSSTFGGHKSEKPALPRKRAGENRSDQVTRGTVTPPPRLVKKNEEAADEVFKDIMESSPGSSPPNLTPKPLRRQVTVAPASGLPHKEEAGKGSALGTPAAAEPVTPTSKAGSGAPGGTSKGPAEESRVRRHKHSSESPGRDKGKLSRLKPAPPPPPAASAGKAGGKPSQSPSQEAAGEAVLGAKTKATSLVDAVNSDAAKPSQPGEGLKKPVLPATPKPQSAKPSGTPISPAPVPSTLPSASSALAGDQPSSTAFIPLISTRVSLRKTRQPPERIASGAITKGVVLDSTEALCLAISRNSEQMASHSAVLEAGKNLYTFCVSTVDSIQQMRNKFAFREAINKLENNLRELQICPATAGSGPAATQDFSKLLSSVKEISDIVQR_",
+transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCCAAGGAAAACCTTCTCGCTGGACCCAGTGAAAATGACCCCAACCTTTTCGTTGCACTGTATGATTTTGTGGCCAGTGGAGATAACACTCTAAGCATAACTAAAGGTGAAAAGCTCCGGGTCTTAGGCTATAATCACAATGGGGAATGGTGTGAAGCCCAAACCAAAAATGGCCAAGGCTGGGTCCCAAGCAACTACATCACGCCAGTCAACAGTCTGGAGAAACACTCCTGGTACCATGGGCCTGTGTCCCGCAATGCCGCTGAGTATCTGCTGAGCAGCGGGATCAATGGCAGCTTCTTGGTGCGTGAGAGTGAGAGCAGTCCTGGCCAGAGGTCCATCTCGCTGAGATACGAAGGGAGGGTGTACCATTACAGGATCAACACTGCTTCTGATGGCAAGCTCTACGTCTCCTCCGAGAGCCGCTTCAACACCCTGGCCGAGTTGGTTCATCATCATTCAACGGTGGCCGACGGGCTCATCACCACGCTCCATTATCCAGCCCCAAAGCGCAACAAGCCCACTGTCTATGGTGTGTCCCCCAACTACGACAAGTGGGAGATGGAACGCACGGACATCACCATGAAGCACAAGCTGGGCGGGGGCCAGTACGGGGAGGTGTACGAGGGCGTGTGGAAGAAATACAGCCTGACGGTGGCCGTGAAGACCTTGAAGGAGGACACCATGGAGGTGGAAGAGTTCTTGAAAGAAGCTGCAGTCATGAAAGAGATCAAACACCCTAACCTGGTGCAGCTCCTTGGGGTCTGCACCCGGGAGCCCCCGTTCTATATCATCACTGAGTTCATGACCTACGGGAACCTCCTGGACTACCTGAGGGAGTGCAACCGGCAGGAGGTGAACGCCGTGGTGCTGCTGTACATGGCCACTCAGATCTCGTCAGCCATGGAGTACCTGGAGAAGAAAAACTTCATCCACAGAGATCTTGCTGCCCGAAACTGCCTGGTAGGGGAGAACCACTTGGTGAAGGTAGCTGATTTTGGCCTGAGCAGGTTGATGACAGGGGACACCTACACAGCCCATGCTGGAGCCAAGTTCCCCATCAAATGGACTGCACCCGAGAGCCTGGCCTACAACAAGTTCTCCATCAAGTCCGACGTCTGGGCATTTGGAGTATTGCTTTGGGAAATTGCTACCTATGGCATGTCCCCTTACCCGGGAATTGACCTGTCCCAGGTGTATGAGCTGCTAGAGAAGGACTACCGCATGGAGCGCCCAGAAGGCTGCCCAGAGAAGGTCTATGAACTCATGCGAGCATGTTGGCAGTGGAATCCCTCTGACCGGCCCTCCTTTGCTGAAATCCACCAAGCCTTTGAAACAATGTTCCAGGAATCCAGTATCTCAGACGAAGTGGAAAAGGAGCTGGGGAAACAAGGCGTCCGTGGGGCTGTGAGTACCTTGCTGCAGGCCCCAGAGCTGCCCACCAAGACGAGGACCTCCAGGAGAGCTGCAGAGCACAGAGACACCACTGACGTGCCTGAGATGCCTCACTCCAAGGGCCAGGGAGAGAGCGATCCTCTGGACCATGAGCCTGCCGTGTCTCCATTGCTCCCTCGAAAAGAGCGAGGTCCCCCGGAGGGCGGCCTGAATGAAGATGAGCGCCTTCTCCCCAAAGACAAAAAGACCAACTTGTTCAGCGCCTTGATCAAGAAGAAGAAGAAGACAGCCCCAACCCCTCCCAAACGCAGCAGCTCCTTCCGGGAGATGGACGGCCAGCCGGAGCGCAGAGGGGCCGGCGAGGAAGAGGGCCGAGACATCAGCAACGGGGCACTGGCTTTCACCCCCTTGGACACAGCTGACCCAGCCAAGTCCCCAAAGCCCAGCAATGGGGCTGGGGTCCCCAATGGAGCCCTCCGGGAGTCCGGGGGCTCAGGCTTCCGGTCTCCCCACCTGTGGAAGAAGTCCAGCACGCTGACCAGCAGCCGCCTAGCCACCGGCGAGGAGGAGGGCGGTGGCAGCTCCAGCAAGCGCTTCCTGCGCTCTTGCTCCGCCTCCTGCGTTCCCCATGGGGCCAAGGACACGGAGTGGAGGTCAGTCACGCTGCCTCGGGACTTGCAGTCCACGGGAAGACAGTTTGACTCGTCCACATTTGGAGGGCACAAAAGTGAGAAGCCGGCTCTGCCTCGGAAGAGGGCAGGGGAGAACAGGTCTGACCAGGTGACCCGAGGCACAGTAACGCCTCCCCCCAGGCTGGTGAAAAAGAATGAGGAAGCTGCTGATGAGGTCTTCAAAGACATCATGGAGTCCAGCCCGGGCTCCAGCCCGCCCAACCTGACTCCAAAACCCCTCCGGCGGCAGGTCACCGTGGCCCCTGCCTCGGGCCTCCCCCACAAGGAAGAAGCTGGAAAGGGCAGTGCCTTAGGGACCCCTGCTGCAGCTGAGCCAGTGACCCCCACCAGCAAAGCAGGCTCAGGTGCACCAGGGGGCACCAGCAAGGGCCCCGCCGAGGAGTCCAGAGTGAGGAGGCACAAGCACTCCTCTGAGTCGCCAGGGAGGGACAAGGGGAAATTGTCCAGGCTCAAACCTGCCCCGCCGCCCCCACCAGCAGCCTCTGCAGGGAAGGCTGGAGGAAAGCCCTCGCAGAGCCCGAGCCAGGAGGCGGCCGGGGAGGCAGTCCTGGGCGCAAAGACAAAAGCCACGAGTCTGGTTGATGCTGTGAACAGTGACGCTGCCAAGCCCAGCCAGCCGGGAGAGGGCCTCAAAAAGCCCGTGCTCCCGGCCACTCCAAAGCCACAGTCCGCCAAGCCGTCGGGGACCCCCATCAGCCCAGCCCCCGTTCCCTCCACGTTGCCATCAGCATCCTCGGCCCTGGCAGGGGACCAGCCGTCTTCCACCGCCTTCATCCCTCTCATATCAACCCGAGTGTCTCTTCGGAAAACCCGCCAGCCTCCAGAGCGGATCGCCAGCGGCGCCATCACCAAGGGCGTGGTCCTGGACAGCACCGAGGCGCTGTGCCTCGCCATCTCTAGGAACTCCGAGCAGATGGCCAGCCACAGCGCAGTGCTGGAGGCCGGCAAAAACCTCTACACGTTCTGCGTGAGCTATGTGGATTCCATCCAGCAAATGAGGAACAAGTTTGCCTTCCGAGAGGCCATCAACAAACTGGAGAATAATCTCCGGGAGCTTCAGATCTGCCCGGCGACAGCAGGCAGTGGTCCAGCGGCCACTCAGGACTTCAGCAAGCTCCTCAGTTCGGTGAAGGAAATCAGTGACATAGTGCAGAGGTAG"}
+    var g_code={BCR:"ENST00000305877",ABL1:"ENST00000318560",EML4:"ENST00000318522",ALK:"ENST00000397938"}
+    var flag=0;
 	var sect_g1=document.getElementById('sect_g1');
 	var g1_bp=document.getElementById('g1_bp');
 	var g2_bp=document.getElementById('g2_bp');
@@ -164,106 +352,228 @@
     var line_1=document.getElementById('line_1');
     var line_2=document.getElementById('line_2');
     var line_box=document.getElementById('line_box');
+    var red_bp=document.getElementById('red_bp');
+    var blue_bp=document.getElementById("blue_bp");
+    var link_line1=document.getElementById('link_line1');
+    var link_line2=document.getElementById('link_line2');
+    var dialog=document.getElementById('dialog');
+    var back_box=document.getElementById('back_box');
+    var f_name=document.getElementById('f_name');
+    var f_start=document.getElementById('f_start');
+    var f_end=document.getElementById('f_end');
+    var f_desc=document.getElementById('f_desc');
+    var infobtn=document.getElementById('infobtn');
+    var aas=document.getElementById('aas');
+    var trs=document.getElementById('trs');
+    var g_name1=document.getElementById('g_name1');
+    var g_name2=document.getElementById('g_name2');
+    var f_show=document.getElementById('f_show');
+    var g_show=document.getElementById('g_show');
+    var line_3=document.getElementById('line_3');
+    var line_4=document.getElementById('line_4');
+    var k=0.3;
+    var gene1_len=0;
+    var gene2_len=0;
+    var gene1_name='';
+    var gene2_name='';
+    var gene1_arr=[];
+    var gene2_arr=[];
+    var gene1_code='';
+    var gene2_code='';
+    var gene1_seq=[];
+    var gene2_seq=[];
+    var line_len1=0;
+    var line_len2=0;
+    
+    
+    
+    infobtn.onclick=function(){
+    	dialog.style.visibility="hidden";
+    	f_show.hidden="hidden";
+    	back_box.style.visibility="hidden";
+    }
 	sect_g1.onchange=function(){
 		if(sect_g1.value=='BCR'){
-			console.log(sect_g1.value)
+			//console.log('g1'+sect_g1.value);
 			//alert('g1选择了BCR');
 			
 		}else{
 			//alert('g1选择了ABL1');
-			console.log(sect_g1.value)
+			//console.log(sect_g1.value);
 		}
+		console.log('g1:'+sect_g1.value);
 	}
 	sect_g2.onchange=function(){
+		console.log('g2:'+sect_g2.value);
 		if(sect_g2.value=='BCR'){
-			console.log(sect_g2.value)
+			//console.log(sect_g2.value)
 			//alert('g2选择了BCR');
 		}else{
 			//alert('g2选择了ABL1');
 			console.log(sect_g2.value)
 		}
 	}
+	red_bp.onclick=function(){
+				        aas.innerHTML=gene1_seq.aaseq;
+				        trs.innerHTML=gene1_seq.transeq;
+				        dialog.style.visibility="visible";
+				        f_show.hidden="hidden";
+				        g_show.hidden=false;
+	                	back_box.style.visibility="visible";
+		
+	}
+	blue_bp.onclick=function(){
+                        aas.innerHTML=gene2_seq.aaseq;
+                        trs.innerHTML=gene2_seq.transeq;
+                        dialog.style.visibility="visible";
+                        f_show.hidden="hidden";
+				        g_show.hidden=false;
+	                	back_box.style.visibility="visible";
+	}
+	function strtoint(arr){
+			for(var i=0;i<arr.length;i++){
+			arr[i].start=parseInt(arr[i].start);
+			arr[i].end=parseInt(arr[i].end);
+			//console.log(bcrinfo[i].start);
+			
+		}	
+	}
 	fusion_btn.onclick=function(){
-//		console.log(f_color.length);
-//		for(var i=0;i<bcr_info.length;i++){
-//			console.log(bcr_info[i].name);
-//		}
-//		for(var i=0;i<abl1_info.length;i++){
-//			console.log(abl1_info[i].name);
-//		}
+		//console.log('eml4lenth'+eml4_info.length);
+		//console.log('alklenth'+alk_info.length);
+        line_len1=0;
+        line_len2=0;
+        
 		removediv();
-		/*while(f_bar2.hasChildNodes()||f_bar1.hasChildNodes()){
-			f_bar2.removeChild(f_bar2.firstChild);
-			f_bar1.removeChild(f_bar1.firstChild);
-		}
-        window.location.reload();*/
+
         if(flag==1){
        	
         }
+        
 		if(sect_g1.value==sect_g2.value){
 			alert('Gene 1 and Gene 2 cannot be the same, please re-select!');
 			flag=0;
 		}else{
+			gene1_name=sect_g1.value;
+			gene2_name=sect_g2.value;
+			g_name1.innerHTML=sect_g1.value;
+			g_name2.innerHTML=sect_g2.value;
+			gene1_code=g_code[sect_g1.value];
+			gene2_code=g_code[sect_g2.value];
+			
+			if(gene1_name=='BCR'){	
+				gene1_arr=bcr_info;
+				gene1_seq=bcr_seq;
+			}else if(gene1_name=='ABL1'){
+				gene1_arr=abl1_info;
+				gene1_seq=abl1_seq;
+			}else if(gene1_name=='EML4'){
+				gene1_arr=eml4_info;
+				gene1_seq=abl1_seq;
+			}else if(gene1_name=='ALK'){
+				gene1_arr=alk_info;
+				gene1_seq=abl1_seq;
+			}
+            if(gene2_name=='BCR'){	
+				gene2_arr=bcr_info;
+				gene2_seq=bcr_seq;
+			}else if(gene2_name=='ABL1'){
+				gene2_arr=abl1_info;
+				gene2_seq=abl1_seq;
+			}else if(gene2_name=='EML4'){
+				gene2_arr=eml4_info;
+				gene2_seq=abl1_seq;
+			}else if(gene2_name=='ALK'){
+				gene2_arr=alk_info;
+				gene2_seq=abl1_seq;
+			}
+			gene1_len=gene1_arr[0].end-gene1_arr[0].start+1;
+			console.log('gene_len:'+gene1_len);
+			gene2_len=gene2_arr[0].end-gene2_arr[0].start+1;
+			console.log('gene2_len:'+gene2_len);
+			//gene1_len=1272;
+            //gene2_len=1131;
             flag=1;
             fusion_img.style.visibility='visible';
             bp_posi.innerHTML=g1_bp.value;
-            bp_label.style.marginLeft=g1_bp.value*0.3+"px";
-            line_1.style.marginLeft=g1_bp.value*0.3+"px";
-            line_box.style.marginLeft=g1_bp.value*0.3+2+"px";
+            bp_label.style.marginLeft=g1_bp.value*k+"px";
+            line_1.style.marginLeft=g1_bp.value*k+"px";
+            line_box.style.marginLeft=g1_bp.value*k+1+"px";
+           
+            
+            
 
             bp_posi2.innerHTML=g2_bp.value;
             
 		    g1_name.innerHTML=sect_g1.value;
-		    if(g1_name.innerText=='BCR'){
-		    	g1_code.innerHTML='ENST00000305877';
-		    	gene_1_lenth.innerHTML='1272';
-		    	gene_1_lenth.style.marginLeft=bcr_len*0.3-50+"px";
-		    	bar_red.style.width=bcr_len*0.3+"px";
-		    	bcr_Draw(0,f_bar1);
-		    }else{
-		    	g1_code.innerHTML='ENST00000318560';
-		    	gene_1_lenth.innerHTML='1131';
-		    	gene_1_lenth.style.marginLeft=abl1_len*0.3-45+"px";
-		    	bar_red.style.width=abl1_len*0.3+"px";
-		    	abl1_Draw(0,f_bar1);
-		    }
+		    ///////////////
+		    g1_code.innerHTML=gene1_code;
+		    gene_1_lenth.innerHTML=gene1_len+'';
+		    gene_1_lenth.style.marginLeft=gene1_len*k-50+"px";
+		    bar_red.style.width=gene1_len*k+"px";
+		    f_Draw(gene1_arr,f_bar1);
+		    
 		    g2_name.innerHTML=sect_g2.value;
-		    if(g2_name.innerText=='ABL1'){
-		    	g2_code.innerHTML='ENST00000318560';
-		    	gene_2_lenth.innerHTML='1131';
-		    	bp_label_2.style.marginLeft=400-abl1_len*0.3+g2_bp.value*0.3+"px";
-		    	line_2.style.marginLeft=800-abl1_len*0.3+g2_bp.value*0.3+"px";
-		    	line_box.style.width=800-abl1_len*0.3+g2_bp.value*0.3-g1_bp.value*0.3-2+"px";
-		    	//line_draw.style.width=800-abl1_len*0.3+g2_bp.value*0.3-g1_bp.value*0.3-2+"px";
-		    	//gene_2_start.style.marginRight=abl1_len*0.3-40+"px";
-		    	bar_blue.style.width=abl1_len*0.3+"px";
-		    	gene_2_begin.style.marginLeft='60px';
-		    	abl1_Draw(1,f_bar2);
-		    }else{
-		    	g2_code.innerHTML='ENST00000305877';
-		    	gene_2_lenth.innerHTML='1272';
-		    	//gene_2_start.style.marginRight="0px";
-		    	gene_2_begin.style.marginLeft='15px';
-		    	gene_2_lenth.style.marginRight="0px";
-		    	bar_blue.style.width=bcr_len*0.3+"px";
-		    	line_2.style.marginLeft=800-bcr_len*0.3+g2_bp.value*0.3+"px";
-		    	line_box.style.width=800-bcr_len*0.3+g2_bp.value*0.3-g1_bp.value*0.3+"px";
-		    	//line_2.style.width=800-abl1_len*0.3+g2_bp.value*0.3-g1_bp.value*0.3-2+"px";
-		    	bcr_Draw(1,f_bar2);
-	      }
-		  line_1.style.height=15*abl1_info.length+48+"px";
+		    g2_code.innerHTML=gene2_code;
+		   	gene_2_lenth.innerHTML=gene2_len+'';
+		   	bp_label_2.style.marginLeft=g2_bp.value*k+"px";
+		   	line_2.style.marginLeft=400+g2_bp.value*k+"px";
+		   	line_box.style.width=g2_bp.value*k+400-g1_bp.value*k+"px";
+		    bar_blue.style.width=gene2_len*k+"px";
+		    	//blue_bp.style.marginLeft=400-abl1_len*0.3+g2_bp.value*0.3+"px";
+		    gene_2_lenth.style.marginRight=400-gene2_len*k+"px";
+		    blue_bp.style.width=gene2_len*k-g2_bp.value*k+"px";
+		    f_Draw(gene2_arr,f_bar2);
+		    //console.log()
+		  var box_len=(gene1_arr.length>gene2_arr.length)?gene1_arr.length:gene2_arr.length;
+//		  var zhezhaolen=(f_bar1.style.height>f_bar2.style.height)?f_bar1.style.height:f_bar2.style.height;
+//		  console.log("fbar长："+zhezhaolen);
+//		  console.log("旧的遮罩长"+box_len);
+//		  line_1.style.height=f_bar1.style.height;
+//		  line_2.style.height=f_bar1.style.height;
+//		  line_box.style.height=f_bar1.style.height;
+
+         //var h2=document.defaultView.getComputedStyle(f_bar1,null).height;
+         
+		  //var h = f_bar1.currentStyle.offsetHeight;
+		  line_1.style.height=(box_len)*15+50+"px";
+		  line_2.style.height=(box_len)*15+50+"px";
+		  line_box.style.height=(box_len)*15+50+"px";
 		  line_1.style.marginTop="90px";
-		  line_2.style.height=15*abl1_info.length+48+"px";
 		  line_2.style.marginTop="90px";
-		  line_box.style.height=15*abl1_info.length+48+"px";
 		  line_box.style.marginTop="90px";
+		  line_3.style.height=(box_len)*15+"px";
+		  line_4.style.height=(box_len)*15+"px";
+
 		  
 		  
 		}
 		
 		clickfeature();
+		strtoint(gene1_arr);
+        strtoint(gene2_arr);
 		line_box.style.visibility="visible";
 		
+		if(g1_bp.value==""||g2_bp.value==""){
+        	line_1.style.visibility="hidden";
+        	line_2.style.visibility="hidden";
+        	line_box.style.visibility="hidden";
+        	red_bp.style.width=bar_red.style.width+"px";
+        }else{
+        	line_1.style.visibility="visible";
+        	line_2.style.visibility="visible";
+        	line_box.style.visibility="visible";
+        }
+        if(g1_bp.value>gene1_len||g2_bp.value>gene2_len){
+         window.location.reload();
+         alert('The cut point is too long, please re-enter');
+        	
+        }
+		if(g1_bp.value==""){
+        red_bp.style.width="100%";
+            }else{
+            	 red_bp.style.width=g1_bp.value*k+"px";
+            }
 	}
 	function removediv(){
 			while(f_bar2.hasChildNodes()){ 
@@ -279,20 +589,20 @@
 	line_box.onclick=function(){
 		line_box.style.visibility="hidden";
 	}
-	function abl1_Draw(r,fbar){
-		var back=0;
-		if(r==1){
-			back=60.7;
-		}
-		for(var i=0;i<abl1_info.length;i++){
+	function f_Draw(arr,fbar){
+		//var back=0;
+		for(var i=0;i<arr.length;i++){
+			if(arr[i].name=='Sequence conflict'||arr[i].name=='Sequence uncertainty'){
+				i++;
+			}else if(arr[i].name=='Mutagenesis'||arr[i].name=='Non-adjacent residues'){
+				i++;
+			}
 		var div=document.createElement("div");
-		div.className="fa";
-		div.id="fa"+i;
-		console.log(div.id);
-		fbar.appendChild(div);
+		div.style.marginLeft=arr[i].start*k+"px";
+		div.style.width=arr[i].end*k-arr[i].start*k+1+"px";
+		
 		//div.style.backgroundColor="#31B0D5";
-		div.style.marginLeft=abl1_info[i].start*0.3+back+"px";
-		div.style.width=abl1_info[i].end*0.3-abl1_info[i].start*0.3+"px";
+
 //		if(div.style.width==0.3+"px"){
 //			div.style.width=0.6+"px";
 //			div.style.borderRadius="50%";
@@ -302,101 +612,105 @@
 		for(var j=0;j<f_color.length;j++){
 			//console.log(f_color.length); 
 			//console.log(bcr_info[i].name);
-			if(abl1_info[i].name==f_color[j].name){
+			if(arr[i].name==f_color[j].name){
 				div.style.backgroundColor=f_color[j].color;			
 			}
 		}
-		if(div.style.width==0.3+"px"){
-			div.style.width="5px";
-		    var circle=document.createElement("div");
-		    circle.style.width="5px";
-		    circle.style.height="5px";
-		    circle.style.borderRadius="50%";
-		    circle.style.backgroundColor=div.style.backgroundColor;
-		    div.style.backgroundColor=null;
-		    div.appendChild(circle);
+		if(fbar==f_bar1){
+			div.className="fa";
+			div.id="fa"+i;
+			console.log(div.id);
+			if(g1_bp.value!=0&&g2_bp.value!=0){
+				
 			
+			if(arr[i].start*k>g1_bp.value*k){
+				//console.log('需要透明的box'+arr[i].start*k);
+				//console.log('bp的位置：'+g1_bp.value*k);
+				console.log('透明的fa：'+i);
+				div.style.opacity="0.5";
+			}else if(arr[i].start<g1_bp.value && arr[i].end>g1_bp.value){
+				console.log('一半透明fa'+i);
+				var divs=document.createElement("div");
+				divs.style.width=arr[i].end*k-g1_bp.value*k+"px";
+				divs.style.height="100%";
+				divs.style.float="right";
+				divs.style.backgroundColor="white";
+				divs.style.opacity="0.5";
+				div.appendChild(divs);
+			}else if(i==0){
+				var divs=document.createElement("div");
+				divs.style.width=arr[i].end*k-g1_bp.value*k+"px";
+				divs.style.height="100%";
+				divs.style.float="right";
+				divs.style.backgroundColor="white";
+				divs.style.opacity="0.5";
+				div.appendChild(divs);
+			}
+			}
+			line_len1=line_len1+15;
+		}else{
+			div.className="fb";
+			div.id="fb"+i;
+			console.log(div.id);
+			if(g1_bp.value!=0&&g2_bp.value!=0){
+			if(arr[i].end*k<=g2_bp.value*k){
+				div.style.opacity="0.5";
+			}else if(arr[i].start<g2_bp.value && arr[i].end>g2_bp.value){
+				var divs=document.createElement("div");
+				divs.style.width=g2_bp.value*k-arr[i].start*k+"px";
+				divs.style.height="100%";
+				divs.style.backgroundColor="white";
+				divs.style.opacity="0.5";
+				div.appendChild(divs);
+			}else if(i==0){
+				var divs=document.createElement("div");
+				divs.style.width=g2_bp.value*k-arr[i].start*k+"px";
+				divs.style.height="100%";
+				divs.style.backgroundColor="white";
+				divs.style.opacity="0.5";
+				div.appendChild(divs);
+			}
+			}
+			//line_len2=line_len2+15;
 		}
-//		document.getElementById(div.id).onclick=function(){
-//      	aclickdiv(div.id);
-//      }
-//		document.getElementById(div.id).addEventListener("click",function(){
-//		
-//		aclickdiv(div.id);
-//		
-//		},false);
-//		document.getElementById(div.id).addEventListener("click",function(){
-//
-//			alert(1);
-//
-//		},false);
-//		if(i==abl1_info.length-1){
-//			div.innerHTML='111';
-//		}
-		}
-		//aclickdiv()
-}
-	function bcr_Draw(r,fbar){
-		var back=0;
-		if(r==1){
-			back=18.4;
-		}
-		for(var i=0;i<bcr_info.length;i++){ 
-		var div=document.createElement("div");
-		div.className="fb";
 		fbar.appendChild(div);
-		//div.style.backgroundColor="#204D74";
-		div.style.marginLeft=bcr_info[i].start*0.3+back+"px";
-		div.style.width=bcr_info[i].end*0.3-bcr_info[i].start*0.3+"px";
-		//div.style.width=bcr_info[i].end*0.3-bcr_info[i].start*0.3+"px";
-		//div.label=bcr_info[i].name;
-		//console.log(div.label);
-		for(var j=0;j<f_color.length;j++){
-			//console.log(f_color.length); 
-			//console.log(bcr_info[i].name);
-			if(bcr_info[i].name==f_color[j].name){
-				div.style.backgroundColor=f_color[j].color;			
-			}
-		} 
-		if(div.style.width==0.3+"px"){
+
+		if((arr[i].name=="Site")||(arr[i].name=="Active site")){
 			div.style.width="5px";
 		    var circle=document.createElement("div");
 		    circle.style.width="5px";
 		    circle.style.height="5px";
 		    circle.style.borderRadius="50%";
+		    circle.style.marginTop="5px";
 		    circle.style.backgroundColor=div.style.backgroundColor;
 		    div.style.backgroundColor=null;
 		    div.appendChild(circle);
-			
 		}
-//		if(i==bcr_info.length-1){
-//			//alert('yes');
-//			div.style.width="1px";
-//			console.log(div.style.backgroundColor);
-//			div.innerHTML='111';
-//		}
+		if((arr[i].name=="Metal binding")||(arr[i].name=="Binding site")){
+			div.style.width="5px";
+		    var circle=document.createElement("div");
+		    circle.style.width="5px";
+		    circle.style.height="5px";
+		    circle.style.borderRadius="50%";
+		    circle.style.marginTop="5px";
+		    circle.style.backgroundColor=div.style.backgroundColor;
+		    div.style.backgroundColor=null;
+		    div.appendChild(circle);
 		}
-
-//		for (var i=0;i<bcr_info.length;i++){ 
-//		var div=document.createElement('div');
-//		//div.setAttribute('f1'+i,'f');// div.id = "example";div.className = "slogan";
-//		div.className='f';
-//		div.style.width='20px';
-//		//div.style.width=bcr_info[i].end-bcr_info[i].start+"px";
-//		div.style.marginLeft='100px'
-//		//div.style.marginLeft=bcr_info[i].start*0.3+"px";
-//		div.style.backgroundColor="Green";
-//		//f_bar.appendChild(div);
-//		//console.log(div.id);
-////		for(var j=0;j<f_color.length;j++){
-////			console.log(f_color.length); 
-////			//console.log(bcr_info[i].name);
-//////			if(bcr_info[i].name==f_color[j].name){
-//////				div.style.backgroundColor=f_color[j].color;
-//////			}
-////		}
-//	    }
+		if((arr[i].name=="Alternative sequence")||(arr[i].name=="Natural variant")){
+			div.style.width="5px";
+		    var circle=document.createElement("div");
+		    circle.style.width="5px";
+		    circle.style.height="5px";
+		    circle.style.borderRadius="50%";
+		    circle.style.marginTop="5px";
+		    circle.style.backgroundColor=div.style.backgroundColor;
+		    div.style.backgroundColor=null;
+		    div.appendChild(circle);
+		}
 	}
+}
+
 	
 	function getElementsByClassName(n) {
 	    var classElements = [],allElements = document.getElementsByTagName('*');
@@ -414,7 +728,11 @@
 //			alert('yes！');
 //		}
         
-        
+	     window.onscroll = function(){
+		 var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+	      console.log('鼠标移动了'+scrollTop);
+		 back_box.style.top=scrollTop+"px";
+		 }
        	var list_obja = getElementsByClassName("fa");  
 		var list_objb = getElementsByClassName("fb");
 		console.log(list_objb.length);	
@@ -422,8 +740,14 @@
 			
 	        list_objb[i].onclick = (function(i){
 	                return function () {
-	                	var infob=bcr_info[i].name+":"+bcr_info[i].desc;
-	                       alert(infob);
+	                	f_desc.innerHTML=gene2_arr[i].desc;
+	                	f_name.innerHTML=gene2_arr[i].name;
+	                	f_start.innerHTML=gene2_arr[i].start;
+	                	f_end.innerHTML=gene2_arr[i].end;
+	                	f_show.hidden=false;
+	                	g_show.hidden="hidden";
+	                	dialog.style.visibility="visible";
+	                	back_box.style.visibility="visible";
 	                }
 	        })(i);
         }
@@ -431,14 +755,22 @@
 			
 	        list_obja[i].onclick = (function(i){
 	                return function () {
-	                	var infoa=abl1_info[i].name+":"+abl1_info[i].desc;
-	                    alert(infoa);
+	                	f_desc.innerHTML=gene1_arr[i].desc;
+	                	f_name.innerHTML=gene1_arr[i].name;
+	                	f_start.innerHTML=gene1_arr[i].start;
+	                	f_end.innerHTML=gene1_arr[i].end;
+	                	f_show.hidden=false;
+	                	g_show.hidden="hidden";
+	                	dialog.style.visibility="visible";
+	                	back_box.style.visibility="visible";
 	                }
 	        })(i);
         }
 //      list_objb[list_objb.length-1].onclick=function(){
 //      	alert('YYYYYes!');
 //      }
-
+        //console.log("f_bar长度："+f_bar1.style.height);
+        //var o = document.getElementById("div1");
+		
 	}
 </script>

@@ -1,3 +1,6 @@
+body{
+	font-family: "微软雅黑";
+}
 .clr{
 	clear: both;
 	width: 0px;
@@ -15,7 +18,7 @@
 }
 #middle{
 	margin-top: 5px;
-	background-color: #EEEEEE;
+	background-color: white;
 }
 #buttom{
 	margin-top: 5px;
@@ -25,8 +28,25 @@
 #m_bp{
 
 }
+#f_bar2{
+	
+}
 .space{
 	height: 30px;
+}
+#link_line1{
+	height: 20px;
+	width:300px;
+	float: right;
+  border-top: 2px solid orangered;
+   border-left: 2px solid orangered;
+}
+#link_line2{
+	height: 20px;
+  border-top: 2px solid orangered;
+   border-right: 2px solid orangered;
+   width: 300px;
+   float: left;
 }
 #fusion_img{
 
@@ -49,7 +69,7 @@
 /*	height: 500px;*/
 	/*background-color:  #2B542C;*/
 	float: right;
-
+	
 }
 #left_g{
 	width:50%;
@@ -100,12 +120,10 @@
 
 }
 #gene_2_lenth{
-
-	float: right;
+float: right;
 }
 #gene_2_start{
 	margin-right: 295px;
-	float: right;
 }
 
 
@@ -115,15 +133,25 @@
 	/*background-color: #FFFF00*/
 }
 #bar_blue{
-	background-color:  darkcyan;
+	background-color: rgba(0,139,139,0.3);
 	width:339px ;
-	float: right;
 	height: 100%;
 }
+#blue_bp{
+	width: 30%;
+	height: 100%;
+	background-color: darkcyan;
+	float: right;
+}
 #bar_red{
-	background-color: indianred;
+	background-color: rgba(205,92,92,0.3);
 	width: 386px;
 	height: 100%;
+}
+#red_bp{
+	width: 100%;
+	height: 100%;
+	background-color: indianred;
 }
 #bp_line{
 	width: 800px;
@@ -147,7 +175,7 @@
 #line_1{
 	position: absolute;
 	margin-left: 278px;
-	width: 2px;
+	width: 1px;
 	background-color: red;
 	height: 100%;
 	
@@ -155,10 +183,28 @@
 #line_2{
 	position: absolute;
 	margin-left: 500px;
-	width: 2px;
+	width: 1px;
 	background-color: red;
 	z-index:10 ;
 	height: 100%;
+}
+#line_3{
+	position: absolute;
+	margin-left: 400px;
+	width: 1px;
+	background-color: #D0E9C6;
+	z-index:99 ;
+	height: 800px;
+	margin-top: 140px;
+}
+#line_4{
+	position: absolute;
+	margin-left:0px;
+	width: 1px;
+	background-color: #D0E9C6;
+	z-index:99 ;
+	height: 800px;
+	margin-top: 140px;
 }
 #line_box{
 	position: absolute;
@@ -173,6 +219,7 @@
 }
 .fb{
 	height: 15px;
+	
 }
 #b_f_1{
 	width: 39px;
@@ -198,4 +245,46 @@
 	width: 46px;
 	background-color: dodgerblue;
 	margin-left: 116px;
+}
+#back_box{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	background-color:rgba(0,0,0,0.4);
+	z-index: 999;
+	visibility: hidden;
+}
+#dialog{
+	width: 50%;
+	margin: auto;
+	background-color: white;
+	margin-top: 50px;
+	border-radius: 2%;
+	padding: 40px;
+}
+#infobtn{
+	margin: auto;
+	margin-left: 270px;
+	width: 80px;
+}
+.content{
+	padding: 20px;
+}
+#feature_title{
+	text-align: center;
+	
+}
+#gene_title{
+	text-align: center;
+	
+}
+textarea{
+	width: 660px;
+	height: 150px;
+	font-family: "微软雅黑";
+	font-size: 14px;
+}
+#f_desc{
+	height:50px;
 }
