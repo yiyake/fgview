@@ -243,6 +243,8 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		}
 	}
 	red_bp.onclick=function(){
+		                g_name1.innerHTML=sect_g1.value;
+		                g_name2.innerHTML=sect_g1.value;
 				        aas.innerHTML=gene1_seq.aaseq;
 				        trs.innerHTML=gene1_seq.transeq;
 				        dialog.style.visibility="visible";
@@ -252,6 +254,8 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		
 	}
 	blue_bp.onclick=function(){
+		                g_name1.innerHTML=sect_g2.value;
+		                g_name2.innerHTML=sect_g2.value;
                         aas.innerHTML=gene2_seq.aaseq;
                         trs.innerHTML=gene2_seq.transeq;
                         dialog.style.visibility="visible";
@@ -288,8 +292,8 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		}else{
 			gene1_name=sect_g1.value;
 			gene2_name=sect_g2.value;
-			g_name1.innerHTML=sect_g1.value;
-			g_name2.innerHTML=sect_g2.value;
+			//g_name1.innerHTML=sect_g1.value;
+			//g_name2.innerHTML=sect_g2.value;
 			gene1_code=g_code[sect_g1.value];
 			gene2_code=g_code[sect_g2.value];
 			
