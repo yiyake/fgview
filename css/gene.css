@@ -235,13 +235,21 @@ float: right;
 }
 .f{
 	height: 15px;
+	width: 100%;
 }
 .fa{
 	height: 15px;
+	float: left;
+	
 }
 .fb{
 	height: 15px;
+	float: left;
 	
+}
+.ftext{
+	font-size: 9px;
+	float: left;
 }
 #b_f_1{
 	width: 39px;

@@ -23,8 +23,8 @@
 				    <select id="sect_g1" onchange="changeGeneO()">
 					  <option value="BCR">BCR</option>
 					  <option value="ABL1">ABL1</option>
-					  <option value="EML4">EML4</option>
-					  <option value="ALK">ALK</option>
+					  <!--<option value="EML4">EML4</option>
+					  <option value="ALK">ALK</option>-->
 			        </select>
 			    BP:<input id="g1_bp" type="text" placeholder="Input breakpoint" maxlength="10000" />
 			  </div>
@@ -33,8 +33,8 @@
 				    <select id="sect_g2" onchange="changeGeneT()">
 				      <option value="ABL1">ABL1</option>
 					  <option value="BCR">BCR</option>
-					  <option value="EML4">EML4</option>
-					  <option value="ALK">ALK</option>
+					  <!--<option value="EML4">EML4</option>
+					  <option value="ALK">ALK</option>-->
 			        </select>
 			    BP:<input id="g2_bp" placeholder="Input breakpoint" maxlength="10000" />
 			  </div>
@@ -213,6 +213,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
     var gene2_seq=[];
     var line_len1=0;
     var line_len2=0;
+    var noteinfo='';
     
     
     
@@ -243,6 +244,28 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		}
 	}
 	red_bp.onclick=function(){
+		                var str='ID=VAR_031727;Note=I->V;Ontology_term=ECO:0000269,ECO:0000269,ECO:0000269;'
+		                var index1=str.indexOf('Note=');
+		                if(index1==-1){
+		                	
+		                }else{
+		                
+		                
+			                var newstr=str.slice(index1);
+			                console.log(newstr)
+			                var index2=newstr.indexOf(';');
+			                if(index2==-1){
+			                	
+			                }else{
+			                	if(index2<10){
+			                		 noteinfo=newstr.substring(0,index2);
+			                	}
+			                	
+			                }
+		                
+		                }
+		                
+		                console.log(noteinfo);
 		                g_name1.innerHTML=sect_g1.value;
 		                g_name2.innerHTML=sect_g1.value;
 				        aas.innerHTML=gene1_seq.aaseq;
@@ -473,10 +496,73 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 			}else if(arr[i].name=='Mutagenesis'||arr[i].name=='Non-adjacent residues'){
 				i++;
 			}
+		/////
+		var str=arr[i].desc;
+		 var index1=str.indexOf('Note=');
+		                if(index1==-1){
+		                	
+		                }else{
+		                
+		                
+			                var newstr=str.slice(index1+5);
+			                console.log(newstr)
+			                var index2=newstr.indexOf(';');
+			                if(index2==-1){
+			                	index3=newstr.indexOf(':');
+			                	
+			                	if(index3==-1&&newstr.length<15){
+			                		noteinfo=newstr.slice(0);
+			                	}else{
+			                		noteinfo='';
+			                	}
+			                	
+			                }else{
+			                	if(index2<15){
+			                		 noteinfo=newstr.substring(0,index2);
+			                	}else{
+			                		noteinfo='';
+			                	}
+			                	
+			                }
+		                
+		                }
+		                
+		console.log(noteinfo);
+		///////////
+	    var contdiv=document.createElement("div");//big line
+	    contdiv.className="f";
+	    contdiv.id=fbar+i+"";
 		var div=document.createElement("div");
+		var divtext=document.createElement("div");
+		divtext.className="ftext";
+		divtext.innerHTML=noteinfo;
+
+//		contdiv.appendChild(div);
+//		contdiv.appendChild(divtext);
+		if(i==0){
+        	div.appendChild(divtext);
+        }
 		div.style.marginLeft=arr[i].start*k+"px";
 		div.style.width=arr[i].end*k-arr[i].start*k+1+"px";
 		
+		//////////
+		var textw=noteinfo.length*8;
+		console.log(textw+"文字的宽度");
+		//////////
+		if(arr[i].end*k+textw>400){
+			console.log(arr[i].end*k+textw+'ppppppppppppppppppppppppppppppppppppp');
+			    var newmargin=arr[i].start*k-textw;
+			    divtext.style.marginLeft=arr[i].start*k-textw+"px";
+			    div.style.marginLeft=0+"px";
+			    
+				contdiv.appendChild(divtext);
+				contdiv.appendChild(div);
+				//contdiv.appendChild(div);
+				//divtext.style.marginLeft=
+		    }else{
+		    	contdiv.appendChild(div);
+		        contdiv.appendChild(divtext);
+		    }
 		//div.style.backgroundColor="#31B0D5";
 
 //		if(div.style.width==0.3+"px"){
@@ -484,6 +570,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 //			div.style.borderRadius="50%";
 //		}
 		//console.log(abl1_info[i].name);
+		
 
 		for(var j=0;j<f_color.length;j++){
 			//console.log(f_color.length); 
@@ -496,6 +583,13 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 			div.className="fa";
 			div.id="fa"+i;
 			console.log(div.id);
+//			if(gene1_name=='BCR'){
+//			if(arr[i].end*k+15>gene1_len*k){
+//			console.log(arr[i].end*k+'ppppppppppppppppppppppppppppppppppppp');
+//				div.appendChild(divtext);
+//				//contdiv.appendChild(div);
+//				//divtext.style.marginLeft=
+//		    }}
 			if(g1_bp.value!=0&&g2_bp.value!=0){
 				
 			
@@ -528,6 +622,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 			div.className="fb";
 			div.id="fb"+i;
 			console.log(div.id);
+			if(gene2_name=='BCR'){}
 			if(g1_bp.value!=0&&g2_bp.value!=0){
 			if(arr[i].end*k<=g2_bp.value*k){
 				div.style.opacity="0.5";
@@ -549,8 +644,9 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 			}
 			//line_len2=line_len2+15;
 		}
-		fbar.appendChild(div);
-
+		divtext.innerHTML=noteinfo;
+		fbar.appendChild(contdiv);
+        
 		if((arr[i].name=="Site")||(arr[i].name=="Active site")){
 			div.style.width="5px";
 		    var circle=document.createElement("div");
@@ -584,10 +680,14 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		    div.style.backgroundColor=null;
 		    div.appendChild(circle);
 		}
+		//divtext.innerHTML=noteinfo;
+
 	}
 }
 
-	
+	function pai(){
+		
+	}
 	function getElementsByClassName(n) {
 	    var classElements = [],allElements = document.getElementsByTagName('*');
 	    for (var i=0; i< allElements.length; i++ )
