@@ -1,4 +1,4 @@
-var abl1_info=[{start:"1",end:"1130",name:"Chain",desc:"ID=PRO_0000088050;Note=Tyrosine-protein kinase ABL1"},{start:"61",end:"121",name:"Domain",desc:"Note=SH3;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00192"},
+var abl1_info=[{start:"1",end:"1130",name:"Chain",desc:"ID=PRO_0000088050;Note=Tyrosine-protein kinase ABL1;"},{start:"61",end:"121",name:"Domain",desc:"Note=SH3;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00192"},
         {start:"127",end:"217",name:"Domain",desc:"Note=SH2;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00191"},{start:"242",end:"493",name:"Domain",desc:"Note=Protein kinase;Ontology_term=ECO:0000255;evidence=ECO:0000255|PROSITE-ProRule:PRU00159"},
         {start:"248",end:"256",name:"Nucleotide binding",desc:"Note=ATP"},{start:"316",end:"322",name:"Nucleotide binding",desc:"Note=ATP"},
         {start:"1",end:"60",name:"Region",desc:"Note=CAP"},{start:"869",end:"968",name:"Region",desc:"Note=DNA-binding;Ontology_term=ECO:0000250;evidence=ECO:0000250"},

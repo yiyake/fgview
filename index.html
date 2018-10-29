@@ -539,30 +539,12 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 
 //		contdiv.appendChild(div);
 //		contdiv.appendChild(divtext);
-		if(i==0){
-        	div.appendChild(divtext);
-        }
+		
 		div.style.marginLeft=arr[i].start*k+"px";
 		div.style.width=arr[i].end*k-arr[i].start*k+1+"px";
 		
 		//////////
-		var textw=noteinfo.length*8;
-		console.log(textw+"文字的宽度");
-		//////////
-		if(arr[i].end*k+textw>400){
-			console.log(arr[i].end*k+textw+'ppppppppppppppppppppppppppppppppppppp');
-			    var newmargin=arr[i].start*k-textw;
-			    divtext.style.marginLeft=arr[i].start*k-textw+"px";
-			    div.style.marginLeft=0+"px";
-			    
-				contdiv.appendChild(divtext);
-				contdiv.appendChild(div);
-				//contdiv.appendChild(div);
-				//divtext.style.marginLeft=
-		    }else{
-		    	contdiv.appendChild(div);
-		        contdiv.appendChild(divtext);
-		    }
+		
 		//div.style.backgroundColor="#31B0D5";
 
 //		if(div.style.width==0.3+"px"){
@@ -644,7 +626,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 			}
 			//line_len2=line_len2+15;
 		}
-		divtext.innerHTML=noteinfo;
+		//divtext.innerHTML=noteinfo;
 		fbar.appendChild(contdiv);
         
 		if((arr[i].name=="Site")||(arr[i].name=="Active site")){
@@ -680,8 +662,32 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		    div.style.backgroundColor=null;
 		    div.appendChild(circle);
 		}
+		if(arr[i].name=="Modified residue"){
+			div.style.width=arr[i].end*k-arr[i].start*k+1+"px";
+		}
 		//divtext.innerHTML=noteinfo;
-
+         var textw=noteinfo.length*8;
+		console.log(textw+"文字的宽度");
+		//////////
+		
+		if(arr[i].end*k+textw>400){
+			console.log(arr[i].end*k+textw+'ppppppppppppppppppppppppppppppppppppp');
+			    var newmargin=arr[i].start*k-textw;
+			    divtext.style.marginLeft=arr[i].start*k-textw+"px";
+			    div.style.marginLeft=0+"px";
+			    
+				contdiv.appendChild(divtext);
+				contdiv.appendChild(div);
+				//contdiv.appendChild(div);
+				//divtext.style.marginLeft=
+		    }else{
+		    	contdiv.appendChild(div);
+		        contdiv.appendChild(divtext);
+		    }
+		if(i==0){
+        	div.appendChild(divtext);
+        	contdiv.appendChild(div);
+        }
 	}
 }
 
