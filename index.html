@@ -54,7 +54,7 @@
 	  	            <!--<div id="bp_line">
 	  	        		<div id="line_draw"></div>
 	  	        	</div>-->
-	  	        	<div id="label"></div>
+	  	        
 	  	        	<div id="line_4"></div>
 	  	        	<div id="line_1"></div>
 	  	        	<div id="line_box"></div>
@@ -219,7 +219,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
     var noteinfo='';
     var fusion_img=document.getElementById('fusion_img');
     var ct=document.getElementById('ct');
-    var label=document.getElementById('label');
+    //var label=document.getElementById('label');
     var result1={};
     var result2={};
     /////////////////////////////////////////////////
@@ -303,7 +303,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 //         	
          	g2_bp.innerHTML=g2_bp.value;
            }else{
-           	label.innerHTML=label.innerHTML+"移动的位置11："+oevent.clientX - distanceX ;
+           	//label.innerHTML=label.innerHTML+"移动的位置11："+oevent.clientX - distanceX ;
          	if(oevent.clientX - distanceX <result1.x){
          		obj.style.left=result1.x+'px';
          		//oevent.clientX - distanceX=274;
@@ -802,13 +802,25 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 				divs.style.opacity="0.5";
 				div.appendChild(divs);
 			}else if(i==0){
-				var divs=document.createElement("div");
-				divs.id="tranparant2"+i;
-				divs.style.width=g2_bp.value*k-arr[i].start*k+"px";
-				divs.style.height="100%";
-				divs.style.backgroundColor="white";
-				divs.style.opacity="0.5";
-				div.appendChild(divs);
+				if(g2_bp.value==""){
+					var divs=document.createElement("div");
+					divs.id="tranparant2"+i;
+					divs.style.width=0+"px";
+					divs.style.height="100%";
+					divs.style.backgroundColor="white";
+					divs.style.opacity="0.5";
+					div.appendChild(divs);
+				}else{
+					var divs=document.createElement("div");
+					divs.id="tranparant2"+i;
+					divs.style.width=g2_bp.value*k-arr[i].start*k+"px";
+					divs.style.height="100%";
+					divs.style.backgroundColor="white";
+					divs.style.opacity="0.5";
+					div.appendChild(divs);
+				}
+				
+				
 			}
 			}
 			//line_len2=line_len2+15;
