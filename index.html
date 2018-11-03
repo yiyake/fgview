@@ -7,7 +7,9 @@
 		<script src="js/alk.js"></script>
 		<script src="js/color.js"></script>
 		<script src="js/abl1.js"></script>
-		<script src="js/bcr.js"></script>
+		<script src="js/bcr.js"></script> 
+		<!--<script src="js/getleft.js"></script>-->
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 		<link href="css/gene.css" rel="stylesheet">
 	</head>
 	<body>
@@ -19,7 +21,7 @@
 		  <div id="m_bp" style="width:400px ;margin: auto;">
 			  <form>
 			  <div>
-			  	Fusion Gene1:
+			  	5'-Gene:
 				    <select id="sect_g1" onchange="changeGeneO()">
 					  <option value="BCR">BCR</option>
 					  <option value="ABL1">ABL1</option>
@@ -29,7 +31,7 @@
 			    BP:<input id="g1_bp" type="text" placeholder="Input breakpoint" maxlength="10000" />
 			  </div>
 			  <div>
-			  	Fusion Gene2:
+			  	3'-Gene:
 				    <select id="sect_g2" onchange="changeGeneT()">
 				      <option value="ABL1">ABL1</option>
 					  <option value="BCR">BCR</option>
@@ -38,7 +40,7 @@
 			        </select>
 			    BP:<input id="g2_bp" placeholder="Input breakpoint" maxlength="10000" />
 			  </div>
-			  <input id="fusion_btn" type="button" value="Draw"/>
+			  <input id="fusion_btn" type="button" value="Draw" onclick="clickbtn()"/>
 			 <!-- <button id="fusion_bt">Draw Fusion Gene</button>-->
 			  </form>
 			  </div>
@@ -52,6 +54,7 @@
 	  	            <!--<div id="bp_line">
 	  	        		<div id="line_draw"></div>
 	  	        	</div>-->
+	  	        	<div id="label"></div>
 	  	        	<div id="line_4"></div>
 	  	        	<div id="line_1"></div>
 	  	        	<div id="line_box"></div>
@@ -214,7 +217,130 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
     var line_len1=0;
     var line_len2=0;
     var noteinfo='';
+    var fusion_img=document.getElementById('fusion_img');
+    var ct=document.getElementById('ct');
+    var label=document.getElementById('label');
+    var result1={};
+    var result2={};
+    /////////////////////////////////////////////////
+    function GetPos(obj) {
+            var pos = new Object();
+            pos.x = obj.offsetLeft;
+            pos.y = obj.offsetTop;
+            while (obj = obj.offsetParent) {
+                pos.x += obj.offsetLeft;
+                pos.y += obj.offsetTop;
+            }
+            return pos;
+       };
+    ////////////////////////////////////////////////////
+//		var Position = {};
+//		(function () {
+//		    Position.getAbsolute = function (reference, target) {
+//		        //因为我们会将目标元素的边框纳入递归公式中，这里先减去对应的值
+//		        var result = {
+//		            left: -target.clientLeft,
+//		            top: -target.clientTop
+//		        }
+//		        var node = target;
+//		        while(node != reference && node != document){
+//		            result.left = result.left + node.offsetLeft + node.clientLeft;
+//		            result.top = result.top + node.offsetTop + node.clientTop;
+//		            node = node.parentNode;
+//		        }
+//		        if(isNaN(reference.scrollLeft)){
+//		            result.right = document.documentElement.scrollWidth - result.left;
+//		            result.bottom = document.documentElement.scrollHeight - result.top;
+//		        }else {
+//		            result.right = reference.scrollWidth - result.left;
+//		            result.bottom = reference.scrollHeight - result.top;
+//		        } 
+//		        return result;
+//		    }  
+//		})();
+		 
+//		
+//		bar_red.onclick=function(){
+//			alert(result.left);
+//			console.log(result)
+//		}
+//		
+    //////////////////2222222222222229999999999999999////////////////
+    /////////////////////////////////////////////////test----------line--------move///////////
+    //var oDivTest = document.getElementById("divtest");
     
+    function darg(obj,num){
+    //鼠标按下 
+    obj.onmousedown = function(ev){
+
+       //IE直接用event或者window.event得到事件本身,而在其他浏览器函数要获取到事件本身需要从函数中传入
+    　　var oevent = ev || event;
+
+    　　var distanceX = oevent.clientX - this.offsetLeft;
+        //鼠标移动
+    　　document.onmousemove = function(ev){ 
+    　　　　var oevent = ev || event;
+    　　　　obj.style.left = oevent.clientX - distanceX + 'px';
+    　　　　//obj.style.top = oevent.clientY - distanceY + 'px'; 
+          //divtext.innerHTML=this.offsetLeft+"+d"+distanceX+"..........."+obj.style.left
+    　　
+    　　　　//obj.style.left = oevent.clientX - distanceX + 'px';
+           if(num==2){
+           	//label.innerHTML=label.innerHTML+"移动的位置22："+oevent.clientX - distanceX ;
+           	line_2.style.left=oevent.clientX - distanceX+ 'px';
+         	if(oevent.clientX - distanceX <result2.x){
+         		obj.style.left=result2.x+'px';
+         		//oevent.clientX - distanceX =674; 
+         		g2_bp.value=0;
+         	}else if(oevent.clientX - distanceX>result2.x+gene2_len*0.3){
+         		obj.style.left=result2.x+gene2_len*0.3+'px';
+         		//oevent.clientX - distanceX=674+gene2_len*0.3;
+         		g2_bp.value=gene2_len;
+         	}else{
+         		obj.style.left = oevent.clientX - distanceX + 'px';
+         		g2_bp.value=parseInt((oevent.clientX - distanceX-result2.x)/0.3);
+         	}
+//         	
+         	g2_bp.innerHTML=g2_bp.value;
+           }else{
+           	label.innerHTML=label.innerHTML+"移动的位置11："+oevent.clientX - distanceX ;
+         	if(oevent.clientX - distanceX <result1.x){
+         		obj.style.left=result1.x+'px';
+         		//oevent.clientX - distanceX=274;
+         		g1_bp.value=0;
+         	}else if(oevent.clientX - distanceX>result1.x+gene1_len*0.3){
+         		obj.style.left=result1.x+gene1_len*0.3+'px';
+         		//oevent.clientX - distanceX=gene2_len*0.3;
+         		g1_bp.value=gene1_len;
+         	}else{
+         		obj.style.left = oevent.clientX - distanceX + 'px';
+         		g1_bp.value=parseInt((oevent.clientX - distanceX-result1.x)/0.3);
+         	}
+         	
+         	g1_bp.innerHTML=g1_bp.value;
+           	//line_box.style.marginLeft=g1_bp.value*0.3+'px';
+           	
+           	
+           }
+           //line_box.style.width=g2_bp.value*k+400-g1_bp.value*k+"px";
+           updateposi();
+        line_box.style.visibility="visible";
+    　　　　//obj.style.top = oevent.clientY - distanceY + 'px'; 
+    　　};
+        //鼠标放开
+    　　document.onmouseup = function(){
+    　　　　document.onmousemove = null;
+    　　　　document.onmouseup = null;
+          update_transbox();
+          clickbtn();
+          //removediv();
+          //f_Draw(gene1_arr,f_bar1);
+		  //f_Draw(gene2_arr,f_bar2);
+        
+    　　};
+    };  
+}
+    // /////////////////////////////////////////////////test----------line--------move//////
     
     
     infobtn.onclick=function(){
@@ -252,7 +378,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		                
 		                
 			                var newstr=str.slice(index1);
-			                console.log(newstr)
+			                //console.log(newstr)
 			                var index2=newstr.indexOf(';');
 			                if(index2==-1){
 			                	
@@ -265,7 +391,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		                
 		                }
 		                
-		                console.log(noteinfo);
+		                //console.log(noteinfo);
 		                g_name1.innerHTML=sect_g1.value;
 		                g_name2.innerHTML=sect_g1.value;
 				        aas.innerHTML=gene1_seq.aaseq;
@@ -294,7 +420,24 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 			
 		}	
 	}
-	fusion_btn.onclick=function(){
+	function updateposi(){
+		
+		var line_margin=ct.style.marginLeft+fusion_img.style.marginLeft;
+		//line_1.style.left=result.left;
+		
+		line_box.style.marginLeft=g1_bp.value*k+1+"px";
+		line_box.style.width=g2_bp.value*k+400-g1_bp.value*k+"px";
+		//console.log(result);
+		console.log(line_1.style.left);
+		//line_2.style.left=line_margin+654+"px";
+//		line_1.style.left=274+g1_bp.value*k+1+"px";
+//		line_2.style.left=674+g2_bp.value*k+"px";
+		bp_posi.innerHTML=g1_bp.value;
+		bp_posi2.innerHTML=g2_bp.value;
+		
+		
+	}
+     function clickbtn(){
 		//////////////////////////
 		
 		///////////////////////////
@@ -347,22 +490,22 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 				gene2_seq=abl1_seq;
 			}
 			gene1_len=gene1_arr[0].end-gene1_arr[0].start+1;
-			console.log('gene_len:'+gene1_len);
+			//console.log('gene_len:'+gene1_len);
 			gene2_len=gene2_arr[0].end-gene2_arr[0].start+1;
-			console.log('gene2_len:'+gene2_len);
+			///console.log('gene2_len:'+gene2_len);
 			//gene1_len=1272;
             //gene2_len=1131;
             flag=1;
             fusion_img.style.visibility='visible';
-            bp_posi.innerHTML=g1_bp.value;
-            bp_label.style.marginLeft=g1_bp.value*k+"px";
-            line_1.style.marginLeft=g1_bp.value*k+"px";
-            line_box.style.marginLeft=g1_bp.value*k+1+"px";
+            //bp_posi.innerHTML=g1_bp.value;
+            bp_label.style.marginLeft=gene1_len*k/2-20+"px";
+            //line_1.style.marginLeft=274+gene1_len*k-1+"px";
+            //line_box.style.marginLeft=g1_bp.value*k+1+"px";
            
             
-            
+            updateposi();
 
-            bp_posi2.innerHTML=g2_bp.value;
+            //bp_posi2.innerHTML=g2_bp.value;
             
 		    g1_name.innerHTML=sect_g1.value;
 		    ///////////////
@@ -371,13 +514,12 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		    gene_1_lenth.style.marginLeft=gene1_len*k-40+"px";
 		    bar_red.style.width=gene1_len*k+"px";
 		    f_Draw(gene1_arr,f_bar1);
-		    
 		    g2_name.innerHTML=sect_g2.value;
 		    g2_code.innerHTML=gene2_code;
 		   	gene_2_lenth.innerHTML=gene2_len+'';
-		   	bp_label_2.style.marginLeft=g2_bp.value*k+"px";
-		   	line_2.style.marginLeft=400+g2_bp.value*k+"px";
-		   	line_box.style.width=g2_bp.value*k+400-g1_bp.value*k+"px";
+		   	bp_label_2.style.marginLeft=gene2_len*k/2-20+"px";
+		   	//line_2.style.marginLeft=400+g2_bp.value*k+"px";
+		   	//line_box.style.width=g2_bp.value*k+400-g1_bp.value*k+"px";
 		    bar_blue.style.width=gene2_len*k+"px";
 		    	//blue_bp.style.marginLeft=400-abl1_len*0.3+g2_bp.value*0.3+"px";
 		    gene_2_lenth.style.marginRight=400-gene2_len*k+"px";
@@ -412,16 +554,21 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		strtoint(gene1_arr);
         strtoint(gene2_arr);
 		line_box.style.visibility="visible";
-		
-		if(g1_bp.value==""||g2_bp.value==""){
-        	line_1.style.visibility="hidden";
-        	line_2.style.visibility="hidden";
+		result1=GetPos(bar_red);
+        result2=GetPos(bar_blue);
+		if(g1_bp.value==""&&g2_bp.value==""){
+        	line_1.style.visibility="visible";
+        	line_2.style.visibility="visible";
         	line_box.style.visibility="hidden";
         	red_bp.style.width=bar_red.style.width+"px";
+        	line_1.style.left=result1.x+"px";
+		    line_2.style.left=result2.x+"px";
         }else{
         	line_1.style.visibility="visible";
         	line_2.style.visibility="visible";
         	line_box.style.visibility="visible";
+        	line_1.style.left=result1.x+g1_bp.value*k+"px";
+		    line_2.style.left=result2.x+g2_bp.value*k+"px";
         }
         if(g1_bp.value>gene1_len||g2_bp.value>gene2_len){
          window.location.reload();
@@ -433,9 +580,14 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
             }else{
             	 red_bp.style.width=g1_bp.value*k+"px";
             }
+        
+		
+        darg(line_2,2);
+        darg(line_1,1);    
+        
 	}
 	function removediv(){
-			while(f_bar2.hasChildNodes()){ 
+		while(f_bar2.hasChildNodes()){ 
 			f_bar2.removeChild(f_bar2.firstChild);
 	
 		}
@@ -452,6 +604,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 	line_box.onclick=function(){
 		line_box.style.visibility="hidden";
 	}
+	
 	function box_Draw(){
 		for(var i=0;i<f_color.length;i++){
 			var div=document.createElement("div");
@@ -488,14 +641,44 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 			
 		}
 	}
+	function update_transbox(){
+	}
+	function boxtsprt(arr,i,div,g_bp){
+		if(g1_bp.value!=0||g2_bp.value!=0){
+		if(arr[i].start*k>g_bp.value*k){
+				//console.log('需要透明的box'+arr[i].start*k);
+				//console.log('bp的位置：'+g1_bp.value*k);
+				//console.log('透明的fa：'+i);
+				div.style.opacity="0.5";
+			}else if(arr[i].start<g_bp.value && arr[i].end>g_bp.value){
+				//console.log('一半透明fa'+i);
+				var divs=document.createElement("div");
+				divs.id="tranparant1"+i;
+				divs.style.width=arr[i].end*k-g_bp.value*k+"px";
+				divs.style.height="100%";
+				divs.style.float="right";
+				divs.style.backgroundColor="white";
+				divs.style.opacity="0.5";
+				div.appendChild(divs);
+			}else if(i==0){
+				var divs=document.createElement("div");
+				divs.id="tranparant1"+i;
+				divs.style.width=arr[i].end*k-g_bp.value*k+"px";
+				divs.style.height="100%";
+				divs.style.float="right";
+				divs.style.backgroundColor="white";
+				divs.style.opacity="0.5";
+				div.appendChild(divs);
+			}
+	}}
 	function f_Draw(arr,fbar){
 		//var back=0;
 		for(var i=0;i<arr.length;i++){
-			if(arr[i].name=='Sequence conflict'||arr[i].name=='Sequence uncertainty'){
-				i++;
-			}else if(arr[i].name=='Mutagenesis'||arr[i].name=='Non-adjacent residues'){
-				i++;
-			}
+//			if(arr[i].name=='Sequence conflict'||arr[i].name=='Sequence uncertainty'){
+//				i++;
+//			}else if(arr[i].name=='Mutagenesis'||arr[i].name=='Non-adjacent residues'){
+//				i++;
+//			}
 		/////
 		var str=arr[i].desc;
 		 var index1=str.indexOf('Note=');
@@ -505,7 +688,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		                
 		                
 			                var newstr=str.slice(index1+5);
-			                console.log(newstr)
+			                //console.log(newstr)
 			                var index2=newstr.indexOf(';');
 			                if(index2==-1){
 			                	index3=newstr.indexOf(':');
@@ -527,7 +710,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		                
 		                }
 		                
-		console.log(noteinfo);
+		//console.log(noteinfo);
 		///////////
 	    var contdiv=document.createElement("div");//big line
 	    contdiv.className="f";
@@ -564,7 +747,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		if(fbar==f_bar1){
 			div.className="fa";
 			div.id="fa"+i;
-			console.log(div.id);
+			//console.log(div.id);
 //			if(gene1_name=='BCR'){
 //			if(arr[i].end*k+15>gene1_len*k){
 //			console.log(arr[i].end*k+'ppppppppppppppppppppppppppppppppppppp');
@@ -572,44 +755,47 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 //				//contdiv.appendChild(div);
 //				//divtext.style.marginLeft=
 //		    }}
-			if(g1_bp.value!=0&&g2_bp.value!=0){
-				
-			
-			if(arr[i].start*k>g1_bp.value*k){
-				//console.log('需要透明的box'+arr[i].start*k);
-				//console.log('bp的位置：'+g1_bp.value*k);
-				console.log('透明的fa：'+i);
-				div.style.opacity="0.5";
-			}else if(arr[i].start<g1_bp.value && arr[i].end>g1_bp.value){
-				console.log('一半透明fa'+i);
-				var divs=document.createElement("div");
-				divs.style.width=arr[i].end*k-g1_bp.value*k+"px";
-				divs.style.height="100%";
-				divs.style.float="right";
-				divs.style.backgroundColor="white";
-				divs.style.opacity="0.5";
-				div.appendChild(divs);
-			}else if(i==0){
-				var divs=document.createElement("div");
-				divs.style.width=arr[i].end*k-g1_bp.value*k+"px";
-				divs.style.height="100%";
-				divs.style.float="right";
-				divs.style.backgroundColor="white";
-				divs.style.opacity="0.5";
-				div.appendChild(divs);
-			}
-			}
+
+         boxtsprt(arr,i,div,g1_bp);
+//			if(g1_bp.value!=0&&g2_bp.value!=0){
+//				
+//			
+//			if(arr[i].start*k>g1_bp.value*k){
+//				//console.log('需要透明的box'+arr[i].start*k);
+//				//console.log('bp的位置：'+g1_bp.value*k);
+//				console.log('透明的fa：'+i);
+//				div.style.opacity="0.5";
+//			}else if(arr[i].start<g1_bp.value && arr[i].end>g1_bp.value){
+//				console.log('一半透明fa'+i);
+//				var divs=document.createElement("div");
+//				divs.style.width=arr[i].end*k-g1_bp.value*k+"px";
+//				divs.style.height="100%";
+//				divs.style.float="right";
+//				divs.style.backgroundColor="white";
+//				divs.style.opacity="0.5";
+//				div.appendChild(divs);
+//			}else if(i==0){
+//				var divs=document.createElement("div");
+//				divs.style.width=arr[i].end*k-g1_bp.value*k+"px";
+//				divs.style.height="100%";
+//				divs.style.float="right";
+//				divs.style.backgroundColor="white";
+//				divs.style.opacity="0.5";
+//				div.appendChild(divs);
+//			}
+//			}
 			line_len1=line_len1+15;
 		}else{
 			div.className="fb";
 			div.id="fb"+i;
-			console.log(div.id);
+			//console.log(div.id);
 			if(gene2_name=='BCR'){}
-			if(g1_bp.value!=0&&g2_bp.value!=0){
+			if(g1_bp.value!=0||g2_bp.value!=0){
 			if(arr[i].end*k<=g2_bp.value*k){
 				div.style.opacity="0.5";
 			}else if(arr[i].start<g2_bp.value && arr[i].end>g2_bp.value){
 				var divs=document.createElement("div");
+				divs.id="tranparant2"+i;
 				divs.style.width=g2_bp.value*k-arr[i].start*k+"px";
 				divs.style.height="100%";
 				divs.style.backgroundColor="white";
@@ -617,6 +803,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 				div.appendChild(divs);
 			}else if(i==0){
 				var divs=document.createElement("div");
+				divs.id="tranparant2"+i;
 				divs.style.width=g2_bp.value*k-arr[i].start*k+"px";
 				divs.style.height="100%";
 				divs.style.backgroundColor="white";
@@ -667,11 +854,11 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		}
 		//divtext.innerHTML=noteinfo;
          var textw=noteinfo.length*8;
-		console.log(textw+"文字的宽度");
+		//console.log(textw+"文字的宽度");
 		//////////
 		
 		if(arr[i].end*k+textw>400){
-			console.log(arr[i].end*k+textw+'ppppppppppppppppppppppppppppppppppppp');
+			//console.log(arr[i].end*k+textw+'ppppppppppppppppppppppppppppppppppppp');
 			    var newmargin=arr[i].start*k-textw;
 			    divtext.style.marginLeft=arr[i].start*k-textw+"px";
 			    div.style.marginLeft=0+"px";
@@ -712,12 +899,12 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
         
 	     window.onscroll = function(){
 		 var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-	      console.log('鼠标移动了'+scrollTop);
+	      //console.log('鼠标移动了'+scrollTop);
 		 back_box.style.top=scrollTop+"px";
 		 }
        	var list_obja = getElementsByClassName("fa");  
 		var list_objb = getElementsByClassName("fb");
-		console.log(list_objb.length);	
+		//console.log(list_objb.length);	
 		for(var i = 0; i<list_objb.length; i++){
 			
 	        list_objb[i].onclick = (function(i){
