@@ -110,12 +110,15 @@ body{
 	float: left;
 
 }
+.gene_title  span{
+	color: #C9302C;
+}
 .gene_title{
 	width:100%;
 	height: 70px;
 	/*background-color: #398439;*/
-	font-size: 23px;
-	text-align: center;
+	font-size: 18px;
+	/*text-align: center;*/
 }
 .gene_bar{
 	width:100%;
