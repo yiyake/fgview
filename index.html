@@ -703,6 +703,8 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
         	line_box.style.visibility="visible";
         	line_1.style.left=result1.x+g1_bp.value*k+"px";
 		    line_2.style.left=result2.x+g2_bp.value*k+"px";
+		    img_line1=result1.x+g1_bp.value*k+8;
+		    img_line2=result2.x+g2_bp.value*k+8;
         }
 
         if(g1_bp.value>gene1_len||g2_bp.value>gene2_len){
@@ -712,13 +714,20 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
         }
 		if(g1_bp.value==""){
         red_bp.style.width="100%";
+        img_line1=result1.x+8;
             }else{
-            	 red_bp.style.width=g1_bp.value*k+"px";
+            	 red_bp.style.width=g1_bp.value*k+1+"px";
+            	 img_line1=result1.x+g1_bp.value*k+8;
             }
         if(g1_bp.value==""&&g2_bp.value!=""){
         	red_bp.style.width=0+"px";
+        	img_line2=result2.x+g2_bp.value*k+8;
         }
-		
+    	if(g2_bp.value==""){
+     	//red_bp.style.width=0+"px";
+      	//img_line2=result2.x+g2_bp.value*k+8;
+      	img_line2=result2.x+8;
+      }
         darg(line_2,2);
         darg(line_1,1);  
         var h = fusion_ct.clientHeight||fusion_ct.offsetHeight;
