@@ -10,6 +10,9 @@
 		<script src="js/bcr.js"></script> 
 		<!--<script src="js/getleft.js"></script>-->
 		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta3/html2canvas.min.js"></script>
+　　       <script src="js/canvas2image.js"></script>
+　　       <script src="js/base64.js"></script>
 		<link href="css/gene.css" rel="stylesheet">
 	</head>
 	<body>
@@ -41,6 +44,7 @@
 			    BP:<input id="g2_bp" placeholder="Input breakpoint" maxlength="10000" />
 			  </div>
 			  <input id="fusion_btn" type="button" value="Draw" onclick="clickbtn()"/>
+			 
 			 <!-- <button id="fusion_bt">Draw Fusion Gene</button>-->
 			  </form>
 			  </div>
@@ -50,6 +54,7 @@
 	  	        </div>
 	  	        <div id="legant">
 	  	        </div>
+	  	         <input id="btnSave" type="button" value="Save image"/>
 	  	        <div id="fusion_ct">
 	  	            <!--<div id="bp_line">
 	  	        		<div id="line_draw"></div>
@@ -126,6 +131,17 @@
 	</div>
 	<div id="buttom"></div>
 	</div>
+	<div id="img_levei">
+		
+	    
+	    <div id="win_img" style=" padding: 20px;">
+	    <div id="images" style="width:850px;margin:auto;padding:25px;text-align:center;background-color: white;">
+	    	<button id="Download">Download PNG</button>
+	    	<button id="back">Back</button>
+	    	</div>
+        </div>
+	</div>
+
     <div id="back_box">
     	<div id="dialog">
     		<div id="f_show">
@@ -146,7 +162,87 @@
     		<button id="infobtn">OK</button>
     	</div>
     </div>
-    
+    <script>
+　　　　/*生成canvas图形*/
+
+　　　　// 获取按钮id
+　　　　var btnSave = document.getElementById("btnSave");
+　　　　// 获取内容id
+　　　　var imgbox = document.getElementById("imgbox");
+        var images = document.getElementById("images");
+        var img_level=document.getElementById('img_levei');
+        var back=document.getElementById('back');
+        back.onclick=function(){
+        	removecanvas();
+        	img_level.style.visibility="hidden";
+        	
+        }
+　　　　// 进行canvas生成
+　　　　btnSave.onclick = function(){
+	     window.scroll(0,0);
+	    //removecanvas();
+	    console.log(line_2.style.left);
+	    var line_sour=line_1.style.left;
+	    var line2_sour=line_2.style.left;
+	    line_2.style.left=img_line2+"px";
+	    line_1.style.left=img_line1+"px";
+	    console.log(line_2.style.left);
+	        //alert('22222222222222');
+	     //img_level.style.top=scrollTop+"px";
+	     
+         //img_level.style.top="0px";
+	     img_level.style.visibility="visible";
+	     
+　　　　　　html2canvas(fusion_ct, {
+　　　　　　　　onrendered: function(canvas) {
+　　　　　　　　　　//添加属性
+　　　　　　　　　　canvas.setAttribute('id','thecanvas');
+　　　　　　　　　　//读取属性值
+                   //var oCanvas = document.getElementById("thecanvas");
+　　　　　　　　　　// var value= canvas.getAttribute('id');
+                   //var pngc=document.getElementById('thecanvas');
+                   //oCanvas.style.marginTop="0px";
+　　　　　　　　　　//document.getElementById('images').innerHTML = '';
+　　　　　　　　　　document.getElementById('images').appendChild(canvas);
+                   settop();
+　　　　　　　　}
+　　　　　　});
+           line_2.style.left=line2_sour;
+	       line_1.style.left=line_sour;
+　　　　}
+　　</script>
+		<script>
+		/*
+		* 说明
+		* 不支持跨域图片
+		* 不能在浏览器插件中使用
+		* 部分浏览器上不支持SVG图片
+		* 不支持Flash
+		*/
+		　　　　var Download = document.getElementById("Download");
+		　　　　Download.onclick = function(){
+		　　　　　　var oCanvas = document.getElementById("thecanvas");
+		　　　　　　/*自动保存为png*/
+		　　　　　　// 获取图片资源
+		　　　　　　var img_data1 = Canvas2Image.saveAsPNG(oCanvas, true).getAttribute('src');
+		　　　　　　saveFile(img_data1, 'fgview.png');
+		
+		
+		　　　　　　/*下面的为原生的保存，不带格式名*/
+		　　　　　　// 这将会提示用户保存PNG图片
+		　　　　　　// Canvas2Image.saveAsPNG(oCanvas);
+		　　　　}
+		　　　　// 保存文件函数
+		　　　　var saveFile = function(data, filename){
+		　　　　var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+		　　　　save_link.href = data;
+		　　　　save_link.download = filename;
+		
+		　　　　var event = document.createEvent('MouseEvents');
+		　　　　event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+		　　　　save_link.dispatchEvent(event);
+		　　};
+		</script>
 	</body>
 </html> 
 <script type="text/javascript">	
@@ -157,6 +253,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
     var g_code={BCR:"ENST00000305877",ABL1:"ENST00000318560",EML4:"ENST00000318522",ALK:"ENST00000397938"}
     var g_ua={BCR:"P11274",ABL1:"P00519"}
     var flag=0;
+    //var scrollTop
     var g1_ud=document.getElementById('g1_ud');
     var g2_ud=document.getElementById('g2_ud');
 	var sect_g1=document.getElementById('sect_g1');
@@ -229,6 +326,22 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
     //var label=document.getElementById('label');
     var result1={};
     var result2={};
+    var img_line1=0;
+    var img_line2=0;
+    function settop(){
+    	var oCanvas = document.getElementById("thecanvas");
+    	oCanvas.style.marginTop="0px";
+    	var h = oCanvas.clientHeight||oCanvas.offsetHeight;
+    	console.log(h);
+    	//oCanvas.style.backgroundColor="#1E90FF";
+    	window.onscroll = function(){
+		 var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+	     console.log('鼠标移动了'+scrollTop);
+		 img_level.style.top=scrollTop+"px";
+//		 
+		 }
+    	
+    }
     /////////////////////////////////////////////////
     function GetPos(obj) {
             var pos = new Object();
@@ -297,30 +410,37 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
            	line_2.style.left=oevent.clientX - distanceX+ 'px';
          	if(oevent.clientX - distanceX <result2.x){
          		obj.style.left=result2.x+'px';
+         		img_line2=result2.x+8;
          		//oevent.clientX - distanceX =674; 
          		g2_bp.value=0;
          	}else if(oevent.clientX - distanceX>result2.x+gene2_len*0.3){
          		obj.style.left=result2.x+gene2_len*0.3+'px';
+         		img_line2=result2.x+gene2_len*0.3+8;
          		//oevent.clientX - distanceX=674+gene2_len*0.3;
          		g2_bp.value=gene2_len;
          	}else{
          		obj.style.left = oevent.clientX - distanceX + 'px';
+         		img_line2=oevent.clientX - distanceX+8;
          		g2_bp.value=parseInt((oevent.clientX - distanceX-result2.x)/0.3);
          	}
 //         	
          	g2_bp.innerHTML=g2_bp.value;
+         	
            }else{
            	//label.innerHTML=label.innerHTML+"移动的位置11："+oevent.clientX - distanceX ;
          	if(oevent.clientX - distanceX <result1.x){
          		obj.style.left=result1.x+'px';
+         		img_line1=result1.x+8;
          		//oevent.clientX - distanceX=274;
          		g1_bp.value=0;
          	}else if(oevent.clientX - distanceX>result1.x+gene1_len*0.3){
          		obj.style.left=result1.x+gene1_len*0.3+'px';
+         		img_line1=result1.x+gene1_len*0.3+8;
          		//oevent.clientX - distanceX=gene2_len*0.3;
          		g1_bp.value=gene1_len;
          	}else{
          		obj.style.left = oevent.clientX - distanceX + 'px';
+         		img_line1= oevent.clientX - distanceX+8;
          		g1_bp.value=parseInt((oevent.clientX - distanceX-result1.x)/0.3);
          	}
          	
@@ -445,6 +565,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		
 	}
      function clickbtn(){
+     	
 		//////////////////////////
 		
 		///////////////////////////
@@ -574,6 +695,8 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
         	red_bp.style.width=bar_red.style.width+"px";
         	line_1.style.left=result1.x+"px";
 		    line_2.style.left=result2.x+"px";
+		    img_line1=result1.x+8;
+		    img_line2=result2.x+8;
         }else{
         	line_1.style.visibility="visible";
         	line_2.style.visibility="visible";
@@ -581,6 +704,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
         	line_1.style.left=result1.x+g1_bp.value*k+"px";
 		    line_2.style.left=result2.x+g2_bp.value*k+"px";
         }
+
         if(g1_bp.value>gene1_len||g2_bp.value>gene2_len){
          window.location.reload();
          alert('The cut point is too long, please re-enter');
@@ -591,11 +715,14 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
             }else{
             	 red_bp.style.width=g1_bp.value*k+"px";
             }
-        
+        if(g1_bp.value==""&&g2_bp.value!=""){
+        	red_bp.style.width=0+"px";
+        }
 		
         darg(line_2,2);
-        darg(line_1,1);    
-        
+        darg(line_1,1);  
+        var h = fusion_ct.clientHeight||fusion_ct.offsetHeight;
+        console.log(h);
 	}
 	function removediv(){
 		while(f_bar2.hasChildNodes()){ 
@@ -610,6 +737,12 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 			legant.removeChild(legant.firstChild);
 	
 		}
+       // window.location.reload();*/
+	}
+	function removecanvas(){
+        var oCanvas = document.getElementById("thecanvas");
+        var tr=oCanvas.parentNode; //找到正点击a标签的祖节点tr
+      		tr.removeChild(oCanvas);    //删除该tr节点
        // window.location.reload();*/
 	}
 	line_box.onclick=function(){
@@ -917,7 +1050,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 	
 	function clickfeature(){
 //		f_bar2.onclick=function(){
-//			alert('yes！');
+//			alert('yes！');  
 //		}
         
 	     window.onscroll = function(){

@@ -68,7 +68,26 @@ body{
 	background-color: #245269;
 	color: white;
 }
-
+#btnSave{
+	width: 200px;
+	align-content: center;
+	margin-left: 35%;
+	margin-bottom: 20px;
+	background-color: #245269;
+	color: white;
+}
+#Download{
+	width: 150px;
+	align-content: center;
+	background-color: #245269;
+	color: white;
+	margin-bottom: 20px;
+}
+#back{
+	width: 100px;
+	align-content: center;
+	margin-bottom: 0px;
+}
 #fusion_ct{
 	width:100%;
 	/*background-color: #222222;*/
@@ -111,14 +130,14 @@ body{
 
 }
 .gene_title  span{
-	color: #C9302C;
+	font-weight: bold;
 }
 .gene_title{
 	width:100%;
 	height: 70px;
 	/*background-color: #398439;*/
 	font-size: 18px;
-	/*text-align: center;*/
+	text-align: center;
 }
 .gene_bar{
 	width:100%;
@@ -134,13 +153,13 @@ body{
 	margin-left:257px ;
 }
 #bp_posi{
-	color: red;
+	font-weight: bold;
 }
 #bp_label_2{
 	margin-left:49px ;
 }
 #bp_posi2{
-	color: red;
+	font-weight: bold;
 }
 .bar_length{
 	height: 33%;
@@ -319,6 +338,21 @@ float: right;
 	background-color:rgba(0,0,0,0.4);
 	z-index: 999;
 	visibility: hidden;
+}
+#img_levei{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	/*background-color:rgba(0,0,0,0.4);*/
+	overflow-y: scroll;
+	z-index: 1000;
+	visibility: hidden;
+}
+#win_img{
+	margin: auto;
+	background-color: white;
+	margin-top: 40px;
 }
 #dialog{
 	width: 40%;
