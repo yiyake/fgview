@@ -184,8 +184,12 @@
 	    console.log(line_2.style.left);
 	    var line_sour=line_1.style.left;
 	    var line2_sour=line_2.style.left;
-	    line_2.style.left=img_line2+"px";
-	    line_1.style.left=img_line1+"px";
+	    pagew=document.documentElement.clientWidth;
+	    if(pagew>1000){
+	    	line_2.style.left=img_line2+"px";
+	        line_1.style.left=img_line1+"px";
+	    }
+	    
 	    console.log(line_2.style.left);
 	        //alert('22222222222222');
 	     //img_level.style.top=scrollTop+"px";
@@ -328,6 +332,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
     var result2={};
     var img_line1=0;
     var img_line2=0;
+    var pagew=document.documentElement.clientWidth;
     function settop(){
     	var oCanvas = document.getElementById("thecanvas");
     	oCanvas.style.marginTop="0px";
@@ -565,7 +570,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		
 	}
      function clickbtn(){
-     	
+     	console.log(pagew+'页面宽度');
 		//////////////////////////
 		
 		///////////////////////////
