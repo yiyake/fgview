@@ -31,7 +31,7 @@
 					  <!--<option value="EML4">EML4</option>
 					  <option value="ALK">ALK</option>-->
 			        </select>
-			    BP:<input id="g1_bp" type="text" placeholder="Input breakpoint" maxlength="10000" />
+			    BP:<input id="g1_bp" type="text" value="0" placeholder="Input breakpoint" maxlength="10000" />
 			  </div>
 			  <div>
 			  	3'-Gene:
@@ -41,7 +41,7 @@
 					  <!--<option value="EML4">EML4</option>
 					  <option value="ALK">ALK</option>-->
 			        </select>
-			    BP:<input id="g2_bp" placeholder="Input breakpoint" maxlength="10000" />
+			    BP:<input id="g2_bp" value="0" placeholder="Input breakpoint" maxlength="10000" />
 			  </div>
 			  <input id="fusion_btn" type="button" value="Draw" onclick="clickbtn()"/>
 			 
@@ -724,15 +724,16 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 		line_box.style.visibility="visible";
 		result1=GetPos(bar_red);
         result2=GetPos(bar_blue);
-		if(g1_bp.value==""&&g2_bp.value==""){
+		if((g1_bp.value==0)&&(g2_bp.value==0)){
         	line_1.style.visibility="visible";
         	line_2.style.visibility="visible";
         	line_box.style.visibility="hidden";
-        	red_bp.style.width=bar_red.style.width+"px";
+        	red_bp.style.width=gene1_len*k+"px";
         	line_1.style.left=result1.x+"px";
 		    line_2.style.left=result2.x+"px";
 		    img_line1=result1.x+8;
 		    img_line2=result2.x+8;
+		    console.log(red_bp.style.width);
         }else{
         	line_1.style.visibility="visible";
         	line_2.style.visibility="visible";
@@ -748,22 +749,21 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
          alert('The cut point is too long, please re-enter');
         	
         }
-		if(g1_bp.value==""){
-        red_bp.style.width="100%";
+		if((g1_bp.value==0)&&(g2_bp.value==0)){
+	    //alert("00");
+        red_bp.style.width=gene1_len*k+"px";
+        red_bp.marginLeft="0px";
+        console.log(red_bp.style.width);
         img_line1=result1.x+8;
             }else{
             	 red_bp.style.width=g1_bp.value*k+1+"px";
             	 img_line1=result1.x+g1_bp.value*k+8;
             }
-        if(g1_bp.value==""&&g2_bp.value!=""){
+        if((g1_bp.value==0)&&(g2_bp.value!=0)){
         	red_bp.style.width=0+"px";
         	img_line2=result2.x+g2_bp.value*k+8;
         }
-    	if(g2_bp.value==""){
-     	//red_bp.style.width=0+"px";
-      	//img_line2=result2.x+g2_bp.value*k+8;
-      	img_line2=result2.x+8;
-      }
+    	
         darg(line_2,2);
         darg(line_1,1);  
         var h = fusion_ct.clientHeight||fusion_ct.offsetHeight;
@@ -864,7 +864,19 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 			}else{
 				retain_5=retain_5+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
 			}
-	}}
+	}
+	if((g1_bp.value==0)&&(g2_bp.value==0)){
+		retain_5=retain_5+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+		//no_retain="\n\r";
+	}
+	if((g1_bp.value==0)&&(g2_bp.value!=0)){
+		
+		no_retain=no_retain+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+	}
+	if(g1_bp.value==gene1_len){
+		retain_5=retain_5+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+	}
+	}
 	function f_Draw(arr,fbar){
 		//var back=0;
 		for(var i=0;i<arr.length;i++){
@@ -999,7 +1011,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 				no_retain=no_retain+arr[i].name+','+arr[i].start+','+g2_bp.value+','+arr[i].desc+'\n';
 				retain_3=retain_3+arr[i].name+','+g2_bp.value+','+arr[i].end+','+arr[i].desc+'\n';
 			}else if(i==0){
-				if(g2_bp.value==""){
+				if(g2_bp.value==""||g2_bp.value==0){
 					var divs=document.createElement("div");
 					divs.id="tranparant2"+i;
 					divs.style.width=0+"px";
@@ -1023,6 +1035,14 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 			}
 				
 	
+			}
+			if(g2_bp.value==0){
+				retain_3=retain_3+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+				//retain_5=retain_5+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+				//no_retain="";
+			}
+			if(g2_bp.value==gene2_len){
+				no_retain=no_retain+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
 			}
 			//line_len2=line_len2+15;
 		}
