@@ -19,10 +19,10 @@
 	<div id="ct">
 	  <div id="top"></div>
 	  <div id="middle" >
-	  	  <div class="space">
-	  	  </div>
-		  <div id="m_bp" style="width:400px ;margin: auto;">
-			  <form>
+		  <div id="m_bp" style="width:800px ;margin: auto;margin-bottom: 5px;">
+		  	<div class="label_title">Fusion gene search</div>
+			  <form >
+			  <div style="margin-left:26%;">
 			  <div>
 			  	5'-Gene:
 				    <select id="sect_g1" onchange="changeGeneO()">
@@ -46,15 +46,20 @@
 			  <input id="fusion_btn" type="button" value="Draw" onclick="clickbtn()"/>
 			 
 			 <!-- <button id="fusion_bt">Draw Fusion Gene</button>-->
+			  </div>
 			  </form>
 			  </div>
 			  
 			  <div id="fusion_img" style="width:800px ;margin: auto; visibility: hidden;">
 			    <div class="space">
 	  	        </div>
+	  	        <div class="label_title">Legends of protein features</div>
 	  	        <div id="legant">
 	  	        </div>
+	  	        <div class="label_title">Protein-level FGviewer</div>
+
 	  	         <input id="btnSave" type="button" value="Save image"/>
+	  	         <input id="btntxt" type="button" value="Download information"/>
 	  	        <div id="fusion_ct">
 	  	            <!--<div id="bp_line">
 	  	        		<div id="line_draw"></div>
@@ -327,12 +332,20 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
     var noteinfo='';
     var fusion_img=document.getElementById('fusion_img');
     var ct=document.getElementById('ct');
+    var btntxt=document.getElementById('btntxt');
     //var label=document.getElementById('label');
     var result1={};
     var result2={};
     var img_line1=0;
     var img_line2=0;
+    var txtcontent="";
+    var retain_5="";
+    var no_retain="";
+    var retain_3="";
     var pagew=document.documentElement.clientWidth;
+    btntxt.onclick=function(){
+    	download("gene_fusion.txt",txtcontent);
+    }
     function settop(){
     	var oCanvas = document.getElementById("thecanvas");
     	oCanvas.style.marginTop="0px";
@@ -393,7 +406,21 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
     //////////////////2222222222222229999999999999999////////////////
     /////////////////////////////////////////////////test----------line--------move///////////
     //var oDivTest = document.getElementById("divtest");
-    
+    //////////download txt
+	function download(filename, text) {
+	  var element = document.createElement('a');
+	  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+	  element.setAttribute('download', filename);
+	 
+	  element.style.display = 'none';
+	  document.body.appendChild(element);
+	 
+	  element.click();
+	 
+	  document.body.removeChild(element);
+	}
+
+    ///////////
     function darg(obj,num){
     //鼠标按下 
     obj.onmousedown = function(ev){
@@ -571,6 +598,10 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 	}
      function clickbtn(){
      	console.log(pagew+'页面宽度');
+     	txtcontent="";
+     	no_retain="";
+     	retain_3="";
+     	retain_5="";
 		//////////////////////////
 		
 		///////////////////////////
@@ -808,6 +839,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 				//console.log('bp的位置：'+g1_bp.value*k);
 				//console.log('透明的fa：'+i);
 				div.style.opacity="0.5";
+				no_retain=no_retain+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
 			}else if(arr[i].start<g_bp.value && arr[i].end>g_bp.value){
 				//console.log('一半透明fa'+i);
 				var divs=document.createElement("div");
@@ -818,6 +850,8 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 				divs.style.backgroundColor="white";
 				divs.style.opacity="0.5";
 				div.appendChild(divs);
+				no_retain=no_retain+arr[i].name+','+g_bp.value+','+arr[i].end+','+arr[i].desc+'\n';
+				retain_5=retain_5+arr[i].name+','+arr[i].start+','+g_bp.value+','+arr[i].desc+'\n';
 			}else if(i==0){
 				var divs=document.createElement("div");
 				divs.id="tranparant1"+i;
@@ -827,6 +861,8 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 				divs.style.backgroundColor="white";
 				divs.style.opacity="0.5";
 				div.appendChild(divs);
+			}else{
+				retain_5=retain_5+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
 			}
 	}}
 	function f_Draw(arr,fbar){
@@ -951,6 +987,7 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 			if(g1_bp.value!=0||g2_bp.value!=0){
 			if(arr[i].end*k<=g2_bp.value*k){
 				div.style.opacity="0.5";
+				no_retain=no_retain+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
 			}else if(arr[i].start<g2_bp.value && arr[i].end>g2_bp.value){
 				var divs=document.createElement("div");
 				divs.id="tranparant2"+i;
@@ -959,6 +996,8 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 				divs.style.backgroundColor="white";
 				divs.style.opacity="0.5";
 				div.appendChild(divs);
+				no_retain=no_retain+arr[i].name+','+arr[i].start+','+g2_bp.value+','+arr[i].desc+'\n';
+				retain_3=retain_3+arr[i].name+','+g2_bp.value+','+arr[i].end+','+arr[i].desc+'\n';
 			}else if(i==0){
 				if(g2_bp.value==""){
 					var divs=document.createElement("div");
@@ -979,7 +1018,11 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
 				}
 				
 				
+			}else{
+				retain_3=retain_3+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
 			}
+				
+	
 			}
 			//line_len2=line_len2+15;
 		}
@@ -1046,6 +1089,9 @@ transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCC
         	contdiv.appendChild(div);
         }
 	}
+		txtcontent="Information Of"+" "+gene1_name+" "+"And"+" "+gene2_name+" "+"Fusion:\n\r";
+		txtcontent=txtcontent+"bp of 5'gene:"+g1_bp.value+"    "+"bp of 5'gene:"+g2_bp.value+"\n\r";
+		txtcontent=txtcontent+"Retained features in 5'gene:\n\r"+retain_5+"\n\r"+"Not Retained features:\n\r"+no_retain+"\n\r"+"Retained features in 3'gene:\n\r"+retain_3;
 }
 
 	function pai(){
