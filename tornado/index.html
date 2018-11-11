@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <!-- <script src="/js/eml4.js"></script> -->
+        <script src="{{ static_url("js/eml4.js")}}"></script>
+
+        <script src="{{ static_url("js/alk.js")}}"></script>
+        <script src="{{ static_url("js/color.js")}}"></script>
+        <script src="{{ static_url("js/abl1.js")}}"></script>
+        <script src="{{ static_url("js/bcr.js")}}"></script>
+        <!--<script src="js/getleft.js"></script>-->
+        <script type="text/javascript" src="{{ static_url("js/jquery-3.2.1.min.js")}}"></script>
+        <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta3/html2canvas.min.js"></script>
+　　       <script src="{{ static_url("js/canvas2image.js")}}"></script>
+　　       <script src="{{ static_url("js/base64.js")}}"></script>
+        <link href="{{ static_url("css/gene.css")}}" rel="stylesheet">
+    </head>
+    <body>
+    <div id="ct">
+      <div id="top"></div>
+      <div id="middle" >
+          <div id="m_bp" style="width:800px ;margin: auto;margin-bottom: 5px;">
+            <div class="label_title">Fusion gene search</div>
+              <form action="data_request" method="post" id="messageform">
+              <div style="margin-left:26%;">
+              <div>
+                5'-Gene:
+                    <select id="sect_g1" name="sect_g1" onchange="changeGeneO()">
+                      <option value="BCR">BCR</option>
+                      <option value="ABL1">ABL1</option>
+                      <!--<option value="EML4">EML4</option>
+                      <option value="ALK">ALK</option>-->
+                    </select>
+                BP:<input id="g1_bp" name="g1_bp" type="text" value="0" placeholder="Input breakpoint" maxlength="10000" />
+              </div>
+              <div>
+                3'-Gene:
+                    <select id="sect_g2" name="sect_g2" onchange="changeGeneT()">
+                      <option value="ABL1">ABL1</option>
+                      <option value="BCR">BCR</option>
+                      <!--<option value="EML4">EML4</option>
+                      <option value="ALK">ALK</option>-->
+                    </select>
+                BP:<input id="g2_bp" name="g2_bp" value="0" placeholder="Input breakpoint" maxlength="10000" />
+              </div>
+              <!-- <input id="fusion_btn" type="button" value="Draw" onclick="clickbtn()"/> -->
+                <input id="fusion_btn" type="submit" value="Draw" onclick="clickbtn()"/>
+
+             <!-- <button id="fusion_bt">Draw Fusion Gene</button>-->
+              </div>
+              </form>
+              </div>
+              
+              <div id="fusion_img" style="width:800px ;margin: auto; visibility:visible;">
+                <div class="space">
+                </div>
+                <div class="label_title">Legends of protein features</div>
+                <div id="legant">
+                </div>
+                <div class="label_title">Protein-level FGviewer</div>
+
+                 <input id="btnSave" type="button" value="Save image"/>
+                 <input id="btntxt" type="button" value="Download information"/>
+                <div id="fusion_ct">
+                    <!--<div id="bp_line">
+                        <div id="line_draw"></div>
+                    </div>-->
+                
+                    <div id="line_4"></div>
+                    <div id="line_1"></div>
+                    <div id="line_box"></div>
+                    <div id="line_3"></div>
+                    <div id="line_2"></div>
+                    <div id="left_g">
+                        <div class="gene_title">
+                            <div class="gene_t" >Gene symbol:<span id="g1_name">BCR</span></div>
+                            <div class="gene_ud" >UniProt accession:<span id="g1_ud">P1112</span></div>
+                            <div class="gene_rank" >Ensembl transcript ID:<span id="g1_code">ENST00000305877</span> </div>
+                        </div>
+                        <!--<div id="link_line1" class="space">
+                         </div>-->
+                        <div class="gene_bar">
+                            <div class="bar_bp">
+                                
+                                <span id="bp_label">BP:<span id="bp_posi">927</span></span>
+                            </div>
+                            <div class="bar_length">
+                                <div id="gene_1_start">1</div>
+                                <div id="gene_1_lenth">1272</div>
+                            </div>
+                            <div class="bar_draw">
+                                <div id="bar_red">
+                                    <div id="red_bp"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="f_bar1" class="feature_bar">
+                            <!--<div class="f" id="b_f_1"></div>
+                            <div class="f" id="b_f_2"></div>
+                            <div class="f" id="b_f_3"></div>-->
+                        </div>
+                    </div>
+                    <div id="right_g">
+                        <div class="gene_title">
+                            <div class="gene_t" >Gene symbol:<span id="g2_name">BCR</span></div>
+                            <div class="gene_ud" >UniProt accession:<span id="g2_ud">P1112</span></div>
+                            <div class="gene_rank" >Ensembl transcript ID: <span id="g2_code">ENST00000305877</span></div>
+                        </div>
+                        <!--<div id="link_line2" class="space">
+                         </div>-->
+                        <div class="gene_bar">
+                            <div class="bar_bp">
+                                <span id="bp_label_2">BP:<span id="bp_posi2">26</span></span>
+                            </div>
+                            <div class="bar_length">
+                                <div id="gene_2_lenth">1131</div>
+                                <!--<div id="gene_2_start">1</div>-->
+                                <div id="gene_2_begin">1</div>
+                            </div>
+                            <div class="bar_draw">
+                                <div id="bar_blue">
+                                    <div id="blue_bp"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="f_bar2" class="feature_bar">
+                            <!--<div class="f" id="a_f_1"></div>
+                            <div class="f" id="a_f_2"></div>
+                            <div class="f" id="a_f_3"></div>-->
+                        </div>
+                    </div>
+
+                    <div class="clr"></div>
+                    
+                </div>
+              </div>
+    </div>
+    <div id="buttom"></div>
+    </div>
+    <div id="img_levei">
+        
+        
+        <div id="win_img" style=" padding: 20px;">
+        <div id="images" style="width:850px;margin:auto;padding:25px;text-align:center;background-color: white;">
+            <button id="Download">Download PNG</button>
+            <button id="back">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="back_box">
+        <div id="dialog">
+            <div id="f_show">
+            <p id="feature_title"><strong>Protein feature information:</strong></p>
+            <p>Name:<span id="f_name"></span></p>
+            <p>Start:<span id="f_start">256</span></p>
+            <p>End:<span id="f_end">265</span></p>
+            <p>Description:<span id="f_desc"></span></p>
+            
+            </div>
+            <div id="g_show" hidden="hidden">
+            <p id="gene_title"><strong>Broken protein's sequence:</strong></p>
+            <p>★Broken <span id="g_name1"></span>'s AA sequence:</p>
+            <textarea id="aas"></textarea>
+            <p>★Broken <span id="g_name2"></span>'s transcript sequence:</p>
+            <textarea id="trs"></textarea>
+            </div>
+            <button id="infobtn">OK</button>
+        </div>
+    </div>
+    <script>
+　　　　/*生成canvas图形*/
+
+　　　　// 获取按钮id
+　　　　var btnSave = document.getElementById("btnSave");
+　　　　// 获取内容id
+　　　　var imgbox = document.getElementById("imgbox");
+        var images = document.getElementById("images");
+        var img_level=document.getElementById('img_levei');
+        var back=document.getElementById('back');
+        back.onclick=function(){
+            removecanvas();
+            img_level.style.visibility="hidden";
+            
+        }
+　　　　// 进行canvas生成
+　　　　btnSave.onclick = function(){
+         window.scroll(0,0);
+        //removecanvas();
+        console.log(line_2.style.left);
+        var line_sour=line_1.style.left;
+        var line2_sour=line_2.style.left;
+        pagew=document.documentElement.clientWidth;
+        if(pagew>1000){
+            line_2.style.left=img_line2+"px";
+            line_1.style.left=img_line1+"px";
+        }
+        
+        console.log(line_2.style.left);
+            //alert('22222222222222');
+         //img_level.style.top=scrollTop+"px";
+         
+         //img_level.style.top="0px";
+         img_level.style.visibility="visible";
+         
+　　　　　　html2canvas(fusion_ct, {
+　　　　　　　　onrendered: function(canvas) {
+　　　　　　　　　　//添加属性
+　　　　　　　　　　canvas.setAttribute('id','thecanvas');
+　　　　　　　　　　//读取属性值
+                   //var oCanvas = document.getElementById("thecanvas");
+　　　　　　　　　　// var value= canvas.getAttribute('id');
+                   //var pngc=document.getElementById('thecanvas');
+                   //oCanvas.style.marginTop="0px";
+　　　　　　　　　　//document.getElementById('images').innerHTML = '';
+　　　　　　　　　　document.getElementById('images').appendChild(canvas);
+                   settop();
+　　　　　　　　}
+　　　　　　});
+           line_2.style.left=line2_sour;
+           line_1.style.left=line_sour;
+　　　　}
+　　</script>
+        <script>
+        /*
+        * 说明
+        * 不支持跨域图片
+        * 不能在浏览器插件中使用
+        * 部分浏览器上不支持SVG图片
+        * 不支持Flash
+        */
+        　　　　var Download = document.getElementById("Download");
+        　　　　Download.onclick = function(){
+        　　　　　　var oCanvas = document.getElementById("thecanvas");
+        　　　　　　/*自动保存为png*/
+        　　　　　　// 获取图片资源
+        　　　　　　var img_data1 = Canvas2Image.saveAsPNG(oCanvas, true).getAttribute('src');
+        　　　　　　saveFile(img_data1, 'fgview.png');
+        
+        
+        　　　　　　/*下面的为原生的保存，不带格式名*/
+        　　　　　　// 这将会提示用户保存PNG图片
+        　　　　　　// Canvas2Image.saveAsPNG(oCanvas);
+        　　　　}
+        　　　　// 保存文件函数
+        　　　　var saveFile = function(data, filename){
+        　　　　var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+        　　　　save_link.href = data;
+        　　　　save_link.download = filename;
+        
+        　　　　var event = document.createEvent('MouseEvents');
+        　　　　event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        　　　　save_link.dispatchEvent(event);
+        　　};
+        </script>
+    </body>
+</html> 
+<script type="text/javascript"> 
+    var bcr_seq={aaseq:"MVDPVGFAEAWKAQFPDSEPPRMELRSVGDIEQELERCKASIRRLEQEVNQERFRMIYLQTLLAKEKKSTDRQRWGFRRAAQAPDGASEPRASASRPQPAPADGADPPPAEEPEARPDGEGSPGKARPGTARRPGAAASGERDDRGPPASVAALRSNFERIRKGHGQPGADAEKPFYVNVEFHHERGLVKVNDKEVSDRISSLGSQAMQMERKKSQHGAGSSVGDASRPPYRGRSSESSCGVDGDYEDAELNPRFLKDNLIDANGGSRPPWPPLEYQPYQSIYVGGMMEGEGKGPLLRSQSTSEQEKRLTWPRRSYSPRSFEDCGGGTTPDCSSNENLTSSEEDFSSGQSSRVSPSPTTYRMFRDKSRSPSQNSQQSFDSSSPPTPQCHKRHRHCPVVVSEATIVGVRKTGQIWPNDGEGAFHGDADGSFGTPPGYGCAADRAEEQRRHQDGLPYIDDSPSSSPHLSSKGRGSRDALVSGALESTKASELDLEKGLEMRKWVLSGILASEETYLSHLEALLLPMKPLKAAATTSQPVLTSQQIETIFFKVPELYEIHKEFTDGLFPRVQQWSHQQRVGDLFQKLASQLGVYRAFVDNYGVAMEMAEKCCQANAQFAEISENLRARSNKDAKDPTTKNSLETLLYKPVDRVTRSTLVLHDLLKHTPASHPDHPLLQDALRISQNFLSSINEEITPRRQSMTVKKGEHRQLLKDSFMVELVEGARKLRHVFLFTDLLLCTKLKKQSGGKTQQTDCKWYIPLTDLSFQMVDELEAVPNIPLVPDEELDALKIKISQIKNDIQREKRANKGSKATERLKKKLSEQESLLLLMSPSMAFRVHSRNGKSYTFLISSDTERAEWRENIREQQKKCFRSFSLTSVELQMLTNSCVKLQTVHSIPLTINKEDDESPGLTGFLNVIVHSATGFKQS",
+transeq:"ATGGTGGACCCGGTGGGCTTCGCGGAGGCGTGGAAGGCGCAGTTCCCGGACTCAGAGCCCCCGCGCATGGAGCTGCGCTCAGTGGGCGACATCGAGCAGGAGCTGGAGCGCTGCAAGGCCTCCATTCGGCGCCTGGAGCAGGAGGTGAACCAGGAGCGCTTCCGCATGATCTACCTGCAGACGTTGCTGGCCAAGGAAAAGAAGAGCTATGACCGGCAGCGATGGGGCTTCCGGCGCGCGGCGCAGGCCCCCGACGGCGCCTCCGAGCCCCGAGCGTCCGCGTCGCGCCCGCAGCCAGCGCCCGCCGACGGAGCCGACCCGCCGCCCGCCGAGGAGCCCGAGGCCCGGCCCGACGGCGAGGGTTCTCCGGGTAAGGCCAGGCCCGGGACCGCCCGCAGGCCCGGGGCAGCCGCGTCGGGGGAACGGGACGACCGGGGACCCCCCGCCAGCGTGGCGGCGCTCAGGTCCAACTTCGAGCGGATCCGCAAGGGCCATGGCCAGCCCGGGGCGGACGCCGAGAAGCCCTTCTACGTGAACGTCGAGTTTCACCACGAGCGCGGCCTGGTGAAGGTCAACGACAAAGAGGTGTCGGACCGCATCAGCTCCCTGGGCAGCCAGGCCATGCAGATGGAGCGCAAAAAGTCCCAGCACGGCGCGGGCTCGAGCGTGGGGGATGCATCCAGGCCCCCTTACCGGGGACGCTCCTCGGAGAGCAGCTGCGGCGTCGACGGCGACTACGAGGACGCCGAGTTGAACCCCCGCTTCCTGAAGGACAACCTGATCGACGCCAATGGCGGTAGCAGGCCCCCTTGGCCGCCCCTGGAGTACCAGCCCTACCAGAGCATCTACGTCGGGGGCATGATGGAAGGGGAGGGCAAGGGCCCGCTCCTGCGCAGCCAGAGCACCTCTGAGCAGGAGAAGCGCCTTACCTGGCCCCGCAGGTCCTACTCCCCCCGGAGTTTTGAGGATTGCGGAGGCGGCTATACCCCGGACTGCAGCTCCAATGAGAACCTCACCTCCAGCGAGGAGGACTTCTCCTCTGGCCAGTCCAGCCGCGTGTCCCCAAGCCCCACCACCTACCGCATGTTCCGGGACAAAAGCCGCTCTCCCTCGCAGAACTCGCAACAGTCCTTCGACAGCAGCAGTCCCCCCACGCCGCAGTGCCATAAGCGGCACCGGCACTGCCCGGTTGTCGTGTCCGAGGCCACCATCGTGGGCGTCCGCAAGACCGGGCAGATCTGGCCCAACGATGGCGAGGGCGCCTTCCATGGAGACGCAGATGGCTCGTTCGGAACACCACCTGGATACGGCTGCGCTGCAGACCGGGCAGAGGAGCAGCGCCGGCACCAAGATGGGCTGCCCTACATTGATGACTCGCCCTCCTCATCGCCCCACCTCAGCAGCAAGGGCAGGGGCAGCCGGGATGCGCTGGTCTCGGGAGCCCTGGAGTCCACTAAAGCGAGTGAGCTGGACTTGGAAAAGGGCTTGGAGATGAGAAAATGGGTCCTGTCGGGAATCCTGGCTAGCGAGGAGACTTACCTGAGCCACCTGGAGGCACTGCTGCTGCCCATGAAGCCTTTGAAAGCCGCTGCCACCACCTCTCAGCCGGTGCTGACGAGTCAGCAGATCGAGACCATCTTCTTCAAAGTGCCTGAGCTCTACGAGATCCACAAGGAGTTCTATGATGGGCTCTTCCCCCGCGTGCAGCAGTGGAGCCACCAGCAGCGGGTGGGCGACCTCTTCCAGAAGCTGGCCAGCCAGCTGGGTGTGTACCGGGCCTTCGTGGACAACTACGGAGTTGCCATGGAAATGGCTGAGAAGTGCTGTCAGGCCAATGCTCAGTTTGCAGAAATCTCCGAGAACCTGAGAGCCAGAAGCAACAAAGATGCCAAGGATCCAACGACCAAGAACTCTCTGGAAACTCTGCTCTACAAGCCTGTGGACCGTGTGACGAGGAGCACGCTGGTCCTCCATGACTTGCTGAAGCACACTCCTGCCAGCCACCCTGACCACCCCTTGCTGCAGGACGCCCTCCGCATCTCACAGAACTTCCTGTCCAGCATCAATGAGGAGATCACACCCCGACGGCAGTCCATGACGGTGAAGAAGGGAGAGCACCGGCAGCTGCTGAAGGACAGCTTCATGGTGGAGCTGGTGGAGGGGGCCCGCAAGCTGCGCCACGTCTTCCTGTTCACCGACCTGCTTCTCTGCACCAAGCTCAAGAAGCAGAGCGGAGGCAAAACGCAGCAGTATGACTGCAAATGGTACATTCCGCTCACGGATCTCAGCTTCCAGATGGTGGATGAACTGGAGGCAGTGCCCAACATCCCCCTGGTGCCCGATGAGGAGCTGGACGCTTTGAAGATCAAGATCTCCCAGATCAAGAATGACATCCAGAGAGAGAAGAGGGCGAACAAGGGCAGCAAGGCTACGGAGAGGCTGAAGAAGAAGCTGTCGGAGCAGGAGTCACTGCTGCTGCTTATGTCTCCCAGCATGGCCTTCAGGGTGCACAGCCGCAACGGCAAGAGTTACACGTTCCTGATCTCCTCTGACTATGAGCGTGCAGAGTGGAGGGAGAACATCCGGGAGCAGCAGAAGAAGTGTTTCAGAAGCTTCTCCCTGACATCCGTGGAGCTGCAGATGCTGACCAACTCGTGTGTGAAACTCCAGACTGTCCACAGCATTCCGCTGACCATCAATAAGGAAGATGATGAGTCTCCGGGGCTCTATGGGTTTCTGAATGTCATCGTCCACTCAGCCACTGGATTTAAGCAGAGTTCAA"}
+    var abl1_seq={aaseq:"KALQRPVASDFEPQGLSEAARWNSKENLLAGPSENDPNLFVALTDFVASGDNTLSITKGEKLRVLGTNHNGEWCEAQTKNGQGWVPSNYITPVNSLEKHSWYHGPVSRNAAETLLSSGINGSFLVRESESSPGQRSISLRYEGRVYHYRINTASDGKLYVSSESRFNTLAELVHHHSTVADGLITTLHTPAPKRNKPTVTGVSPNYDKWEMERTDITMKHKLGGGQYGEVYEGVWKKYSLTVAVKTLKEDTMEVEEFLKEAAVMKEIKHPNLVQLLGVCTREPPFTIITEFMTYGNLLDYLRECNRQEVNAVVLLYMATQISSAMEYLEKKNFIHRDLAARNCLVGENHLVKVADFGLSRLMTGDTYTAHAGAKFPIKWTAPESLAYNKFSIKSDVWAFGVLLWEIATTGMSPYPGIDLSQVTELLEKDYRMERPEGCPEKVTELMRACWQWNPSDRPSFAEIHQAFETMFQESSISDEVEKELGKQGVRGAVSTLLQAPELPTKTRTSRRAAEHRDTTDVPEMPHSKGQGESDPLDHEPAVSPLLPRKERGPPEGGLNEDERLLPKDKKTNLFSALIKKKKKTAPTPPKRSSSFREMDGQPERRGAGEEEGRDISNGALAFTPLDTADPAKSPKPSNGAGVPNGALRESGGSGFRSPHLWKKSSTLTSSRLATGEEEGGGSSSKRFLRSCSASCVPHGAKDTEWRSVTLPRDLQSTGRQFDSSTFGGHKSEKPALPRKRAGENRSDQVTRGTVTPPPRLVKKNEEAADEVFKDIMESSPGSSPPNLTPKPLRRQVTVAPASGLPHKEEAGKGSALGTPAAAEPVTPTSKAGSGAPGGTSKGPAEESRVRRHKHSSESPGRDKGKLSRLKPAPPPPPAASAGKAGGKPSQSPSQEAAGEAVLGAKTKATSLVDAVNSDAAKPSQPGEGLKKPVLPATPKPQSAKPSGTPISPAPVPSTLPSASSALAGDQPSSTAFIPLISTRVSLRKTRQPPERIASGAITKGVVLDSTEALCLAISRNSEQMASHSAVLEAGKNLYTFCVSTVDSIQQMRNKFAFREAINKLENNLRELQICPATAGSGPAATQDFSKLLSSVKEISDIVQR_",
+transeq:"AAGCCCTTCAGCGGCCAGTAGCATCTGACTTTGAGCCTCAGGGTCTGAGTGAAGCCGCTCGTTGGAACTCCAAGGAAAACCTTCTCGCTGGACCCAGTGAAAATGACCCCAACCTTTTCGTTGCACTGTATGATTTTGTGGCCAGTGGAGATAACACTCTAAGCATAACTAAAGGTGAAAAGCTCCGGGTCTTAGGCTATAATCACAATGGGGAATGGTGTGAAGCCCAAACCAAAAATGGCCAAGGCTGGGTCCCAAGCAACTACATCACGCCAGTCAACAGTCTGGAGAAACACTCCTGGTACCATGGGCCTGTGTCCCGCAATGCCGCTGAGTATCTGCTGAGCAGCGGGATCAATGGCAGCTTCTTGGTGCGTGAGAGTGAGAGCAGTCCTGGCCAGAGGTCCATCTCGCTGAGATACGAAGGGAGGGTGTACCATTACAGGATCAACACTGCTTCTGATGGCAAGCTCTACGTCTCCTCCGAGAGCCGCTTCAACACCCTGGCCGAGTTGGTTCATCATCATTCAACGGTGGCCGACGGGCTCATCACCACGCTCCATTATCCAGCCCCAAAGCGCAACAAGCCCACTGTCTATGGTGTGTCCCCCAACTACGACAAGTGGGAGATGGAACGCACGGACATCACCATGAAGCACAAGCTGGGCGGGGGCCAGTACGGGGAGGTGTACGAGGGCGTGTGGAAGAAATACAGCCTGACGGTGGCCGTGAAGACCTTGAAGGAGGACACCATGGAGGTGGAAGAGTTCTTGAAAGAAGCTGCAGTCATGAAAGAGATCAAACACCCTAACCTGGTGCAGCTCCTTGGGGTCTGCACCCGGGAGCCCCCGTTCTATATCATCACTGAGTTCATGACCTACGGGAACCTCCTGGACTACCTGAGGGAGTGCAACCGGCAGGAGGTGAACGCCGTGGTGCTGCTGTACATGGCCACTCAGATCTCGTCAGCCATGGAGTACCTGGAGAAGAAAAACTTCATCCACAGAGATCTTGCTGCCCGAAACTGCCTGGTAGGGGAGAACCACTTGGTGAAGGTAGCTGATTTTGGCCTGAGCAGGTTGATGACAGGGGACACCTACACAGCCCATGCTGGAGCCAAGTTCCCCATCAAATGGACTGCACCCGAGAGCCTGGCCTACAACAAGTTCTCCATCAAGTCCGACGTCTGGGCATTTGGAGTATTGCTTTGGGAAATTGCTACCTATGGCATGTCCCCTTACCCGGGAATTGACCTGTCCCAGGTGTATGAGCTGCTAGAGAAGGACTACCGCATGGAGCGCCCAGAAGGCTGCCCAGAGAAGGTCTATGAACTCATGCGAGCATGTTGGCAGTGGAATCCCTCTGACCGGCCCTCCTTTGCTGAAATCCACCAAGCCTTTGAAACAATGTTCCAGGAATCCAGTATCTCAGACGAAGTGGAAAAGGAGCTGGGGAAACAAGGCGTCCGTGGGGCTGTGAGTACCTTGCTGCAGGCCCCAGAGCTGCCCACCAAGACGAGGACCTCCAGGAGAGCTGCAGAGCACAGAGACACCACTGACGTGCCTGAGATGCCTCACTCCAAGGGCCAGGGAGAGAGCGATCCTCTGGACCATGAGCCTGCCGTGTCTCCATTGCTCCCTCGAAAAGAGCGAGGTCCCCCGGAGGGCGGCCTGAATGAAGATGAGCGCCTTCTCCCCAAAGACAAAAAGACCAACTTGTTCAGCGCCTTGATCAAGAAGAAGAAGAAGACAGCCCCAACCCCTCCCAAACGCAGCAGCTCCTTCCGGGAGATGGACGGCCAGCCGGAGCGCAGAGGGGCCGGCGAGGAAGAGGGCCGAGACATCAGCAACGGGGCACTGGCTTTCACCCCCTTGGACACAGCTGACCCAGCCAAGTCCCCAAAGCCCAGCAATGGGGCTGGGGTCCCCAATGGAGCCCTCCGGGAGTCCGGGGGCTCAGGCTTCCGGTCTCCCCACCTGTGGAAGAAGTCCAGCACGCTGACCAGCAGCCGCCTAGCCACCGGCGAGGAGGAGGGCGGTGGCAGCTCCAGCAAGCGCTTCCTGCGCTCTTGCTCCGCCTCCTGCGTTCCCCATGGGGCCAAGGACACGGAGTGGAGGTCAGTCACGCTGCCTCGGGACTTGCAGTCCACGGGAAGACAGTTTGACTCGTCCACATTTGGAGGGCACAAAAGTGAGAAGCCGGCTCTGCCTCGGAAGAGGGCAGGGGAGAACAGGTCTGACCAGGTGACCCGAGGCACAGTAACGCCTCCCCCCAGGCTGGTGAAAAAGAATGAGGAAGCTGCTGATGAGGTCTTCAAAGACATCATGGAGTCCAGCCCGGGCTCCAGCCCGCCCAACCTGACTCCAAAACCCCTCCGGCGGCAGGTCACCGTGGCCCCTGCCTCGGGCCTCCCCCACAAGGAAGAAGCTGGAAAGGGCAGTGCCTTAGGGACCCCTGCTGCAGCTGAGCCAGTGACCCCCACCAGCAAAGCAGGCTCAGGTGCACCAGGGGGCACCAGCAAGGGCCCCGCCGAGGAGTCCAGAGTGAGGAGGCACAAGCACTCCTCTGAGTCGCCAGGGAGGGACAAGGGGAAATTGTCCAGGCTCAAACCTGCCCCGCCGCCCCCACCAGCAGCCTCTGCAGGGAAGGCTGGAGGAAAGCCCTCGCAGAGCCCGAGCCAGGAGGCGGCCGGGGAGGCAGTCCTGGGCGCAAAGACAAAAGCCACGAGTCTGGTTGATGCTGTGAACAGTGACGCTGCCAAGCCCAGCCAGCCGGGAGAGGGCCTCAAAAAGCCCGTGCTCCCGGCCACTCCAAAGCCACAGTCCGCCAAGCCGTCGGGGACCCCCATCAGCCCAGCCCCCGTTCCCTCCACGTTGCCATCAGCATCCTCGGCCCTGGCAGGGGACCAGCCGTCTTCCACCGCCTTCATCCCTCTCATATCAACCCGAGTGTCTCTTCGGAAAACCCGCCAGCCTCCAGAGCGGATCGCCAGCGGCGCCATCACCAAGGGCGTGGTCCTGGACAGCACCGAGGCGCTGTGCCTCGCCATCTCTAGGAACTCCGAGCAGATGGCCAGCCACAGCGCAGTGCTGGAGGCCGGCAAAAACCTCTACACGTTCTGCGTGAGCTATGTGGATTCCATCCAGCAAATGAGGAACAAGTTTGCCTTCCGAGAGGCCATCAACAAACTGGAGAATAATCTCCGGGAGCTTCAGATCTGCCCGGCGACAGCAGGCAGTGGTCCAGCGGCCACTCAGGACTTCAGCAAGCTCCTCAGTTCGGTGAAGGAAATCAGTGACATAGTGCAGAGGTAG"}
+    var g_code={BCR:"ENST00000305877",ABL1:"ENST00000318560",EML4:"ENST00000318522",ALK:"ENST00000397938"}
+    var g_ua={BCR:"P11274",ABL1:"P00519"}
+    var flag=0;
+    //var scrollTop
+    var g1_ud=document.getElementById('g1_ud');
+    var g2_ud=document.getElementById('g2_ud');
+    var sect_g1=document.getElementById('sect_g1');
+    var g1_bp=document.getElementById('g1_bp');
+    var g2_bp=document.getElementById('g2_bp');
+    var fusion_btn=document.getElementById('fusion_btn');
+    var g1_name=document.getElementById('g1_name');
+    var g1_code=document.getElementById('g1_code');
+    var g2_name=document.getElementById('g2_name');
+    var g2_code=document.getElementById('g2_code');
+    var fusion_img=document.getElementById('fusion_img');
+    var sect_g2=document.getElementById('sect_g2');
+    var bp_label=document.getElementById('bp_label');
+    var bp_label_2=document.getElementById('bp_label_2');
+    var bp_posi=document.getElementById('bp_posi'); 
+    var bp_posi2=document.getElementById('bp_posi2'); 
+    var gene_1_start=document.getElementById('gene_1_start');
+    var gene_2_start=document.getElementById('gene_2_start');
+    var gene_1_lenth=document.getElementById('gene_1_lenth');
+    var gene_2_start=document.getElementById('gene_2_lenth');
+    var bar_red=document.getElementById('bar_red');
+    var bar_blue=document.getElementById('bar_blue');
+    var gene_2_begin=document.getElementById('gene_2_begin');
+    var line_draw=document.getElementById('line_draw');
+    var bcr_len=1272;
+    var abl1_len=1131;
+    var f_bar1=document.getElementById('f_bar1');
+    var f_bar2=document.getElementById('f_bar2');
+    var line_1=document.getElementById('line_1');
+    var line_2=document.getElementById('line_2');
+    var line_box=document.getElementById('line_box');
+    var red_bp=document.getElementById('red_bp');
+    var blue_bp=document.getElementById("blue_bp");
+    var link_line1=document.getElementById('link_line1');
+    var link_line2=document.getElementById('link_line2');
+    var dialog=document.getElementById('dialog');
+    var back_box=document.getElementById('back_box');
+    var f_name=document.getElementById('f_name');
+    var f_start=document.getElementById('f_start');
+    var f_end=document.getElementById('f_end');
+    var f_desc=document.getElementById('f_desc');
+    var infobtn=document.getElementById('infobtn');
+    var aas=document.getElementById('aas');
+    var trs=document.getElementById('trs');
+    var g_name1=document.getElementById('g_name1');
+    var g_name2=document.getElementById('g_name2');
+    var f_show=document.getElementById('f_show');
+    var g_show=document.getElementById('g_show');
+    var line_3=document.getElementById('line_3');
+    var line_4=document.getElementById('line_4');
+    var legant=document.getElementById('legant')
+    var k=0.3;
+    var gene1_len=0;
+    var gene2_len=0;
+    var gene1_name='';
+    var gene2_name='';
+    var gene1_arr=[];
+    var gene2_arr=[];
+    var gene1_code='';
+    var gene2_code='';
+    var gene1_ua='';
+    var gene2_ua='';
+    var gene1_seq=[];
+    var gene2_seq=[];
+    var line_len1=0;
+    var line_len2=0;
+    var noteinfo='';
+    var fusion_img=document.getElementById('fusion_img');
+    var ct=document.getElementById('ct');
+    var btntxt=document.getElementById('btntxt');
+    //var label=document.getElementById('label');
+    var result1={};
+    var result2={};
+    var img_line1=0;
+    var img_line2=0;
+    var txtcontent="";
+    var retain_5="";
+    var no_retain="";
+    var retain_3="";
+    var pagew=document.documentElement.clientWidth;
+    btntxt.onclick=function(){
+        download("gene_fusion.txt",txtcontent);
+    }
+    function settop(){
+        var oCanvas = document.getElementById("thecanvas");
+        oCanvas.style.marginTop="0px";
+        var h = oCanvas.clientHeight||oCanvas.offsetHeight;
+        console.log(h);
+        //oCanvas.style.backgroundColor="#1E90FF";
+        window.onscroll = function(){
+         var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+         console.log('鼠标移动了'+scrollTop);
+         img_level.style.top=scrollTop+"px";
+//       
+         }
+        
+    }
+    /////////////////////////////////////////////////
+    function GetPos(obj) {
+            var pos = new Object();
+            pos.x = obj.offsetLeft;
+            pos.y = obj.offsetTop;
+            while (obj = obj.offsetParent) {
+                pos.x += obj.offsetLeft;
+                pos.y += obj.offsetTop;
+            }
+            return pos;
+       };
+    ////////////////////////////////////////////////////
+//      var Position = {};
+//      (function () {
+//          Position.getAbsolute = function (reference, target) {
+//              //因为我们会将目标元素的边框纳入递归公式中，这里先减去对应的值
+//              var result = {
+//                  left: -target.clientLeft,
+//                  top: -target.clientTop
+//              }
+//              var node = target;
+//              while(node != reference && node != document){
+//                  result.left = result.left + node.offsetLeft + node.clientLeft;
+//                  result.top = result.top + node.offsetTop + node.clientTop;
+//                  node = node.parentNode;
+//              }
+//              if(isNaN(reference.scrollLeft)){
+//                  result.right = document.documentElement.scrollWidth - result.left;
+//                  result.bottom = document.documentElement.scrollHeight - result.top;
+//              }else {
+//                  result.right = reference.scrollWidth - result.left;
+//                  result.bottom = reference.scrollHeight - result.top;
+//              } 
+//              return result;
+//          }  
+//      })();
+         
+//      
+//      bar_red.onclick=function(){
+//          alert(result.left);
+//          console.log(result)
+//      }
+//      
+    //////////////////2222222222222229999999999999999////////////////
+    /////////////////////////////////////////////////test----------line--------move///////////
+    //var oDivTest = document.getElementById("divtest");
+    //////////download txt
+    function download(filename, text) {
+      var element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+      element.setAttribute('download', filename);
+     
+      element.style.display = 'none';
+      document.body.appendChild(element);
+     
+      element.click();
+     
+      document.body.removeChild(element);
+    }
+
+    ///////////
+    function darg(obj,num){
+    //鼠标按下 
+    obj.onmousedown = function(ev){
+
+       //IE直接用event或者window.event得到事件本身,而在其他浏览器函数要获取到事件本身需要从函数中传入
+    　　var oevent = ev || event;
+
+    　　var distanceX = oevent.clientX - this.offsetLeft;
+        //鼠标移动
+    　　document.onmousemove = function(ev){ 
+    　　　　var oevent = ev || event;
+    　　　　obj.style.left = oevent.clientX - distanceX + 'px';
+    　　　　//obj.style.top = oevent.clientY - distanceY + 'px'; 
+          //divtext.innerHTML=this.offsetLeft+"+d"+distanceX+"..........."+obj.style.left
+    　　
+    　　　　//obj.style.left = oevent.clientX - distanceX + 'px';
+           if(num==2){
+            //label.innerHTML=label.innerHTML+"移动的位置22："+oevent.clientX - distanceX ;
+            line_2.style.left=oevent.clientX - distanceX+ 'px';
+            if(oevent.clientX - distanceX <result2.x){
+                obj.style.left=result2.x+'px';
+                img_line2=result2.x+8;
+                //oevent.clientX - distanceX =674; 
+                g2_bp.value=0;
+            }else if(oevent.clientX - distanceX>result2.x+gene2_len*0.3){
+                obj.style.left=result2.x+gene2_len*0.3+'px';
+                img_line2=result2.x+gene2_len*0.3+8;
+                //oevent.clientX - distanceX=674+gene2_len*0.3;
+                g2_bp.value=gene2_len;
+            }else{
+                obj.style.left = oevent.clientX - distanceX + 'px';
+                img_line2=oevent.clientX - distanceX+8;
+                g2_bp.value=parseInt((oevent.clientX - distanceX-result2.x)/0.3);
+            }
+//          
+            g2_bp.innerHTML=g2_bp.value;
+            
+           }else{
+            //label.innerHTML=label.innerHTML+"移动的位置11："+oevent.clientX - distanceX ;
+            if(oevent.clientX - distanceX <result1.x){
+                obj.style.left=result1.x+'px';
+                img_line1=result1.x+8;
+                //oevent.clientX - distanceX=274;
+                g1_bp.value=0;
+            }else if(oevent.clientX - distanceX>result1.x+gene1_len*0.3){
+                obj.style.left=result1.x+gene1_len*0.3+'px';
+                img_line1=result1.x+gene1_len*0.3+8;
+                //oevent.clientX - distanceX=gene2_len*0.3;
+                g1_bp.value=gene1_len;
+            }else{
+                obj.style.left = oevent.clientX - distanceX + 'px';
+                img_line1= oevent.clientX - distanceX+8;
+                g1_bp.value=parseInt((oevent.clientX - distanceX-result1.x)/0.3);
+            }
+            
+            g1_bp.innerHTML=g1_bp.value;
+            //line_box.style.marginLeft=g1_bp.value*0.3+'px';
+            
+            
+           }
+           //line_box.style.width=g2_bp.value*k+400-g1_bp.value*k+"px";
+           updateposi();
+        line_box.style.visibility="visible";
+    　　　　//obj.style.top = oevent.clientY - distanceY + 'px'; 
+    　　};
+        //鼠标放开
+    　　document.onmouseup = function(){
+    　　　　document.onmousemove = null;
+    　　　　document.onmouseup = null;
+          update_transbox();
+          clickbtn();
+          //removediv();
+          //f_Draw(gene1_arr,f_bar1);
+          //f_Draw(gene2_arr,f_bar2);
+        
+    　　};
+    };  
+}
+    // /////////////////////////////////////////////////test----------line--------move//////
+    
+    
+    infobtn.onclick=function(){
+        dialog.style.visibility="hidden";
+        f_show.hidden="hidden";
+        back_box.style.visibility="hidden";
+    }
+    sect_g1.onchange=function(){
+        if(sect_g1.value=='BCR'){
+            //console.log('g1'+sect_g1.value);
+            //alert('g1选择了BCR');
+            
+        }else{
+            //alert('g1选择了ABL1');
+            //console.log(sect_g1.value);
+        }
+        console.log('g1:'+sect_g1.value);
+    }
+    sect_g2.onchange=function(){
+        console.log('g2:'+sect_g2.value);
+        if(sect_g2.value=='BCR'){
+            //console.log(sect_g2.value)
+            //alert('g2选择了BCR');
+        }else{
+            //alert('g2选择了ABL1');
+            console.log(sect_g2.value)
+        }
+    }
+    red_bp.onclick=function(){
+                        var str='ID=VAR_031727;Note=I->V;Ontology_term=ECO:0000269,ECO:0000269,ECO:0000269;'
+                        var index1=str.indexOf('Note=');
+                        if(index1==-1){
+                            
+                        }else{
+                        
+                        
+                            var newstr=str.slice(index1);
+                            //console.log(newstr)
+                            var index2=newstr.indexOf(';');
+                            if(index2==-1){
+                                
+                            }else{
+                                if(index2<10){
+                                     noteinfo=newstr.substring(0,index2);
+                                }
+                                
+                            }
+                        
+                        }
+                        
+                        //console.log(noteinfo);
+                        g_name1.innerHTML=sect_g1.value;
+                        g_name2.innerHTML=sect_g1.value;
+                        aas.innerHTML=gene1_seq.aaseq;
+                        trs.innerHTML=gene1_seq.transeq;
+                        dialog.style.visibility="visible";
+                        f_show.hidden="hidden";
+                        g_show.hidden=false;
+                        back_box.style.visibility="visible";
+        
+    }
+    blue_bp.onclick=function(){
+                        g_name1.innerHTML=sect_g2.value;
+                        g_name2.innerHTML=sect_g2.value;
+                        aas.innerHTML=gene2_seq.aaseq;
+                        trs.innerHTML=gene2_seq.transeq;
+                        dialog.style.visibility="visible";
+                        f_show.hidden="hidden";
+                        g_show.hidden=false;
+                        back_box.style.visibility="visible";
+    }
+    function strtoint(arr){
+            for(var i=0;i<arr.length;i++){
+            arr[i].start=parseInt(arr[i].start);
+            arr[i].end=parseInt(arr[i].end);
+            //console.log(bcrinfo[i].start);
+            
+        }   
+    }
+    function updateposi(){
+        
+        var line_margin=ct.style.marginLeft+fusion_img.style.marginLeft;
+        //line_1.style.left=result.left;
+        
+        line_box.style.marginLeft=g1_bp.value*k+1+"px";
+        line_box.style.width=g2_bp.value*k+400-g1_bp.value*k+"px";
+        //console.log(result);
+        console.log(line_1.style.left);
+        //line_2.style.left=line_margin+654+"px";
+//      line_1.style.left=274+g1_bp.value*k+1+"px";
+//      line_2.style.left=674+g2_bp.value*k+"px";
+        bp_posi.innerHTML=g1_bp.value;
+        bp_posi2.innerHTML=g2_bp.value;
+        
+        
+    }
+     function clickbtn(){
+        console.log(pagew+'页面宽度');
+        txtcontent="";
+        no_retain="";
+        retain_3="";
+        retain_5="";
+        //////////////////////////
+        
+        ///////////////////////////
+        //console.log('eml4lenth'+eml4_info.length);
+        //console.log('alklenth'+alk_info.length);
+        line_len1=0;
+        line_len2=0;
+        
+        removediv();
+        box_Draw();
+        if(flag==1){
+        
+        }
+        
+        if(sect_g1.value==sect_g2.value){
+            alert('Gene 1 and Gene 2 cannot be the same, please re-select!');
+            flag=0;
+        }else{
+            gene1_name=sect_g1.value;
+            gene2_name=sect_g2.value;
+            //g_name1.innerHTML=sect_g1.value;
+            //g_name2.innerHTML=sect_g2.value;
+            gene1_code=g_code[sect_g1.value];
+            gene2_code=g_code[sect_g2.value];
+            gene1_ua=g_ua[sect_g1.value];
+            gene2_ua=g_ua[sect_g2.value];
+            
+            if(gene1_name=='BCR'){  
+                gene1_arr=bcr_info;
+                gene1_seq=bcr_seq;
+            }else if(gene1_name=='ABL1'){
+                gene1_arr=abl1_info;
+                gene1_seq=abl1_seq;
+            }else if(gene1_name=='EML4'){
+                gene1_arr=eml4_info;
+                gene1_seq=abl1_seq;
+            }else if(gene1_name=='ALK'){
+                gene1_arr=alk_info;
+                gene1_seq=abl1_seq;
+            }
+            if(gene2_name=='BCR'){  
+                gene2_arr=bcr_info;
+                gene2_seq=bcr_seq;
+            }else if(gene2_name=='ABL1'){
+                gene2_arr=abl1_info;
+                gene2_seq=abl1_seq;
+            }else if(gene2_name=='EML4'){
+                gene2_arr=eml4_info;
+                gene2_seq=abl1_seq;
+            }else if(gene2_name=='ALK'){
+                gene2_arr=alk_info;
+                gene2_seq=abl1_seq;
+            }
+            gene1_len=gene1_arr[0].end-gene1_arr[0].start+1;
+            //console.log('gene_len:'+gene1_len);
+            gene2_len=gene2_arr[0].end-gene2_arr[0].start+1;
+            ///console.log('gene2_len:'+gene2_len);
+            //gene1_len=1272;
+            //gene2_len=1131;
+            flag=1;
+            fusion_img.style.visibility='visible';
+            //bp_posi.innerHTML=g1_bp.value;
+            bp_label.style.marginLeft=gene1_len*k/2-20+"px";
+            //line_1.style.marginLeft=274+gene1_len*k-1+"px";
+            //line_box.style.marginLeft=g1_bp.value*k+1+"px";
+           
+            
+            updateposi();
+
+            //bp_posi2.innerHTML=g2_bp.value;
+            
+            g1_name.innerHTML=sect_g1.value;
+            ///////////////
+            g1_code.innerHTML=gene1_code;
+            g1_ud.innerHTML=gene1_ua;
+            g2_ud.innerHTML=gene2_ua;
+            gene_1_lenth.innerHTML=gene1_len;
+            gene_1_lenth.style.marginLeft=gene1_len*k-40+"px";
+            bar_red.style.width=gene1_len*k+"px";
+            f_Draw(gene1_arr,f_bar1);
+            g2_name.innerHTML=sect_g2.value;
+            g2_code.innerHTML=gene2_code;
+            gene_2_lenth.innerHTML=gene2_len+'';
+            bp_label_2.style.marginLeft=gene2_len*k/2-20+"px";
+            //line_2.style.marginLeft=400+g2_bp.value*k+"px";
+            //line_box.style.width=g2_bp.value*k+400-g1_bp.value*k+"px";
+            bar_blue.style.width=gene2_len*k+"px";
+                //blue_bp.style.marginLeft=400-abl1_len*0.3+g2_bp.value*0.3+"px";
+            gene_2_lenth.style.marginRight=400-gene2_len*k+"px";
+            blue_bp.style.width=gene2_len*k-g2_bp.value*k+"px";
+            f_Draw(gene2_arr,f_bar2);
+            //console.log()
+          var box_len=(gene1_arr.length>gene2_arr.length)?gene1_arr.length:gene2_arr.length;
+//        var zhezhaolen=(f_bar1.style.height>f_bar2.style.height)?f_bar1.style.height:f_bar2.style.height;
+//        console.log("fbar长："+zhezhaolen);
+//        console.log("旧的遮罩长"+box_len);
+//        line_1.style.height=f_bar1.style.height;
+//        line_2.style.height=f_bar1.style.height;
+//        line_box.style.height=f_bar1.style.height;
+
+         //var h2=document.defaultView.getComputedStyle(f_bar1,null).height;
+         
+          //var h = f_bar1.currentStyle.offsetHeight;
+          line_1.style.height=(box_len)*15+50+"px";
+          line_2.style.height=(box_len)*15+50+"px";
+          line_box.style.height=(box_len)*15+50+"px";
+          line_1.style.marginTop="90px";
+          line_2.style.marginTop="90px";
+          line_box.style.marginTop="90px";
+          line_3.style.height=(box_len)*15+"px";
+          line_4.style.height=(box_len)*15+"px";
+
+          
+          
+        }
+        
+        clickfeature();
+        strtoint(gene1_arr);
+        strtoint(gene2_arr);
+        line_box.style.visibility="visible";
+        result1=GetPos(bar_red);
+        result2=GetPos(bar_blue);
+        if((g1_bp.value==0)&&(g2_bp.value==0)){
+            line_1.style.visibility="visible";
+            line_2.style.visibility="visible";
+            line_box.style.visibility="hidden";
+            red_bp.style.width=gene1_len*k+"px";
+            line_1.style.left=result1.x+"px";
+            line_2.style.left=result2.x+"px";
+            img_line1=result1.x+8;
+            img_line2=result2.x+8;
+            console.log(red_bp.style.width);
+        }else{
+            line_1.style.visibility="visible";
+            line_2.style.visibility="visible";
+            line_box.style.visibility="visible";
+            line_1.style.left=result1.x+g1_bp.value*k+"px";
+            line_2.style.left=result2.x+g2_bp.value*k+"px";
+            img_line1=result1.x+g1_bp.value*k+8;
+            img_line2=result2.x+g2_bp.value*k+8;
+        }
+
+        if(g1_bp.value>gene1_len||g2_bp.value>gene2_len){
+         window.location.reload();
+         alert('The cut point is too long, please re-enter');
+            
+        }
+        if((g1_bp.value==0)&&(g2_bp.value==0)){
+        //alert("00");
+        red_bp.style.width=gene1_len*k+"px";
+        red_bp.marginLeft="0px";
+        console.log(red_bp.style.width);
+        img_line1=result1.x+8;
+            }else{
+                 red_bp.style.width=g1_bp.value*k+1+"px";
+                 img_line1=result1.x+g1_bp.value*k+8;
+            }
+        if((g1_bp.value==0)&&(g2_bp.value!=0)){
+            red_bp.style.width=0+"px";
+            img_line2=result2.x+g2_bp.value*k+8;
+        }
+        
+        darg(line_2,2);
+        darg(line_1,1);  
+        var h = fusion_ct.clientHeight||fusion_ct.offsetHeight;
+        console.log(h);
+    }
+    function removediv(){
+        while(f_bar2.hasChildNodes()){ 
+            f_bar2.removeChild(f_bar2.firstChild);
+    
+        }
+        while(f_bar1.hasChildNodes()){
+            f_bar1.removeChild(f_bar1.firstChild);
+    
+        }
+        while(legant.hasChildNodes()){
+            legant.removeChild(legant.firstChild);
+    
+        }
+       // window.location.reload();*/
+    }
+    function removecanvas(){
+        var oCanvas = document.getElementById("thecanvas");
+        var tr=oCanvas.parentNode; //找到正点击a标签的祖节点tr
+            tr.removeChild(oCanvas);    //删除该tr节点
+       // window.location.reload();*/
+    }
+    line_box.onclick=function(){
+        line_box.style.visibility="hidden";
+    }
+    
+    function box_Draw(){
+        for(var i=0;i<f_color.length;i++){
+            var div=document.createElement("div");
+            div.className="legant_box";
+            div.id="box"+i;
+            legant.appendChild(div);
+            var divs1=document.createElement("div");
+            divs1.className="box_color";
+            divs1.style.backgroundColor=f_color[i].color;
+            div.appendChild(divs1);
+            var divs2=document.createElement("div");
+            divs2.className="box_text";
+            divs2.innerHTML=f_color[i].name;
+            div.appendChild(divs2);
+            ///////////////
+            if((f_color[i].name=="Site")||(f_color[i].name=="Active site")){
+                divs1.style.height="10px";
+                divs1.style.width="10px";
+                divs1.style.marginTop="4px";
+                divs1.style.borderRadius="50%";
+            }
+            if((f_color[i].name=="Metal binding")||(f_color[i].name=="Binding site")){
+                divs1.style.height="10px";
+                divs1.style.width="10px";
+                divs1.style.marginTop="4px";
+                divs1.style.borderRadius="50%";
+            }
+            if((f_color[i].name=="Alternative sequence")||(f_color[i].name=="Natural variant")){
+                divs1.style.height="10px";
+                divs1.style.width="10px";
+                divs1.style.marginTop="4px";
+                divs1.style.borderRadius="50%";
+            }
+            
+        }
+    }
+    function update_transbox(){
+    }
+    function boxtsprt(arr,i,div,g_bp){
+        if(g1_bp.value!=0||g2_bp.value!=0){
+        if(arr[i].start*k>g_bp.value*k){
+                //console.log('需要透明的box'+arr[i].start*k);
+                //console.log('bp的位置：'+g1_bp.value*k);
+                //console.log('透明的fa：'+i);
+                div.style.opacity="0.5";
+                no_retain=no_retain+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+            }else if(arr[i].start<g_bp.value && arr[i].end>g_bp.value){
+                //console.log('一半透明fa'+i);
+                var divs=document.createElement("div");
+                divs.id="tranparant1"+i;
+                divs.style.width=arr[i].end*k-g_bp.value*k+"px";
+                divs.style.height="100%";
+                divs.style.float="right";
+                divs.style.backgroundColor="white";
+                divs.style.opacity="0.5";
+                div.appendChild(divs);
+                no_retain=no_retain+arr[i].name+','+g_bp.value+','+arr[i].end+','+arr[i].desc+'\n';
+                retain_5=retain_5+arr[i].name+','+arr[i].start+','+g_bp.value+','+arr[i].desc+'\n';
+            }else if(i==0){
+                var divs=document.createElement("div");
+                divs.id="tranparant1"+i;
+                divs.style.width=arr[i].end*k-g_bp.value*k+"px";
+                divs.style.height="100%";
+                divs.style.float="right";
+                divs.style.backgroundColor="white";
+                divs.style.opacity="0.5";
+                div.appendChild(divs);
+            }else{
+                retain_5=retain_5+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+            }
+    }
+    if((g1_bp.value==0)&&(g2_bp.value==0)){
+        retain_5=retain_5+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+        //no_retain="\n\r";
+    }
+    if((g1_bp.value==0)&&(g2_bp.value!=0)){
+        
+        no_retain=no_retain+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+    }
+    if(g1_bp.value==gene1_len){
+        retain_5=retain_5+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+    }
+    }
+    function f_Draw(arr,fbar){
+        //var back=0;
+        for(var i=0;i<arr.length;i++){
+//          if(arr[i].name=='Sequence conflict'||arr[i].name=='Sequence uncertainty'){
+//              i++;
+//          }else if(arr[i].name=='Mutagenesis'||arr[i].name=='Non-adjacent residues'){
+//              i++;
+//          }
+        /////
+        var str=arr[i].desc;
+         var index1=str.indexOf('Note=');
+                        if(index1==-1){
+                            noteinfo='';
+                        }else{
+                        
+                        
+                            var newstr=str.slice(index1+5);
+                            //console.log(newstr)
+                            var index2=newstr.indexOf(';');
+                            if(index2==-1){
+                                index3=newstr.indexOf(':');
+                                
+                                if(index3==-1&&newstr.length<15){
+                                    noteinfo=newstr.slice(0);
+                                }else{
+                                    noteinfo='';
+                                }
+                                
+                            }else{
+                                if(index2<15){
+                                     noteinfo=newstr.substring(0,index2);
+                                }else{
+                                    noteinfo='';
+                                }
+                                
+                            }
+                        
+                        }
+                        
+        //console.log(noteinfo);
+        ///////////
+        var contdiv=document.createElement("div");//big line
+        contdiv.className="f";
+        contdiv.id=fbar+i+"";
+        var div=document.createElement("div");
+        var divtext=document.createElement("div");
+        divtext.className="ftext";
+        divtext.innerHTML=noteinfo;
+
+//      contdiv.appendChild(div);
+//      contdiv.appendChild(divtext);
+        
+        div.style.marginLeft=arr[i].start*k+"px";
+        div.style.width=arr[i].end*k-arr[i].start*k+1+"px";
+        
+        //////////
+        
+        //div.style.backgroundColor="#31B0D5";
+
+//      if(div.style.width==0.3+"px"){
+//          div.style.width=0.6+"px";
+//          div.style.borderRadius="50%";
+//      }
+        //console.log(abl1_info[i].name);
+        
+
+        for(var j=0;j<f_color.length;j++){
+            //console.log(f_color.length); 
+            //console.log(bcr_info[i].name);
+            if(arr[i].name==f_color[j].name){
+                div.style.backgroundColor=f_color[j].color;         
+            }
+        }
+        if(fbar==f_bar1){
+            div.className="fa";
+            div.id="fa"+i;
+            //console.log(div.id);
+//          if(gene1_name=='BCR'){
+//          if(arr[i].end*k+15>gene1_len*k){
+//          console.log(arr[i].end*k+'ppppppppppppppppppppppppppppppppppppp');
+//              div.appendChild(divtext);
+//              //contdiv.appendChild(div);
+//              //divtext.style.marginLeft=
+//          }}
+
+         boxtsprt(arr,i,div,g1_bp);
+//          if(g1_bp.value!=0&&g2_bp.value!=0){
+//              
+//          
+//          if(arr[i].start*k>g1_bp.value*k){
+//              //console.log('需要透明的box'+arr[i].start*k);
+//              //console.log('bp的位置：'+g1_bp.value*k);
+//              console.log('透明的fa：'+i);
+//              div.style.opacity="0.5";
+//          }else if(arr[i].start<g1_bp.value && arr[i].end>g1_bp.value){
+//              console.log('一半透明fa'+i);
+//              var divs=document.createElement("div");
+//              divs.style.width=arr[i].end*k-g1_bp.value*k+"px";
+//              divs.style.height="100%";
+//              divs.style.float="right";
+//              divs.style.backgroundColor="white";
+//              divs.style.opacity="0.5";
+//              div.appendChild(divs);
+//          }else if(i==0){
+//              var divs=document.createElement("div");
+//              divs.style.width=arr[i].end*k-g1_bp.value*k+"px";
+//              divs.style.height="100%";
+//              divs.style.float="right";
+//              divs.style.backgroundColor="white";
+//              divs.style.opacity="0.5";
+//              div.appendChild(divs);
+//          }
+//          }
+            line_len1=line_len1+15;
+        }else{
+            div.className="fb";
+            div.id="fb"+i;
+            //console.log(div.id);
+            if(gene2_name=='BCR'){}
+            if(g1_bp.value!=0||g2_bp.value!=0){
+            if(arr[i].end*k<=g2_bp.value*k){
+                div.style.opacity="0.5";
+                no_retain=no_retain+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+            }else if(arr[i].start<g2_bp.value && arr[i].end>g2_bp.value){
+                var divs=document.createElement("div");
+                divs.id="tranparant2"+i;
+                divs.style.width=g2_bp.value*k-arr[i].start*k+"px";
+                divs.style.height="100%";
+                divs.style.backgroundColor="white";
+                divs.style.opacity="0.5";
+                div.appendChild(divs);
+                no_retain=no_retain+arr[i].name+','+arr[i].start+','+g2_bp.value+','+arr[i].desc+'\n';
+                retain_3=retain_3+arr[i].name+','+g2_bp.value+','+arr[i].end+','+arr[i].desc+'\n';
+            }else if(i==0){
+                if(g2_bp.value==""||g2_bp.value==0){
+                    var divs=document.createElement("div");
+                    divs.id="tranparant2"+i;
+                    divs.style.width=0+"px";
+                    divs.style.height="100%";
+                    divs.style.backgroundColor="white";
+                    divs.style.opacity="0.5";
+                    div.appendChild(divs);
+                }else{
+                    var divs=document.createElement("div");
+                    divs.id="tranparant2"+i;
+                    divs.style.width=g2_bp.value*k-arr[i].start*k+"px";
+                    divs.style.height="100%";
+                    divs.style.backgroundColor="white";
+                    divs.style.opacity="0.5";
+                    div.appendChild(divs);
+                }
+                
+                
+            }else{
+                retain_3=retain_3+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+            }
+                
+    
+            }
+            if(g2_bp.value==0){
+                retain_3=retain_3+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+                //retain_5=retain_5+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+                //no_retain="";
+            }
+            if(g2_bp.value==gene2_len){
+                no_retain=no_retain+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
+            }
+            //line_len2=line_len2+15;
+        }
+        //divtext.innerHTML=noteinfo;
+        fbar.appendChild(contdiv);
+        
+        if((arr[i].name=="Site")||(arr[i].name=="Active site")){
+            div.style.width="5px";
+            var circle=document.createElement("div");
+            circle.style.width="5px";
+            circle.style.height="5px";
+            circle.style.borderRadius="50%";
+            circle.style.marginTop="5px";
+            circle.style.backgroundColor=div.style.backgroundColor;
+            div.style.backgroundColor=null;
+            div.appendChild(circle);
+        }
+        if((arr[i].name=="Metal binding")||(arr[i].name=="Binding site")){
+            div.style.width="5px";
+            var circle=document.createElement("div");
+            circle.style.width="5px";
+            circle.style.height="5px";
+            circle.style.borderRadius="50%";
+            circle.style.marginTop="5px";
+            circle.style.backgroundColor=div.style.backgroundColor;
+            div.style.backgroundColor=null;
+            div.appendChild(circle);
+        }
+        if((arr[i].name=="Alternative sequence")||(arr[i].name=="Natural variant")){
+            div.style.width="5px";
+            var circle=document.createElement("div");
+            circle.style.width="5px";
+            circle.style.height="5px";
+            circle.style.borderRadius="50%";
+            circle.style.marginTop="5px";
+            circle.style.backgroundColor=div.style.backgroundColor;
+            div.style.backgroundColor=null;
+            div.appendChild(circle);
+        }
+        if(arr[i].name=="Modified residue"){
+            div.style.width=arr[i].end*k-arr[i].start*k+1+"px";
+        }
+        //divtext.innerHTML=noteinfo;
+         var textw=noteinfo.length*8;
+        //console.log(textw+"文字的宽度");
+        //////////
+        
+        if(arr[i].end*k+textw>400){
+            //console.log(arr[i].end*k+textw+'ppppppppppppppppppppppppppppppppppppp');
+                var newmargin=arr[i].start*k-textw;
+                divtext.style.marginLeft=arr[i].start*k-textw+"px";
+                div.style.marginLeft=0+"px";
+                
+                contdiv.appendChild(divtext);
+                contdiv.appendChild(div);
+                //contdiv.appendChild(div);
+                //divtext.style.marginLeft=
+            }else{
+                contdiv.appendChild(div);
+                contdiv.appendChild(divtext);
+            }
+        if(i==0){
+            div.appendChild(divtext);
+            contdiv.appendChild(div);
+    }    
+    }
+        txtcontent="Information Of"+" "+gene1_name+" "+"And"+" "+gene2_name+" "+"Fusion:\n\r";
+        txtcontent=txtcontent+"bp of 5'gene:"+g1_bp.value+"    "+"bp of 3'gene:"+g2_bp.value+"\n\r";
+        txtcontent=txtcontent+"Retained features in 5'gene:\n\r"+retain_5+"\n\r"+"Not Retained features:\n\r"+no_retain+"\n\r"+"Retained features in 3'gene:\n\r"+retain_3;
+}
+
+    function pai(){
+        
+    }
+    function getElementsByClassName(n) {
+        var classElements = [],allElements = document.getElementsByTagName('*');
+        for (var i=0; i< allElements.length; i++ )
+       {
+           if (allElements[i].className == n ) {
+               classElements[classElements.length] = allElements[i];
+            }
+       }
+       return classElements;
+    }
+    
+    function clickfeature(){
+//      f_bar2.onclick=function(){
+//          alert('yes！');  
+//      }
+        
+         window.onscroll = function(){
+         var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+          //console.log('鼠标移动了'+scrollTop);
+         back_box.style.top=scrollTop+"px";
+         }
+        var list_obja = getElementsByClassName("fa");  
+        var list_objb = getElementsByClassName("fb");
+        //console.log(list_objb.length);    
+        for(var i = 0; i<list_objb.length; i++){
+            
+            list_objb[i].onclick = (function(i){
+                    return function () {
+                        f_desc.innerHTML=gene2_arr[i].desc;
+                        f_name.innerHTML=gene2_arr[i].name;
+                        f_start.innerHTML=gene2_arr[i].start;
+                        f_end.innerHTML=gene2_arr[i].end;
+                        f_show.hidden=false;
+                        g_show.hidden="hidden";
+                        dialog.style.visibility="visible";
+                        back_box.style.visibility="visible";
+                    }
+            })(i);
+        }
+        for(var i = 0; i<list_obja.length; i++){
+            
+            list_obja[i].onclick = (function(i){
+                    return function () {
+                        f_desc.innerHTML=gene1_arr[i].desc;
+                        f_name.innerHTML=gene1_arr[i].name;
+                        f_start.innerHTML=gene1_arr[i].start;
+                        f_end.innerHTML=gene1_arr[i].end;
+                        f_show.hidden=false;
+                        g_show.hidden="hidden";
+                        dialog.style.visibility="visible";
+                        back_box.style.visibility="visible";
+                    }
+            })(i);
+        }
+//      list_objb[list_objb.length-1].onclick=function(){
+//          alert('YYYYYes!');
+//      }
+        //console.log("f_bar长度："+f_bar1.style.height);
+        //var o = document.getElementById("div1");
+        
+    }
+</script>
