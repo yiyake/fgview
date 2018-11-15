@@ -67,11 +67,11 @@ body{
 
 }
 #fusion_btn{
-	width: 200px;
-	margin-left:80px ;
-	margin-top: 20px;
+	width: 100px;
+	margin-left:10px ;
 	background-color: #245269;
 	color: white;
+	float: left;
 }
 #btnSave{
 	width: 160px;
@@ -204,14 +204,14 @@ float: right;
 	height: 100%;
 }
 #blue_bp{
-	width: 30%;
+	width: 100%;
 	height: 100%;
 	background-color: darkcyan;
 	float: right;
 }
 #bar_red{
 	background-color: rgba(205,92,92,0.3);
-	width: 386px;
+	width: 100%;
 	height: 100%;
 }
 #red_bp{
