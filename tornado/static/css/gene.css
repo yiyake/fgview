@@ -95,6 +95,13 @@ body{
 	color: white;
 	margin-bottom: 25px;
 }
+#btnpdf{
+	width: 150px;
+	align-content: center;
+	background-color: #245269;
+	color: white;
+	margin-bottom: 25px;
+}
 #back{
 	width: 100px;
 	align-content: center;
@@ -102,6 +109,7 @@ body{
 }
 #fusion_ct{
 	width:100%;
+	background-color: white;
 	/*background-color: #222222;*/
 }	
 #legant{

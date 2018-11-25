@@ -10,6 +10,7 @@
         <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta3/html2canvas.min.js"></script>
 　　       <script src="{{ static_url("js/canvas2image.js")}}"></script>
 　　       <script src="{{ static_url("js/base64.js")}}"></script>
+         <script src="{{ static_url("js/jspdf.debug.js")}}"></script>
       <link href="{{ static_url("css/gene.css")}}" rel="stylesheet">  
 
 	</head>
@@ -136,6 +137,7 @@
 	    <div id="win_img" style=" padding: 20px;">
 	    <div id="images" style="width:850px;margin:auto;padding:25px;text-align:center;background-color: white;">
 	    	<button id="Download">Download PNG</button>
+	    	<button id="btnpdf">Download PDF</button>
 	    	<button id="back">Back</button>
 	    	</div>
         </div>
@@ -216,12 +218,74 @@
 　　</script>
 		<script>
 		/*
+
 		* 说明
 		* 不支持跨域图片
 		* 不能在浏览器插件中使用
 		* 部分浏览器上不支持SVG图片
 		* 不支持Flash
 		*/
+		document.getElementById("btnpdf").onclick = function(e){
+                    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+//                  renderPDF(document.getElementById("images"),"fgview","a4", function(){
+                 
+//                  });
+					        var line_sour=line_1.style.left;
+						    var line2_sour=line_2.style.left;
+						    pagew=document.documentElement.clientWidth;
+						    if(pagew>1000){
+						    	line_2.style.left=img_line2+"px";
+						        line_1.style.left=img_line1+"px";
+				    }				
+		            html2canvas(fusion_ct, {
+						  onrendered:function(canvas) {
+						
+						      var contentWidth = canvas.width;
+						      var contentHeight = canvas.height;
+						
+						      //一页pdf显示html页面生成的canvas高度;
+						      var pageHeight = contentWidth / 592.28 * 841.89;
+						      //未生成pdf的html页面高度
+						      var leftHeight = contentHeight;
+						      //页面偏移
+						      var position = 0;
+						      //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+						      //var imgWidth = 595.28;
+						      var imgWidth = 555.28;
+                              var imgHeight = 555.28/contentWidth * contentHeight;
+						      //var imgHeight = 592.28/contentWidth * contentHeight;
+						
+						      var pageData = canvas.toDataURL('image/jpeg', 1.0);
+						
+						      var pdf = new jsPDF('', 'pt', 'a4');
+						
+						      //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+						      //当内容未超过pdf一页显示的范围，无需分页
+						      if (leftHeight < pageHeight) {
+							  //pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight );
+							  pdf.addImage(pageData, 'JPEG', 20, 0, imgWidth, imgHeight );
+						      } else {
+							      while(leftHeight > 0) {
+							          //pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+							          pdf.addImage(pageData, 'JPEG', 20, position, imgWidth, imgHeight);
+							          leftHeight -= pageHeight;
+							          position -= 841.89;
+							          //避免添加空白页
+							          if(leftHeight > 0) {
+								        pdf.addPage();
+							          }
+							      }
+						      }
+						
+						      pdf.save('fgview.pdf');
+						  }
+						})
+
+		          line_2.style.left=line2_sour;
+	              line_1.style.left=line_sour;
+ 
+                }
+		//////////////////////////////
 		　　　　var Download = document.getElementById("Download");
 		　　　　Download.onclick = function(){
 		　　　　　　var oCanvas = document.getElementById("thecanvas");
@@ -360,7 +424,7 @@
 
        gene1_name=sect_g1.value;
        gene1_name.toUpperCase()
-       //sect_g1.value=sect_g1.value.toUpperCase();
+       sect_g1.value=sect_g1.value.toUpperCase();
        console.log(gene1_name);
        islink=0;
        console.log(islink)
@@ -370,7 +434,7 @@
 
        gene2_name=sect_g2.value;
        gene2_name.toUpperCase()
-       //sect_g2.value=sect_g2.value.toUpperCase()
+       sect_g2.value=sect_g2.value.toUpperCase()
        console.log(gene2_name);
        islink=0;
        console.log(islink)
@@ -407,7 +471,7 @@
 			            	gene1_arr=[];
 			            	gene2_arr=[];
 			            	var i=0;
-			            	//console.log(Object.keys(allinfo).length)
+			            	console.log(Object.keys(allinfo).length)
 			            	for(var i=0;i<6;i++){
                                g1_info.push(allinfo[i])
                                //console.log(g1_info)
@@ -508,8 +572,9 @@
      $("#fusion_btn").click(function()
 			    {
 			        if(islink==0){
+			        	   console.log('重新连接数据库')
                            linkdata();
-                           setTimeout("clickbtn();",500)//在函数体里面写入你想要等待执行的代码
+                           setTimeout("clickbtn();",300)//在函数体里面写入你想要等待执行的代码
 			        }else if(islink==1){
                            clickbtn();
 			        }
@@ -797,17 +862,26 @@
             gene1_len=g1_info[3];
             gene2_len=g2_info[3];
            // console.log(gene2_len+"长度")
-           
-           if (gene1_len>2000||gene2_len>2000){
-           	      k=0.1;
+           if(gene1_len>4000||gene2_len>4000){
+                   k=0.08;
+           }else if(gene1_len>3000||gene2_len>3000){
+                   k=0.1;
+           }else if (gene1_len>2000||gene2_len>2000){
+           	      k=0.12;
 
            }else if(gene1_len>1600||gene2_len>1600){
            	   k=0.2;
 
            }else if(gene1_len>1300||gene2_len>1300){
                      k=0.25;
-           }else{
+           }else if (gene1_len>1000||gene2_len>1000){
            	      k=0.3;
+           }else if (gene1_len>600||gene2_len>600){
+           	      k=0.4;
+           }else if (gene1_len>300||gene2_len>300){
+           	      k=0.6;
+           }else{
+           	   K=1;
            }
             
             //gene1_arr=g1_arr;

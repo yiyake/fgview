@@ -51,7 +51,7 @@ class AjaxHandler(tornado.web.RequestHandler):
         con=pymysql.connect('127.0.0.1','root','KEyiya19960302','kyy')
         with con:
             cur=con.cursor()
-            sql = "SELECT * FROM g_type \
+            sql = "SELECT * FROM g_enst \
                WHERE g_name = '%s'" % (g1_n)
             cur.execute(sql)
             rows=cur.fetchall()
@@ -73,7 +73,7 @@ class AjaxHandler(tornado.web.RequestHandler):
                 print("empty")
 
 
-            sql = "SELECT * FROM g_type \
+            sql = "SELECT * FROM g_enst \
                WHERE g_name = '%s'" % (g2_n)
             cur.execute(sql)
             rows=cur.fetchall()

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>测试Ajax</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>  
+            <script src="{{ static_url("js/eml4.js")}}"></script>
+
+        <script src="{{ static_url("js/alk.js")}}"></script>
+        <script src="{{ static_url("js/color.js")}}"></script>
+        <script src="{{ static_url("js/abl1.js")}}"></script>
+        <script src="{{ static_url("js/bcr.js")}}"></script>
+        <!--<script src="js/getleft.js"></script>-->
+        <script type="text/javascript" src="{{ static_url("js/jquery-3.2.1.min.js")}}"></script>
+        <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta3/html2canvas.min.js"></script>
+　　       <script src="{{ static_url("js/canvas2image.js")}}"></script>
+　　       <script src="{{ static_url("js/base64.js")}}"></script>
+        <link href="{{ static_url("css/gene.css")}}" rel="stylesheet">
+    
+    
+    
+
+    <style type="text/css">
+#result{
+    border: 10px;
+    font-size: 50px;
+    background: #ff0fef;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <input type="text" id="word" > <br>
+    <button id="foo">点击</button>
+
+    <div id="result">
+
+    </div>
+    	<div id="ct">
+	  <div id="top"></div>
+	  <div id="middle" >
+	  	  <div class="space">
+	  	  </div>
+		  <div id="m_bp" style="width:400px ;margin: auto;">
+			  <form>
+			  <div>
+			  	Fusion Gene1:
+				    <select id="sect_g1" onchange="changeGeneO()">
+					  <option value="BCR">BCR</option>
+					  <option value="ABL1">ABL1</option>
+					  <!--<option value="EML4">EML4</option>
+					  <option value="ALK">ALK</option>-->
+			        </select>
+			    BP:<input id="g1_bp" type="text" placeholder="Input breakpoint" maxlength="10000" />
+			  </div>
+			  <div>
+			  	Fusion Gene2:
+				    <select id="sect_g2" onchange="changeGeneT()">
+				      <option value="ABL1">ABL1</option>
+					  <option value="BCR">BCR</option>
+					  <!--<option value="EML4">EML4</option>
+					  <option value="ALK">ALK</option>-->
+			        </select>
+			    BP:<input id="g2_bp" placeholder="Input breakpoint" maxlength="10000" />
+			  </div>
+			  <input id="fusion_btn" type="button" value="Draw"/>
+			 <!-- <button id="fusion_bt">Draw Fusion Gene</button>-->
+			  </form>
+			  </div>
+			  
+			  <div id="fusion_img" style="width:800px ;margin: auto; visibility: hidden;">
+			    <div class="space">
+	  	        </div>
+	  	        <div id="legant">
+	  	        </div>
+	  	        <div id="fusion_ct">
+	  	            <!--<div id="bp_line">
+	  	        		<div id="line_draw"></div>
+	  	        	</div>-->
+	  	        	<div id="line_4"></div>
+	  	        	<div id="line_1"></div>
+	  	        	<div id="line_box"></div>
+	  	        	<div id="line_3"></div>
+	  	        	<div id="line_2"></div>
+	  	        	<div id="left_g">
+	  	        		<div class="gene_title">
+	  	        			<div class="gene_t" id="g1_name">BCR</div>
+	  	        			<div class="gene_rank" id="g1_code">ENST00000305877</div>
+	  	        		</div>
+	  	        		<!--<div id="link_line1" class="space">
+	  	                 </div>-->
+	  	        		<div class="gene_bar">
+	  	        			<div class="bar_bp">
+	  	        				
+	  	        				<span id="bp_label">BP:<span id="bp_posi">927</span></span>
+	  	        			</div>
+	  	        			<div class="bar_length">
+	  	        				<div id="gene_1_start">1</div>
+	  	        				<div id="gene_1_lenth">1272</div>
+	  	        			</div>
+	  	        			<div class="bar_draw">
+	  	        				<div id="bar_red">
+	  	        					<div id="red_bp"></div>
+	  	        				</div>
+	  	        			</div>
+	  	        		</div>
+	  	        		<div id="f_bar1" class="feature_bar">
+	  	        			<!--<div class="f" id="b_f_1"></div>
+	  	        			<div class="f" id="b_f_2"></div>
+	  	        			<div class="f" id="b_f_3"></div>-->
+	  	        		</div>
+	  	        	</div>
+	  	        	<div id="right_g">
+	  	        		<div class="gene_title">
+	  	        			<div class="gene_t" id="g2_name">BCR</div>
+	  	        			<div class="gene_rank" id="g2_code">ENST00000305877</div>
+	  	        		</div>
+	  	        		<!--<div id="link_line2" class="space">
+	  	                 </div>-->
+	  	        		<div class="gene_bar">
+	  	        			<div class="bar_bp">
+	  	        				<span id="bp_label_2">BP:<span id="bp_posi2">26</span></span>
+	  	        			</div>
+	  	        			<div class="bar_length">
+	  	        				<div id="gene_2_lenth">1131</div>
+	  	        				<!--<div id="gene_2_start">1</div>-->
+	  	        				<div id="gene_2_begin">1</div>
+	  	        			</div>
+	  	        			<div class="bar_draw">
+	  	        				<div id="bar_blue">
+	  	        					<div id="blue_bp"></div>
+	  	        				</div>
+	  	        			</div>
+	  	        		</div>
+	  	        		<div id="f_bar2" class="feature_bar">
+	  	        			<!--<div class="f" id="a_f_1"></div>
+	  	        			<div class="f" id="a_f_2"></div>
+	  	        			<div class="f" id="a_f_3"></div>-->
+	  	        		</div>
+	  	        	</div>
+
+	  	        	<div class="clr"></div>
+	  	        	
+	  	        </div>
+		      </div>
+	</div>
+	<div id="buttom"></div>
+	</div>
+    <div id="back_box">
+    	<div id="dialog">
+    		<div id="f_show">
+	    	<p id="feature_title"><strong>Protein feature information:</strong></p>
+	    	<p>Name:<span id="f_name"></span></p>
+	    	<p>Start:<span id="f_start">256</span></p>
+	    	<p>End:<span id="f_end">265</span></p>
+	    	<p>Description:<span id="f_desc"></span></p>
+	    	
+    		</div>
+    		<div id="g_show" hidden="hidden">
+	    	<p id="gene_title"><strong>Broken protein's sequence:</strong></p>
+	    	<p>★Broken <span id="g_name1"></span>'s AA sequence:</p>
+	    	<textarea id="aas"></textarea>
+	    	<p>★Broken <span id="g_name2"></span>'s transcript sequence:</p>
+	    	<textarea id="trs"></textarea>
+    		</div>
+    		<button id="infobtn">OK</button>
+    	</div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $("#foo").click(function()
+    {
+        var word = $("#word").val(); //获取文本框的输入
+
+        //把word发给后台php程序
+        //返回的数据放在data中，返回状态放在status
+        $.post("/test",{message:word}, function(data,status){
+            if(status == "success")
+            {
+            	console.log(data);
+            	var dict=data;
+            	console.log(dict.yiyake);
+                $("#result").html(data[0]);
+            }
+            else
+            {
+                alert("Ajax 失败");
+            }
+        });
+    });
+
+
+</script>
