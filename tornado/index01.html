@@ -405,6 +405,11 @@
     btntxt.onclick=function(){
     	download("gene_fusion.txt",txtcontent);
     }
+    window.onload=function()//用window的onload事件，窗体加载完毕的时候
+    {
+      linkdata();
+      console.log('jiajiajijiajijiajijiajijaijaijaijijaija')
+    }
     function settop(){
     	var oCanvas = document.getElementById("thecanvas");
     	oCanvas.style.marginTop="0px";
