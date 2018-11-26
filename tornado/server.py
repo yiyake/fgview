@@ -67,6 +67,7 @@ class AjaxHandler(tornado.web.RequestHandler):
                     isempty=1
                     print("empty")
             #print(g1info)
+
             print(len(g1info))
             if len(g1info)==0:
                 isempty=1
@@ -175,10 +176,11 @@ class AjaxHandler(tornado.web.RequestHandler):
 #all_data.append(f2_infos)
             print(len(all_data))
             k=0
-            for i in range(len(all_data)):
-                for j in range(len(all_data[0])):
-                    all_info[k]=all_data[i][j]
-                    k=k+1
+            if isempty==0:
+                for i in range(len(all_data)):
+                    for j in range(len(all_data[0])):
+                        all_info[k]=all_data[i][j]
+                        k=k+1
 
             #print(all_info)
         print(isempty)
