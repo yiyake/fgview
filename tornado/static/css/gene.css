@@ -1,6 +1,9 @@
 body{
 	font-family: arial;
 }
+::-webkit-scrollbar{
+display:none;
+}
 #drivebox{
 	width: 100px;
 	height: 100px;
@@ -22,24 +25,35 @@ body{
 	width: 1000px;
 }
 #top{
-	height: 150px;
+	height: 0px;
 	background-color: #245269;
 }
 #middle{
 	margin-top: 5px;
+	margin-bottom: : 5px;
 	background-color: white;
 }
 #buttom{
 	margin-top: 5px;
 	background-color: #245269;
-	height: 50px;
+	height: 0px;
 }
+.label_title00{
+        font-size: 35px;
+	vertical-align: middle;
+}
+
 .label_title{
-	font-size: 17px;
+	font-size: 19px;
 	font-weight: bold;
-	margin-bottom: 15px;
-    margin-top: 10px;
+	margin-top: 25px;
 }
+.label_title0{
+        font-size: 19px;
+        font-weight: bold;
+        margin-top: 5px;
+}
+
 #m_bp{
 
 }

@@ -25,7 +25,7 @@ sys.path.append("..")
 arr={'yiyake':18 ,'jint':20}
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("index01.html")
+        self.render("outindex.html")
 
 class AjaxHandler(tornado.web.RequestHandler):
     def post(self):
