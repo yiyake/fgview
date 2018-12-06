@@ -1,8 +1,6 @@
 body{
 	font-family: arial;
-}
-::-webkit-scrollbar{
-display:none;
+	overflow-y: scroll;
 }
 #drivebox{
 	width: 100px;

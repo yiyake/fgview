@@ -13,6 +13,7 @@
 #     application.listen(8888)
 #     tornado.ioloop.IOLoop.instance().start()
 
+import tornado.httpserver
 import tornado.ioloop
 import tornado.web
 import os.path
@@ -48,7 +49,7 @@ class AjaxHandler(tornado.web.RequestHandler):
         print(g2)
         g1_n=g1
         g2_n=g2
-        con=pymysql.connect('127.0.0.1','root','KEyiya19960302','kyy')
+        con=pymysql.connect('127.0.0.1','fusiongdb','K3j?mxyVRJjK','fusiongdb')
         with con:
             cur=con.cursor()
             sql = "SELECT * FROM g_enst \
@@ -195,7 +196,7 @@ class AjaxHandler(tornado.web.RequestHandler):
 
 
 application = tornado.web.Application([
-    (r"/", MainHandler),
+    (r"/FGviewer/tornado", MainHandler),
     (r"/test", AjaxHandler),
     ],
     static_path = os.path.join(os.path.dirname(__file__), "static"),
@@ -205,5 +206,14 @@ if __name__ == '__main__':
     settings = {
         "static_path": os.path.join(os.path.dirname(__file__), "static"),
     }
-    application.listen(8888)
+
+    http_server = tornado.httpserver.HTTPServer(application, ssl_options={
+        "certfile": "/home/pkim1/ssl/ccsm_uth_edu_cert.cer",
+        "keyfile": "/home/pkim1/ssl/ccsm.uth.edu.key",
+    })
+
+    http_server.listen(8888)
+    #application.listen(8888)
     tornado.ioloop.IOLoop.instance().start()
+
+

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -43,8 +43,14 @@
 			  </div>
                <div class="space">
 	  	        </div>
+	  	      <div id="fgvieweristext" style="width:780px ;margin: auto;margin-bottom: 5px">
+                                <div class="label_title">FGviewer</div>
+                                <div style="width:780px ;margin: auto; font-size: 14px">A visualization tool for functional features of fusion genes.
+                </div>
+              </div>
+              
 			  <div id="abouttext" style="width:800px ;margin: auto;margin-bottom: 5px">
-			  	<div class="label_title">About FGviewer</div>
+			  	<div class="label_title">BACKGROUND</div>
 			  	<div style="width:780px ;margin: auto; font-size: 14px">Due to the uniqueness composed of the two different genes, 
 			  		the typical gene browser has the clear limitation to show the fusion gene structure and the related feature information. 
 			  		FGviewer is aiming the effective visualization of the functional features of fusion genes for better prioritization and therapeutic target selection. 
@@ -53,58 +59,97 @@
 			  		and understanding the functional landscape of fusion gene at a glance.
                 </div>
 			  </div>
-			  <div id="organizationtext" style="width:800px ;margin: auto;margin-bottom: 5px;">
-			  	<div class="label_title">Organization of FGviewer</div>
+			  
+			  <div id="organizationtext" style="width:780px ;margin: auto;margin-bottom: 5px;">
+			  	<div class="label_title">ORGANIZATION OF VIEWS</div>
 			  	<a href="img/img2.png" target="_blank"><img style="width: 780px;" src="img/img2.png" /></a>
 			  </div>
-              <div id="downloadtext" style="width:800px ;margin: auto;margin-bottom: 5px; font-size: 14px">
-			  	<div class="label_title">Download</div>
-			  	<div style="width:780px ;margin: auto">- Download FGviewer src from github
+              <div id="downloadtext" style="width:780px ;margin: auto;margin-bottom: 5px; font-size: 14px">
+			  	<div class="label_title">DOWNLOAD</div>
+			  	<div style="width:780px ;margin: auto">You can download the src of FGviewer from the <a href="https://github.com/a56132470/tornado" target="_blank">GitHub</a>
                 </div>
 			  </div>
-			  <div id="exampletext" style="width:800px ;margin: auto;margin-bottom: 5px">
-			  	<div class="label_title">Example</div>
-			  	<div style="width:780px ;margin: auto; font-size: 14px">- FGviewing the representative kinase fusion genes<br>
-				  &nbsp;&nbsp;BCR-ABL1<br>
-				  &nbsp;&nbsp;EML4-ALK<br>
+			  <div id="prerequisitetext" style="width:780px ;margin: auto;margin-bottom: 5px;">
+                     <div class="label_title">PREREQUISITE</div>
+               <div style="width:780px ;margin: auto; font-size: 14px">
+				If you want to build a stand-alone version, then follow these intructions. <br>
+				1. You need install <a href="https://www.tornadoweb.org/en/stable/" target="_blank">Tornado</a>, a Python web framework with the corresponding version of Python. <br>
+				2. You need to upload tables into your MySQL database. <br>
+				3. You need to set up the path for the static directory. <br>
+				4. You need to run the server.py  
+                </div>
+              </div>
+			  
+			  <div id="exampletext" style="width:780px ;margin: auto;margin-bottom: 5px">
+			  	<div class="label_title">SEARCH EXAMPLES</div>
+			  	<div style="width:780px ;margin: auto; font-size: 14px">Each category lists the representative fusion genes with tumorigenesis. You can try to search FGviewer using these fusion gene names. Furthermore, you can go to the FusionGDB to get the intensive functional annotation of each fusion gene. <br>
+				1. Kinase fusion genes<br>
+				  &nbsp;&nbsp;BCR-ABL1, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=4081" target=_blank>FusionGDB for this fusion gene</a><br>
+				  &nbsp;&nbsp;EML4-ALK, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=11559" target=_blank>FusionGDB for this fusion gene</a><br>
                   <br>
-				- FGviewing the representative transcription factor fusion genes<br>
-				  &nbsp;&nbsp;TMPRSS2-ERG<br>
-				  &nbsp;&nbsp;PML-RARA<br>
-				  &nbsp;&nbsp;RUNX1-RUNX1T1<br>
-				  &nbsp;&nbsp;EWSR1-FLI1<br>
+				2. Transcription factor fusion genes<br>
+				  &nbsp;&nbsp;TMPRSS2-ERG, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=38748" target=_blank>FusionGDB for this fusion gene</a><br>
+				  &nbsp;&nbsp;PML-RARA, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=27793" target=_blank>FusionGDB for this fusion gene</a><br>
+				  &nbsp;&nbsp;RUNX1-RUNX1T1, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=32407" target=_blank>FusionGDB for this fusion gene</a><br>
+				  &nbsp;&nbsp;EWSR1-FLI1, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=12233" target=_blank>FusionGDB for this fusion gene</a><br>
                   <br>
-				- FGviewing the representative 3'-UTR truncated fusion genes<br>
-				  &nbsp;&nbsp;FGFR3-TACC3<br>
+				3. 3'-UTR truncated fusion genes<br>
+				  &nbsp;&nbsp;FGFR3-TACC3, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=13420" target=_blank>FusionGDB for this fusion gene</a><br>
                   <br>
-				- FGviewing the representative epigentic modification-associated fusion genes<br>
-				  &nbsp;&nbsp;EWSR1-FLI1<br>
-				  &nbsp;&nbsp;TMPRSS2-ERG<br>
-				  &nbsp;&nbsp;KMT2A-MLLT10<br>
+				4. Epigentic modification-associated fusion genes<br>
+				  &nbsp;&nbsp;EWSR1-FLI1, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=12233" target=_blank>FusionGDB for this fusion gene</a><br>
+				  &nbsp;&nbsp;TMPRSS2-ERG, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=38748" target=_blank>FusionGDB for this fusion gene</a><br>
+				  &nbsp;&nbsp;KMT2A-MLLT10, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=19102" target=_blank>FusionGDB for this fusion gene</a><br>
                   <br>
-				- FGviewing the representative tissue-specific fusion genes<br>
-				  &nbsp;&nbsp;TMPRSS2-ERG<br>
+				5. Tissue-specific fusion genes<br>
+				  &nbsp;&nbsp;TMPRSS2-ERG, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=38748" target=_blank>FusionGDB for this fusion gene</a><br>
                 </div>
 			  </div>
-              <div id="helptext" style="width:800px ;margin: auto;margin-bottom: 5px; font-size: 14px">
-			  	<div class="label_title">Help</div>
-			  	<div style="width:780px ;margin: auto; font-size: 14px">- Protean sequence annotation (features) information<br>
-  &nbsp;&nbsp;UniProt database provides 39 protein sequence annotation features based on individual protein sequence including six molecule processing features, 13 region features, four site features, six amino acid modification features, two natural variation features, five experimental info features, and 3 secondary structure features. Detailed information about all of the protein features is in UniProt page (add hyper link for https://www.uniprot.org/help/sequence_annotation).<br>
-                <br>
-                - I will add more figures and texts later.<br>
+			  
+              <div id="helptext" style="width:780px ;margin: auto;margin-bottom: 5px; font-size: 14px">
+			  	<div class="label_title">HELP</div>
+               <div style="width:780px ;margin: auto; font-size: 14px">- Understanding FGviewer functions.<br>
+				1. Search, example: BCR and ABL1 fusion gene. <br>
+				Input query: Official HUGO gene symbols. 
+                                <a href="help_images/1.png" target="_blank"><img style="border:1px solid #021a40" src="help_images/1.png" /></a><br><br>
+				2. Legends of protein features. <br>
+                                Protean sequence annotation (features) information<br>
+				UniProt database provides 39 protein sequence annotation features based on individual protein sequence including six molecule processing features, 13 region features, four site features, six amino acid modification features, two natural variation features, five experimental info features, and 3 secondary structure features. Detailed information about all of the protein features is in <a href="https://www.uniprot.org/help/sequence_annotation" target="_blank">UniProt page </a>.<br>
+                                <a href="help_images/2.png" target="_blank"><img src="help_images/2.png" style="border:1px solid #021a40" /></a><br><br>
+				3. Protein-level viewer. <br>
+				For each gene, it provides the representative accessions of UniProt and Ensembl transcript. <br>
+				1) The user can move the breakpoint line by dragging. This line is consistent along the three level viewers. See point (a).<br>
+                                <a href="help_images/3.png" target="_blank"><img src="help_images/3.png" style="border:1px solid #021a40" width="718px" /></a><br><br>
+                                2) When you click the button of 'Save image', then it will provide the option to download png or pdf files as below. See point (b) of image 3. 1). <br>
+                                <a href="help_images/4.png" target="_blank"><img src="help_images/4.png" style="border:1px solid #021a40" width="718px" /></a><br><br>
+				3) When you click the protein structure bar, then it let you download the broken sequence of amino acids. This sequence is created based on the breakpoint location which is dragged by the user as below. See point (c) of image 3. 1). <br>
+                                <a href="help_images/5.png" target="_blank"><img src="help_images/5.png" style="border:1px solid #021a40" width="300"/></a><br><br>
+				4) When you click the bar of each protein feature, then you can see the detailed information for that feature as below. See point (d) of image 3. 1).<br>
+                                <a href="help_images/6.png" target="_blank"><img src="help_images/6.png" style="border:1px solid #021a40" width="300"/></a><br><br>
+				5) When you click the button of 'Download information', then you can download all information of the protein feature retention based on the current breakpoints for both of the genes as below. See point (e) of image 3. 1).<br>
+                                <a href="help_images/7.png" target="_blank"><img src="help_images/7.png" style="border:1px solid #021a40" /></a><br>
+
+
                 </div>
 			  </div>
-			  <div id="contacttext" style="width:800px ;margin: auto;margin-bottom: 5px; font-size: 14px">
-			  	<div class="label_title">Contact</div>
+			  
+			  <div id="licensetext" style="width:780px ;margin: auto;margin-bottom: 5px;">
+                                <div class="label_title">LICENSE</div>
+               <div style="width:780px ;margin: auto; font-size: 14px">FGviewer is free for non-commercial use. Please contact the authors for commercial use.<br>
+               </div>
+               </div>
+			  
+			  <div id="contacttext" style="width:780px ;margin: auto;margin-bottom: 5px; font-size: 14px">
+			  	<div class="label_title">CONTACT</div>
 			  	<div style="width:780px ;margin: auto; font-size: 14px">
-			  	- Citation of the Database<br>
+			  	1. Cite<br>
 			  	&nbsp;&nbsp;Pease quote the following:<br>
 			  	&nbsp;&nbsp;"Kim P, Ke Y, Zhou X, FGviewer: an online visualization tool for functional features of fusion genes."<br>
 			  	<br>
-			  	- Website of Center for Computational Systems Medicine<br>
-			  	&nbsp;&nbsp;https://sbmi.uth.edu/ccsm<br>
+			  	2. Website of Center for Computational Systems Medicine<br>
+			  	&nbsp;&nbsp;<a href="https://sbmi.uth.edu/ccsm" target="_blank">https://sbmi.uth.edu/ccsm</a><br>
 			  	<br>
-			  	- Contact Info<br>
+			  	3. Contact<br>
 				  &nbsp;&nbsp;Pora Kim, MS, PhD and Xiaobo Zhou, PhD<br>
 				  &nbsp;&nbsp;Email: Pora.Kim@uth.tmc.edu & Xiaobo.Zhou@uth.tmc.edu<br>
 				  &nbsp;&nbsp;Mailing address:  Center for Computational Systems Medicine<br>
@@ -235,8 +280,7 @@
 	    	<p id="gene_title"><strong>Broken protein's sequence:</strong></p>
 	    	<p>★Broken <span id="g_name1"></span>'s AA sequence:</p>
 	    	<textarea id="aas"></textarea>
-	    	<p>★Broken <span id="g_name2"></span>'s transcript sequence:</p>
-	    	<textarea id="trs"></textarea>
+	    
     		</div>
     		<button id="infobtn">OK</button>
     	</div>
@@ -393,12 +437,15 @@
 	</body>
 </html> 
 <script type="text/javascript">	
-	var abouttext=document.getElementById('abouttext');
+	var fgvieweristext=document.getElementById('fgvieweristext');
+    var abouttext=document.getElementById('abouttext');
 	var organizationtext=document.getElementById('organizationtext');
 	var downloadtext=document.getElementById('downloadtext');
+    var prerequisitetext=document.getElementById('prerequisitetext');
 	var exampletext=document.getElementById('exampletext');
 	var helptext=document.getElementById('helptext');
-	var contacttext=document.getElementById('contacttext');
+    var licensetext=document.getElementById('licensetext');	
+    var contacttext=document.getElementById('contacttext');
 	var allinfo={}
 	var g1_info=[]
 	var g2_info=[]
@@ -452,7 +499,7 @@
     var aas=document.getElementById('aas');
     var trs=document.getElementById('trs');
     var g_name1=document.getElementById('g_name1');
-    var g_name2=document.getElementById('g_name2');
+    //var g_name2=document.getElementById('g_name2');
     var f_show=document.getElementById('f_show');
     var g_show=document.getElementById('g_show');
     var line_3=document.getElementById('line_3');
@@ -485,6 +532,7 @@
     var txtcontent="";
     var retain_5="";
     var no_retain="";
+    var no_retain3="";
     var retain_3="";
     var islink=0;
     var pagew=document.documentElement.clientWidth;
@@ -506,13 +554,19 @@
 					window.scroll(0,0);
 					//document.body.scrollTop || document.documentElement.scrollTop=100px;
 				}else if (indexpage==1){
-                     window.scroll(0,1000);
+                     window.scroll(0,150);
 				}else if (indexpage==2){
-                    window.scroll(0,1050);
+                    window.scroll(0,300);
 				}else if (indexpage==3){
-                    window.scroll(0,1450);
+                    window.scroll(0,1050);
 				}else if (indexpage==4){
-                    window.scroll(0,1600);
+                    window.scroll(0,1100);
+				}else if (indexpage==5){
+                    window.scroll(0,1250);
+				}else if (indexpage==6){
+                    window.scroll(0,1630);
+				}else if (indexpage==7){
+                    window.scroll(0,4500);
 				}
 				
 	}
@@ -604,8 +658,8 @@
 			            	 if(g1_info[3]==0||g2_info[3]==0){
                                flag=0;
 			            	 }
-			            	 g1_bp.value=g1_info[3]/2;
-			            	 g2_bp.value=g2_info[3]/2;
+			            	 g1_bp.value=parseInt(g1_info[3]/2);
+			            	 g2_bp.value=parseInt(g2_info[3]/2);
 			            	 var line_num=(Object.keys(allinfo).length-12)/6;
                                 var shuzu=new Array(); //定义一维数组 
 
@@ -907,8 +961,9 @@
 		                
 		                //console.log(noteinfo);
 		                g_name1.innerHTML=gene1_name;
-		                g_name2.innerHTML=gene1_name;
-				        aas.innerHTML=gene1_seq;
+		                //g_name2.innerHTML=gene1_name;
+		                var newseq=gene1_seq.substr(0,g1_bp.value);
+				        aas.innerHTML=newseq;
 				       // trs.innerHTML=gene1_seq.transeq;
 				        dialog.style.visibility="visible";
 				        f_show.hidden="hidden";
@@ -918,8 +973,9 @@
 	}
 	blue_bp.onclick=function(){
 		                g_name1.innerHTML=gene2_name;
-		                g_name2.innerHTML=gene2_name;
-                        aas.innerHTML=gene2_seq;
+		                //g_name2.innerHTML=gene2_name;
+		                var newseq=gene2_seq.substr(g2_bp.value,gene2_len-g2_bp.value);
+                        aas.innerHTML=newseq;
                        // trs.innerHTML=gene2_seq.transeq;
                         dialog.style.visibility="visible";
                         f_show.hidden="hidden";
@@ -955,6 +1011,9 @@
      	//console.log(pagew+'页面宽度');
          fusion_img.hidden=false;
      	 abouttext.hidden=true;
+         fgvieweristext.hidden=true;
+         prerequisitetext.hidden=true;
+         licensetext.hidden=true;
      	 organizationtext.hidden=true;
      	 helptext.hidden=true;
      	 contacttext.hidden=true;
@@ -962,6 +1021,7 @@
      	 downloadtext.hidden=true;
      	txtcontent="";
      	no_retain="";
+     	no_retain3="";
      	retain_3="";
      	retain_5="";
 		//////////////////////////
@@ -1236,7 +1296,7 @@
 				//console.log('bp的位置：'+g1_bp.value*k);
 				//console.log('透明的fa：'+i);
 				div.style.opacity="0.5";
-				no_retain=no_retain+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
+				no_retain=no_retain+gene1_name+'    '+"Not-retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
 			}else if(arr[i].start<g_bp.value && arr[i].end>g_bp.value){
 				//console.log('一半透明fa'+i);
 				var divs=document.createElement("div");
@@ -1247,8 +1307,8 @@
 				divs.style.backgroundColor="white";
 				divs.style.opacity="0.5";
 				div.appendChild(divs);
-				no_retain=no_retain+arr[i].name+'    '+g_bp.value+'    '+arr[i].end+'    '+arr[i].desc+'\n';
-				retain_5=retain_5+arr[i].name+'    '+arr[i].start+'    '+g_bp.value+'    '+arr[i].desc+'\n';
+				no_retain=no_retain+gene1_name+'    '+"Not-retained"+'    '+arr[i].name+'    '+g_bp.value+'    '+arr[i].end+'    '+arr[i].desc+'\n';
+				retain_5=retain_5+gene1_name+'    '+"Retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+g_bp.value+'    '+arr[i].desc+'\n';
 			}else if(i==0){
 				var divs=document.createElement("div");
 				divs.id="tranparant1"+i;
@@ -1259,19 +1319,19 @@
 				divs.style.opacity="0.5";
 				div.appendChild(divs);
 			}else{
-				retain_5=retain_5+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
+				retain_5=retain_5+gene1_name+'    '+"Retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
 			}
 	}
 	if((g1_bp.value==0)&&(g2_bp.value==0)){
-		retain_5=retain_5+arr[i].name+'  '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
+		retain_5=retain_5+gene1_name+'    '+"Retained"+'    '+arr[i].name+'  '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
 		//no_retain="\n\r";
 	}
 	if((g1_bp.value==0)&&(g2_bp.value!=0)){
 		
-		no_retain=no_retain+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
+		no_retain=no_retain+gene1_name+'    '+"Not-retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
 	}
 	if(g1_bp.value==gene1_len){
-		retain_5=retain_5+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
+		retain_5=retain_5+gene1_name+'    '+"Retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
 	}
 	}
 	function textSize(fontSize,fontFamily,text){
@@ -1445,7 +1505,7 @@
 			if(g1_bp.value!=0||g2_bp.value!=0){
 			if(arr[i].end*k<=g2_bp.value*k){
 				div.style.opacity="0.5";
-				no_retain=no_retain+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
+				no_retain3=no_retain3+gene2_name+'    '+"Not-retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
 			}else if(arr[i].start<g2_bp.value && arr[i].end>g2_bp.value){
 				var divs=document.createElement("div");
 				divs.id="tranparant2"+i;
@@ -1454,8 +1514,8 @@
 				divs.style.backgroundColor="white";
 				divs.style.opacity="0.5";
 				div.appendChild(divs);  
-				no_retain=no_retain+arr[i].name+'    '+arr[i].start+'    '+g2_bp.value+'    '+arr[i].desc+'\n';
-				retain_3=retain_3+arr[i].name+'    '+g2_bp.value+'    '+arr[i].end+'    '+arr[i].desc+'\n';
+				no_retain3=no_retain3+gene2_name+'    '+"Not-retained"+'    '+gene2_name+'    '+"Not-retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+g2_bp.value+'    '+arr[i].desc+'\n';
+				retain_3=retain_3+gene2_name+'    '+"Retained"+'    '+arr[i].name+'    '+g2_bp.value+'    '+arr[i].end+'    '+arr[i].desc+'\n';
 			}else if(i==0){
 				if(g2_bp.value==""||g2_bp.value==0){
 					var divs=document.createElement("div");
@@ -1477,18 +1537,18 @@
 				
 				
 			}else{
-				retain_3=retain_3+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
+				retain_3=retain_3+gene2_name+'    '+"Retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
 			}
 				
 	
 			}
 			if(g2_bp.value==0){
-				retain_3=retain_3+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
+				retain_3=retain_3+gene2_name+'    '+"Retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
 				//retain_5=retain_5+arr[i].name+','+arr[i].start+','+arr[i].end+','+arr[i].desc+'\n';
 				//no_retain="";
 			}
 			if(g2_bp.value==gene2_len){
-				no_retain=no_retain+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
+				no_retain3=no_retain3+gene2_name+'    '+"Not-retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
 			}
 			//line_len2=line_len2+15;
 		}
@@ -1557,9 +1617,15 @@
 		    }
 		  
 	}
-		txtcontent="Information Of"+" "+gene1_name+" "+"And"+" "+gene2_name+" "+"Fusion:";
-		txtcontent=txtcontent+"bp of 5'gene:"+g1_bp.value+"    "+"bp of 3'gene:"+g2_bp.value+"\n\r";
-		txtcontent=txtcontent+"Retained features in 5'gene:\n\r"+retain_5+"\n\r"+"Not Retained features:\n\r"+no_retain+"\n\r"+"Retained features in 3'gene:\n\r"+retain_3;
+		txtcontent="# 5'gene:"+gene1_name+"\n\r";
+		txtcontent=txtcontent+"# 3'gene:"+gene2_name+"\n\r";
+		txtcontent=txtcontent+"# 5'-protein length:"+gene1_len+' '+"amino acids"+"\n\r";
+		txtcontent=txtcontent+"# 3'-protein length:"+gene2_len+' '+"amino acids"+"\n\r";
+		txtcontent=txtcontent+"# BP in 5'-protein:"+g1_bp.value+' '+"amino acids"+"\n\r";
+		txtcontent=txtcontent+"# BP in 3'-protein:"+g2_bp.value+' '+"amino acids"+"\n\r";
+		txtcontent=txtcontent+"# Protein     Retention of feature  Feature type  Start  End  Description"+"\n\r";
+		txtcontent=txtcontent+retain_5+"\n\r"+no_retain+"\n\r"+no_retain3+"\n\r"+retain_3;
+		//txtcontent=txtcontent+"Retained features in 5'gene:\n\r"+retain_5+"\n\r"+"Not Retained features:\n\r"+no_retain+"\n\r"+"Retained features in 3'gene:\n\r"+retain_3;
 }
 
 	function pai(){
