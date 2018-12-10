@@ -3,11 +3,28 @@
 	<head>
 	<meta charset="UTF-8">
 		<title>FGviewer: a visualization tool for functional features of fusion genes</title>
-		<link href="{{ static_url("outstyle.css")}} rel="stylesheet">
+    <style type="text/css">
+        H1
+        {
+        font-size: 26pt;
+        text-align: left;
+	    vertical-align: middle;
+	    color:white;
+	    font-family: arial;
+        }
+        #myframe{
+        	width: 90%; 
+        	float: left; 
+        	background-color:white; 
+        	height: 100%; 
+        	margin-top: 5px;
+        }
+    </style>
+
 	</head>
 	<body>
-		<div style="width: 100%; height: 100px; background-color: #245269;font-size: 35px;color: white;vertical-align: middle;font-family: arial;text-align: center;border-style: hidden">
-			 <div style="position: absolute; top: 35px; left: 30px">FGviewer: a visualization tool for functional features of fusion genes</div>
+		<div style="width: 100%; height: 100px; background-color: #245269;border-style: hidden">
+			 <H1>FGviewer: a visualization tool for functional features of fusion genes</H1>
 		</div>
 		<div style="width: 10%; float: left; background-color: #245269; height: 850px; margin-top: 5px; color: white;border-style: hidden">
 			<button style="background-color: #245269; width: 100%;font-size: 16px;color: white;border: none;padding-top: 5px;padding-bottom: 5px" id="homebtn" onclick="home()">HOME</button>
@@ -20,9 +37,9 @@
                         <button style="background-color: #245269; width: 100%;font-size: 16px;color: white;border: none;padding-top: 5px;padding-bottom: 5px" onclick="cantact()">CONTACT</button>
 			<div style="padding-top:510px;font-size: 13px;text-align: center;font-family: arial">© Center for Computational and Systems Medicine (CCSM), The University of Texas Health Science Center at Houston</div>
 		</div>
-		<div style="width: 90%; float: left; background-color:white; height: 100%; margin-top: 5px;">
+		<div id="myframe">
 			 
-			 <iframe id="frame" src="{{ static_url("index01.html")}}" width="100%" height="850px" scrolling="yes" title="FGviewer body"></iframe>
+			 <iframe id="frame" src="{{ static_url("index01.html")}}" style="width:100%; height:850px; scrolling:auto;" title="FGviewer body"></iframe>
 		</div>
 	</body>
 </html>
