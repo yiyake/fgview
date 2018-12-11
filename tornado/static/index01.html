@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>  
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>  
         <script src="js/color.js"></script>
         <!--<script src="js/getleft.js"></script>-->
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
@@ -12,12 +12,13 @@
 　　       <script src="js/base64.js"></script>
          <script src="js/jspdf.debug.js"></script>
       <link href="css/gene.css" rel="stylesheet">  
+
 	</head>
 	<body>
 	<div id="ct">
 	  <div id="middle" >
-		  <div id="m_bp" style="width:780px ;margin: auto;margin-bottom: 5px;">
-		  	<H2>Fusion gene search</H2>
+		  <div id="m_bp" style="width:800px ;margin: auto;margin-bottom: 5px;">
+		  	<div class="label_title0">Fusion gene search</div>
 			  <form >
 			  <div>
 			  <div style="float: left;margin-left: 10%">
@@ -43,13 +44,13 @@
                <div class="space">
 	  	        </div>
 	  	      <div id="fgvieweristext" style="width:780px ;margin: auto;margin-bottom: 5px">
-                                <H2>FGviewer</H2>
+                                <div class="label_title">FGviewer</div>
                                 <div style="width:780px ;margin: auto; font-size: 14px">A visualization tool for functional features of fusion genes.
                 </div>
               </div>
               
-			  <div id="abouttext" style="width:780px ;margin: auto;margin-bottom: 5px">
-			  	<H2>BACKGROUND</H2>
+			  <div id="abouttext" style="width:800px ;margin: auto;margin-bottom: 5px">
+			  	<div class="label_title">BACKGROUND</div>
 			  	<div style="width:780px ;margin: auto; font-size: 14px">Due to the uniqueness composed of the two different genes, 
 			  		the typical gene browser has the clear limitation to show the fusion gene structure and the related feature information. 
 			  		FGviewer is aiming the effective visualization of the functional features of fusion genes for better prioritization and therapeutic target selection. 
@@ -60,16 +61,16 @@
 			  </div>
 			  
 			  <div id="organizationtext" style="width:780px ;margin: auto;margin-bottom: 5px;">
-			  	<H2>ORGANIZATION OF VIEWS</H2>
-			  	<a href="img/img2.png" target="_blank"><img alt="organization" style="width: 780px;" src="img/img2.png" /></a>
+			  	<div class="label_title">ORGANIZATION OF VIEWS</div>
+			  	<a href="img/img2.png" target="_blank"><img style="width: 780px;" src="img/img2.png" /></a>
 			  </div>
               <div id="downloadtext" style="width:780px ;margin: auto;margin-bottom: 5px; font-size: 14px">
-			  	<H2>DOWNLOAD</H2>
+			  	<div class="label_title">DOWNLOAD</div>
 			  	<div style="width:780px ;margin: auto">You can download the src of FGviewer from the <a href="https://github.com/a56132470/tornado" target="_blank">GitHub</a>
                 </div>
 			  </div>
 			  <div id="prerequisitetext" style="width:780px ;margin: auto;margin-bottom: 5px;">
-                     <H2>PREREQUISITE</H2>
+                     <div class="label_title">PREREQUISITE</div>
                <div style="width:780px ;margin: auto; font-size: 14px">
 				If you want to build a stand-alone version, then follow these intructions. <br>
 				1. You need install <a href="https://www.tornadoweb.org/en/stable/" target="_blank">Tornado</a>, a Python web framework with the corresponding version of Python. <br>
@@ -80,7 +81,7 @@
               </div>
 			  
 			  <div id="exampletext" style="width:780px ;margin: auto;margin-bottom: 5px">
-			  	<H2>SEARCH EXAMPLES</H2>
+			  	<div class="label_title">SEARCH EXAMPLES</div>
 			  	<div style="width:780px ;margin: auto; font-size: 14px">Each category lists the representative fusion genes with tumorigenesis. You can try to search FGviewer using these fusion gene names. Furthermore, you can go to the FusionGDB to get the intensive functional annotation of each fusion gene. <br>
 				1. Kinase fusion genes<br>
 				  &nbsp;&nbsp;BCR-ABL1, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=4081" target=_blank>FusionGDB for this fusion gene</a><br>
@@ -106,40 +107,40 @@
 			  </div>
 			  
               <div id="helptext" style="width:780px ;margin: auto;margin-bottom: 5px; font-size: 14px">
-			  	<H2>HELP</H2>
+			  	<div class="label_title">HELP</div>
                <div style="width:780px ;margin: auto; font-size: 14px">- Understanding FGviewer functions.<br>
 				1. Search, example: BCR and ABL1 fusion gene. <br>
 				Input query: Official HUGO gene symbols. 
-                                <a href="help_images/1.png" target="_blank"><img alt="search" style="border:1px solid #021a40" src="help_images/1.png" /></a><br><br>
+                                <a href="help_images/1.png" target="_blank"><img style="border:1px solid #021a40" src="help_images/1.png" /></a><br><br>
 				2. Legends of protein features. <br>
                                 Protean sequence annotation (features) information<br>
 				UniProt database provides 39 protein sequence annotation features based on individual protein sequence including six molecule processing features, 13 region features, four site features, six amino acid modification features, two natural variation features, five experimental info features, and 3 secondary structure features. Detailed information about all of the protein features is in <a href="https://www.uniprot.org/help/sequence_annotation" target="_blank">UniProt page </a>.<br>
-                                <a href="help_images/2.png" target="_blank"><img alt="legends" src="help_images/2.png" style="border:1px solid #021a40" /></a><br><br>
+                                <a href="help_images/2.png" target="_blank"><img src="help_images/2.png" style="border:1px solid #021a40" /></a><br><br>
 				3. Protein-level viewer. <br>
 				For each gene, it provides the representative accessions of UniProt and Ensembl transcript. <br>
 				1) The user can move the breakpoint line by dragging. This line is consistent along the three level viewers. See point (a).<br>
-                                <a href="help_images/3.png" target="_blank"><img alt="viewer" src="help_images/3.png" style="border:1px solid #021a40" width="718px" /></a><br><br>
+                                <a href="help_images/3.png" target="_blank"><img src="help_images/3.png" style="border:1px solid #021a40" width="718px" /></a><br><br>
                                 2) When you click the button of 'Save image', then it will provide the option to download png or pdf files as below. See point (b) of image 3. 1). <br>
-                                <a href="help_images/4.png" target="_blank"><img alt="save" src="help_images/4.png" style="border:1px solid #021a40" width="718px" /></a><br><br>
+                                <a href="help_images/4.png" target="_blank"><img src="help_images/4.png" style="border:1px solid #021a40" width="718px" /></a><br><br>
 				3) When you click the protein structure bar, then it let you download the broken sequence of amino acids. This sequence is created based on the breakpoint location which is dragged by the user as below. See point (c) of image 3. 1). <br>
-                                <a href="help_images/5.png" target="_blank"><img alt="seq" src="help_images/5.png" style="border:1px solid #021a40" width="300"/></a><br><br>
+                                <a href="help_images/5.png" target="_blank"><img src="help_images/5.png" style="border:1px solid #021a40" width="300"/></a><br><br>
 				4) When you click the bar of each protein feature, then you can see the detailed information for that feature as below. See point (d) of image 3. 1).<br>
-                                <a href="help_images/6.png" target="_blank"><img alt="feature" src="help_images/6.png" style="border:1px solid #021a40" width="300"/></a><br><br>
+                                <a href="help_images/6.png" target="_blank"><img src="help_images/6.png" style="border:1px solid #021a40" width="300"/></a><br><br>
 				5) When you click the button of 'Download information', then you can download all information of the protein feature retention based on the current breakpoints for both of the genes as below. See point (e) of image 3. 1).<br>
-                                <a href="help_images/7.png" target="_blank"><img alt="download" src="help_images/7.png" style="border:1px solid #021a40" /></a><br>
+                                <a href="help_images/7.png" target="_blank"><img src="help_images/7.png" style="border:1px solid #021a40" /></a><br>
 
 
                 </div>
 			  </div>
 			  
 			  <div id="licensetext" style="width:780px ;margin: auto;margin-bottom: 5px;">
-                                <H2>LICENSE</H2>
+                                <div class="label_title">LICENSE</div>
                <div style="width:780px ;margin: auto; font-size: 14px">FGviewer is free for non-commercial use. Please contact the authors for commercial use.<br>
                </div>
                </div>
 			  
 			  <div id="contacttext" style="width:780px ;margin: auto;margin-bottom: 5px; font-size: 14px">
-			  	<H2>CONTACT</H2>
+			  	<div class="label_title">CONTACT</div>
 			  	<div style="width:780px ;margin: auto; font-size: 14px">
 			  	1. Cite<br>
 			  	&nbsp;&nbsp;Pease quote the following:<br>
@@ -162,10 +163,10 @@
 			  <div id="fusion_img" hidden="true" style="width:800px ;margin: auto; visibility: hidden;">
 			    <div class="space">
 	  	        </div>
-	  	        <H2>Legends of protein features</H2>
+	  	        <div class="label_title">Legends of protein features</div>
 	  	        <div id="legant">
 	  	        </div>
-	  	        <H2>Protein-level FGviewer</H2>
+	  	        <div class="label_title">Protein-level FGviewer</div>
 
 	  	         <input id="btnSave" type="button" value="Save image"/>
 	  	         <input id="btntxt" type="button" value="Download information"/>
@@ -239,6 +240,7 @@
 	  	        	</div>
 
 	  	        	<div class="clr"></div>
+	  	        	
 	  	        </div>
 		      </div>
 		       <div id="footer" style="text-align: center;margin-top: 20px; font-size: 13px">
@@ -249,9 +251,10 @@
                           <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/399043/t/9" align="right"></script>
                     </div>
                 </div>
+
 	</div>
 	</div>
-	<div id="img_levei" >
+	<div id="img_levei">
 		
 	    
 	    <div id="win_img" style=" padding: 20px;">
@@ -262,6 +265,7 @@
 	    	</div>
         </div>
 	</div>
+
     <div id="back_box">
     	<div id="dialog">
     		<div id="f_show">
@@ -850,17 +854,17 @@
            	line_2.style.left=oevent.clientX - distanceX+ 'px';
          	if(oevent.clientX - distanceX <result2.x){
          		obj.style.left=result2.x+'px';
-         		img_line2=result2.x+8;
+         		img_line2=result2.x;
          		//oevent.clientX - distanceX =674; 
          		g2_bp.value=0;
          	}else if(oevent.clientX - distanceX>result2.x+gene2_len*k){
          		obj.style.left=result2.x+gene2_len*k+'px';
-         		img_line2=result2.x+gene2_len*k+8;
+         		img_line2=result2.x+gene2_len*k;
          		//oevent.clientX - distanceX=674+gene2_len*0.3;
          		g2_bp.value=gene2_len;
          	}else{
          		obj.style.left = oevent.clientX - distanceX + 'px';
-         		img_line2=oevent.clientX - distanceX+8;
+         		img_line2=oevent.clientX - distanceX;
          		g2_bp.value=parseInt((oevent.clientX - distanceX-result2.x)/k);
          	}
 //         	
@@ -870,17 +874,17 @@
            	//label.innerHTML=label.innerHTML+"移动的位置11："+oevent.clientX - distanceX ;
          	if(oevent.clientX - distanceX <result1.x){
          		obj.style.left=result1.x+'px';
-         		img_line1=result1.x+8;
+         		img_line1=result1.x;
          		//oevent.clientX - distanceX=274;
          		g1_bp.value=0;
          	}else if(oevent.clientX - distanceX>result1.x+gene1_len*k){
          		obj.style.left=result1.x+gene1_len*k+'px';
-         		img_line1=result1.x+gene1_len*k+8;
+         		img_line1=result1.x+gene1_len*k;
          		//oevent.clientX - distanceX=gene2_len*0.3;
          		g1_bp.value=gene1_len;
          	}else{
          		obj.style.left = oevent.clientX - distanceX + 'px';
-         		img_line1= oevent.clientX - distanceX+8;
+         		img_line1= oevent.clientX - distanceX;
          		g1_bp.value=parseInt((oevent.clientX - distanceX-result1.x)/k);
          	}
          	
@@ -1185,8 +1189,8 @@
         	red_bp.style.width=gene1_len*k+"px";
         	line_1.style.left=result1.x+"px";
 		    line_2.style.left=result2.x+"px";
-		    img_line1=result1.x+8;
-		    img_line2=result2.x+8;
+		    img_line1=result1.x;
+		    img_line2=result2.x;
 		   // console.log(red_bp.style.width);
         }else{
         	line_1.style.visibility="visible";
@@ -1194,8 +1198,8 @@
         	line_box.style.visibility="visible";
         	line_1.style.left=result1.x+g1_bp.value*k+"px";
 		    line_2.style.left=result2.x+g2_bp.value*k+"px";
-		    img_line1=result1.x+g1_bp.value*k+8;
-		    img_line2=result2.x+g2_bp.value*k+8;
+		    img_line1=result1.x+g1_bp.value*k;
+		    img_line2=result2.x+g2_bp.value*k;
         }
 
         if(g1_bp.value>gene1_len||g2_bp.value>gene2_len){
@@ -1211,11 +1215,11 @@
         img_line1=result1.x+8;
             }else{
             	 red_bp.style.width=g1_bp.value*k+1+"px";
-            	 img_line1=result1.x+g1_bp.value*k+8;
+            	 img_line1=result1.x+g1_bp.value*k;
             }
         if((g1_bp.value==0)&&(g2_bp.value!=0)){
         	red_bp.style.width=0+"px";
-        	img_line2=result2.x+g2_bp.value*k+8;
+        	img_line2=result2.x+g2_bp.value*k;
         }
     	
         darg(line_2,2);
