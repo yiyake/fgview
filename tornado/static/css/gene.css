@@ -1,8 +1,6 @@
 body{
 	font-family: arial;
-}
-::-webkit-scrollbar{
-display:none;
+    overflow-y: scroll;
 }
 #drivebox{
 	width: 100px;
@@ -22,7 +20,7 @@ display:none;
 #ct{
 	background-color: white;
 	margin: auto;
-	width: 1000px;
+	width: 1130px;
 }
 #top{
 	height: 0px;
@@ -35,8 +33,8 @@ display:none;
 }
 #buttom{
 	margin-top: 5px;
-	background-color: #245269;
-	height: 0px;
+	background-color: #204D74;
+	width: 1130px;
 }
 .label_title00{
         font-size: 35px;
@@ -48,18 +46,6 @@ display:none;
 	font-weight: bold;
 	margin-top: 25px;
 }
-.H1{
-        font-size:16px;
-        font-weight: bold;
-        margin-top: 5px;
-}
-
-.H2{
-        font-size:15px;
-        font-weight: bold;
-        margin-top: 25px;
-}
-
 .label_title0{
         font-size: 19px;
         font-weight: bold;
@@ -89,8 +75,13 @@ display:none;
    width: 300px;
    float: left;
 }
-#fusion_img{
+#fusion_label{
+	width: 170px;
+	float: left;
 
+}
+#fusion_img{
+   float: right;
 }
 #fusion_btn{
 	width: 100px;
@@ -136,8 +127,18 @@ display:none;
 #fusion_ct{
 	width:100%;
 	background-color: white;
+	margin: auto;
 	/*background-color: #222222;*/
-}	
+}
+#dna_level_t{
+	margin-top: 170px;
+}
+#rna_level_t{
+	margin-top: 110px;
+}
+#protein_level_t{
+	margin-top: 150px;
+}
 #legant{
 	width: 100%;
 	height: 200px;
@@ -161,29 +162,357 @@ display:none;
 	background-color: #262626;
 	float: left;
 }
+#all_left{
+	width: 49%;
+	float: left;
+	/*border:1px solid #008B8B;*/
+}
+#all_right{
+	width: 49%;
+	float: left;
+	/*border:1px solid #008B8B;*/
+}
+
 #right_g{
-	width:50%;
+	width:300px;
 /*	height: 500px;*/
 	/*background-color:  #2B542C;*/
 	float: right;
+	margin-right: 60px;
 	
 }
 #left_g{
-	width:50%;
+	width:300px;
 	/*height: 500px;*/
 	/*background-color: #269ABC;*/
-	float: left;
+	float: right;
+	margin-right: 60px;
 
 }
 .gene_title  span{
 	font-weight: bold;
 }
+#g1_kbp{
+	 word-wrap:break-word;
+     word-break:break-all;
+
+}
+#g2_kbp{
+	 word-wrap:break-word;
+     word-break:break-all;
+
+}
 .gene_title{
 	width:100%;
-	height: 70px;
+	height: 90px;
 	/*background-color: #398439;*/
 	font-size: 18px;
 	text-align: center;
+}
+.gene_kbp{
+	font-size: 9px;
+}
+.dna_level{  
+	width: 460px;
+	height: 130px;
+	margin: auto;
+	margin-top: 10px;
+}
+.rna_level{
+	width: 430px;
+	height: 150px;
+	margin: auto;
+}
+.pathogeinc_level{
+	width: 300px;
+	height: 150px;
+	float: right;
+	margin-right: 60px;
+
+    /*background-color:  #CE8483;*/
+}
+.disease_level{
+	width: 300px;
+	float: right;
+	margin-right: 60px;
+
+    background-color:  white;
+    word-wrap:break-word;
+    word-break:break-all;
+}
+.d_item{
+
+	width: 95%;
+	margin-left: 5%;
+	font-size: 14px;
+	/*background-color: #008B8B;*/
+}
+#p_cont{
+	margin: left;
+}
+#p_bar{
+
+	height: 15px;
+	/*background-color: #2B542C;*/
+}
+#p_dot_bar{
+
+	height: 100px;
+	/*background-color: #5BC0DE;*/
+}
+#p_cont1{
+	margin: left;
+}
+#p_bar1{
+
+	height: 15px;
+	/*background-color: #2B542C;*/
+}
+#p_dot_bar1{
+
+	height: 100px;
+	/*background-color: #5BC0DE;*/
+}
+.pbox{
+	width: 100%;
+	height: 15px;i
+	
+}
+.pdot1{
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: red;
+	float: left;;
+	margin-top: 3px;
+}
+.pdot2{
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: red;
+	float: left;
+	margin-top: 3px;
+}
+.mrna_text_label{
+	font-size: 15px;
+	width: 100%;
+	height: 20px;
+	/*border:1px solid #008B8B;*/
+}
+#g1_half_circur{
+	position: absolute;
+	width: 30px;
+    height: 20px;
+    border-radius: 15px 15px 0 0;
+    margin-top: 18px;
+    margin-left: 35px;
+    background-color: red;
+    border: 1px solid #000000;
+}
+#g2_half_circur{
+	margin-top: 18px;
+	margin-left: 35px;
+	position: absolute;
+	width: 30px;
+    height: 20px;
+    border-radius: 15px 15px 0 0;
+    background-color: red;
+    border: 1px solid #000000;
+}
+#g1_dna_line{
+	width:430px;
+	position: absolute;
+	margin-top: 13px;
+	height: 2px;
+	background-color: #000000;
+	z-index: 0;
+}
+#g1_dna_line1{
+	width:100px;
+	height: 15px;
+	float: left;·
+	background-color: #1E90FF;
+    border-bottom: 2px solid #000000;·
+}
+#g1_dna_line2{
+	width:100px;
+	height: 15px;
+	float: left;
+	border-bottom: 2px solid #000000;
+}
+#g2_dna_line1{
+	width:430px;
+	height: 15px;
+	float: left;
+    border-bottom: 2px solid #000000;
+}
+#g2_dna_line2{
+	width:100px;
+	height: 15px;
+	float: left;
+	border-bottom: 2px solid #000000;
+}
+#g1_mrna_utr5{
+	background-color: #CD5C5C;
+	opacity: 0.5;
+	width: 8px;
+	height: 23px;
+	float: left;
+	border: 1px solid #000000;
+}
+#g1_mrna_bar{
+	background-color: #CD5C5C;
+	width: 280px;
+	height: 23px;
+	float: left;
+	border: 1px solid #AC2925;
+}
+#g1_mrna_utr3{
+	background-color: #CD5C5C;
+	opacity: 0.5;
+	width: 8px;
+	height: 23px;
+	float: left;
+	border: 1px solid #000000;
+}
+#g1_mrna_start{
+	float: left;
+}
+#g1_mrna_end{
+	float: left;
+}
+
+#g2_mrna_utr5{
+	background-color: darkcyan;
+	opacity: 0.5;
+	width: 8px;
+	height: 23px;
+	float: left;
+	border: 1px solid #000000;
+}
+#g2_mrna_bar{
+	background-color: darkcyan;
+	width: 280px;
+	height: 23px;
+	float: left;
+	border: 1px solid #245269;
+}
+#g1_no_retain_bar{
+	background-color:white;
+	opacity: 0.5;	
+	height: 23px;
+	float: right;
+}
+#g2_no_retain_bar{
+	background-color: white;
+	opacity: 0.5;	
+	height: 23px;
+	float: left;
+}
+#g2_mrna_utr3{
+	background-color: darkcyan;
+	opacity: 0.5;
+	width: 8px;
+	height: 23px;
+	float: left;
+	border: 1px solid #000000;
+}
+#g2_mrna_start{
+	float: left;
+}
+#g2_mrna_end{
+	float: left;
+}
+
+#g1_dna_utr5{
+	background-color: #CD5C5C;
+	opacity: 0.5;
+	width: 8px;
+	height: 28px;
+	float: left;
+	margin-left: 100px;
+	border: 1px solid #000000;
+}
+#g1_dna_bar{
+	background-color: #CD5C5C;
+	width: 280px;
+	height: 100%;
+	float: left;
+
+}
+#g1_dna_utr3{
+	background-color: #CD5C5C;
+	opacity: 0.5;
+	width: 8px;
+	height: 28px;
+	float: left;
+	border: 1px solid #000000;
+}
+#dna1_cds_start{
+	float: left;
+}
+#dna1_cds_end{
+	float: left;
+}
+
+#g2_dna_utr5{
+	background-color: darkcyan;
+	opacity: 0.5;
+	width: 8px;
+	height: 28px;
+	float: left;
+	margin-left: 100px;
+	border: 1px solid darkcyan;
+}
+#g2_dna_bar{
+	background-color:darkcyan ;
+	width: 280px;
+	height: 100%;
+	float: left;
+
+}
+
+#g2_dna_utr3{
+	background-color: darkcyan;
+	opacity: 0.5;
+	width: 8px;
+	height: 28px;
+	float: left;
+	border: 1px solid darkcyan;
+}
+#dna2_cds_start{
+	float: left;
+}
+#dna2_cds_end{
+	float: left;
+
+ }
+
+.exon1_box{
+	height:28px;
+	width:20px;
+	border: 1px solid #AC2925;
+	float: left;
+	
+}
+.exon2_box{
+	height:28px;
+	width:20px;
+	border: 1px solid #245269;
+	float: left;
+}
+.mrna_bar{
+	font-size: 15px;
+	width: 100%;
+	height: 25px;
+/*	border:1px solid #008B8B;*/
+}
+.dna_bar{
+	font-size: 15px;
+	width: 100%;
+	height: 30px;
+/*	border:1px solid #008B8B;*/
 }
 .gene_bar{
 	width:100%;
@@ -310,9 +639,69 @@ float: right;
 	z-index:199 ;
 	height: 100%;
 }
+#line_5{
+    position: absolute;
+
+	width: 1px;
+	border-left: 2px dashed  #C9302C;
+	z-index:99 ;
+	height: 325px;	
+}
+#line_6{
+    position: absolute;
+	width: 1px;
+	border-left: 2px dashed  #C9302C;
+	z-index:99 ;
+	height: 325px;	
+}
+#line_7{
+    position: absolute;
+
+	width: 1px;
+	border-left: 2px dashed  darkcyan;
+	z-index:99 ;
+	height: 325px;	
+}
+#line_8{
+    position: absolute;
+	width: 1px;
+	border-left: 2px dashed  darkcyan;
+	z-index:99 ;
+	height: 325px;	
+}
+#line_5_utr{
+    position: absolute;
+
+	width: 1px;
+	border-left: 2px dashed  #C9302C;
+	z-index:99 ;
+	height: 155px;	
+}
+#line_6_utr{
+    position: absolute;
+	width: 1px;
+	border-left: 2px dashed  #C9302C;
+	z-index:99 ;
+	height: 155px;	
+}
+#line_7_utr{
+    position: absolute;
+
+	width: 1px;
+	border-left: 2px dashed  darkcyan;
+	z-index:99 ;
+	height: 155px;	
+}
+#line_8_utr{
+    position: absolute;
+	width: 1px;
+	border-left: 2px dashed  darkcyan;
+	z-index:99 ;
+	height: 155px;	
+}
 #line_3{
 	position: absolute;
-	margin-left: 400px;
+
 	width: 1px;
 	background-color: #D0E9C6;
 	z-index:99 ;
@@ -321,7 +710,7 @@ float: right;
 }
 #line_4{
 	position: absolute;
-	margin-left:0px;
+
 	width: 1px;
 	background-color: #D0E9C6;
 	z-index:99 ;
@@ -334,8 +723,8 @@ float: right;
 	background-color: rgba(0,0,0,0.2);
 }
 .f{
-	height: 15px;
 	width: 100%;
+
 }
 .fa{
 	height: 15px;

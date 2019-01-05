@@ -13,7 +13,6 @@
 #     application.listen(8888)
 #     tornado.ioloop.IOLoop.instance().start()
 
-import tornado.httpserver
 import tornado.ioloop
 import tornado.web
 import os.path
@@ -27,6 +26,364 @@ arr={'yiyake':18 ,'jint':20}
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("outindex.html")
+        
+
+
+class KdinfoHandler(tornado.web.RequestHandler):
+    def post(self):
+        mykdinfo={}
+        kdallinfo=[]
+        name_1=''
+        name_2=''
+        count_bp1=0;
+        count_bp2=0;
+        bp1=''
+        bp2=''
+        dis1=''
+        dis2=''
+        c=self.get_argument("message")
+        codes=c.split('+')
+
+        name_1=codes[0]
+        name_2=codes[1]
+        #print("Debug:")
+        print("kdinfo print:")
+        print(self.get_argument("message"))
+        con=pymysql.connect('127.0.0.1','root','KEyiya19960302','kyy')
+        with con:
+            cur=con.cursor()
+            sql = "SELECT * FROM knownbp \
+               WHERE gene = '%s'" % (name_1)
+            cur.execute(sql)
+            rows=cur.fetchall()
+
+            for row in rows:
+
+                if row:
+                    count_bp1=count_bp1+1;
+                    row=list(row)
+                    # kdallinfo.append(row[2])
+                    bp1=bp1+row[2]
+                    bp1=bp1+','
+                    # print(row[2])
+                else:
+                   # isempty=1
+                    print("empty")
+
+            kdallinfo.append(bp1)
+              
+            sql = "SELECT * FROM knownbp \
+               WHERE gene = '%s'" % (name_2)
+            cur.execute(sql)
+            rows=cur.fetchall()
+
+            for row in rows:
+
+                if row:
+                    # count_bp2=count_bp2+1;
+                    row=list(row)
+                    # kdallinfo.append(row[2])
+                    bp2=bp2+row[2]
+                    bp2=bp2+','
+                    # print(row[2])
+                else:
+                   # isempty=1
+                    print("empty")  
+            kdallinfo.append(bp2)
+
+             
+            sql = "SELECT * FROM disease \
+               WHERE gene = '%s'" % (name_1)
+            cur.execute(sql)
+            rows=cur.fetchall()
+
+            for row in rows:
+
+                if row:
+                    # count_bp2=count_bp2+1;
+                    row=list(row)
+                    # kdallinfo.append(row[2])
+                    dis1=dis1+row[1]
+                    dis1=dis1+','
+                    # print(row[2])
+                else:
+                   # isempty=1
+                    print("empty")  
+            kdallinfo.append(dis1)
+            
+            sql = "SELECT * FROM disease \
+               WHERE gene = '%s'" % (name_2)
+            cur.execute(sql)
+            rows=cur.fetchall()
+
+            for row in rows:
+
+                if row:
+                    count_bp2=count_bp2+1;
+                    row=list(row)
+                    # kdallinfo.append(row[2])
+                    dis2=dis2+row[1]
+                    dis2=dis2+','
+                    # print(row[2])
+                else:
+                   # isempty=1
+                    print("empty")  
+            kdallinfo.append(dis2)
+            kdallinfo.append(count_bp1)
+            kdallinfo.append(count_bp2)
+            k=0
+            for i in range(len(kdallinfo)):
+                mykdinfo[k]=kdallinfo[i]
+                k=k+1
+
+        self.write(mykdinfo)
+
+
+class FeatureHandler(tornado.web.RequestHandler):
+    def post(self):
+        code_1=''
+        code_2=''
+        name_1=''
+        name_2=''
+        dr1_info=[]
+        dr2_info=[]
+        dr_all=[]
+        codeempty=0
+        dr_info={}
+        count_1=0
+        count_2=0
+        c=self.get_argument("message")
+        #print("Debug:")
+        print(self.get_argument("message"))
+        #back='aaaa'
+        codes=c.split('+')
+
+        name_1=codes[0]
+        name_2=codes[1]
+        enstg_1=[]
+        enstg_2=[]
+        con=pymysql.connect('127.0.0.1','root','KEyiya19960302','kyy')
+        with con:
+            cur=con.cursor()
+            sql = "SELECT * FROM g_enst \
+               WHERE g_name = '%s'" % (name_1)
+            cur.execute(sql)
+            rows=cur.fetchall()
+
+            for row in rows:
+                if row:
+                    row=list(row)
+                   # print(row)
+                   # g1_id=row[1]
+                    for i in row:
+                        enstg_1.append(i)
+                else:
+                   # isempty=1
+                    print("empty")
+            code_1=enstg_1[2]
+
+            sql = "SELECT * FROM g_enst \
+               WHERE g_name = '%s'" % (name_2)
+            cur.execute(sql)
+            rows=cur.fetchall()
+
+            for row in rows:
+                if row:
+                    row=list(row)
+                   # print(row)
+                   # g1_id=row[1]
+                    for i in row:
+                        enstg_2.append(i)
+                else:
+                   # isempty=1
+                    print("empty")
+            code_2=enstg_2[2]
+
+
+
+            sql = "SELECT * FROM gencode \
+               WHERE enst = '%s'" % (code_1)
+            cur.execute(sql)
+            rows=cur.fetchall()
+            dr_all
+            for row in rows:
+                if row:
+                    row=list(row)
+                    # print(row)
+                    for i in row:
+                        dr1_info.append(i)
+                        dr_all.append(i)
+                else:
+                    codeempty=1
+                    print("empty")
+            # print(dr1_info)
+
+            #print(len(g1info))
+            if len(dr1_info)==0:
+                codeempty=1
+                print("empty")
+            
+            sql = "SELECT * FROM gencode \
+               WHERE enst = '%s'" % (code_2)
+            cur.execute(sql)
+            rows=cur.fetchall()
+
+            for row in rows:
+                if row:
+                    row=list(row)
+                    # print(row)
+                    for i in row:
+                        dr2_info.append(i)
+                        dr_all.append(i)
+                else:
+                    codeempty=1
+                    print("empty")
+            # print(dr2_info)
+            sql = "SELECT * FROM mir \
+               WHERE gene = '%s'" % (name_1)
+            cur.execute(sql)
+            row=cur.fetchone()
+            if row:
+                row=list(row)
+                 # print(row)
+                for i in row:
+                    dr_all.append(i)
+            else:
+                dr_all.append('0')
+                dr_all.append('0')
+                dr_all.append('0')
+
+
+            sql = "SELECT * FROM mir \
+               WHERE gene = '%s'" % (name_2)
+            cur.execute(sql)
+            row=cur.fetchone()
+            if row:
+                row=list(row)
+                # print(row)
+                for i in row:
+                    dr_all.append(i)
+
+            else:
+                dr_all.append('0')
+                dr_all.append('0')
+                dr_all.append('0')
+
+
+
+            sql = "SELECT * FROM tf \
+               WHERE gene = '%s'" % (name_1)
+            cur.execute(sql)
+            rows=cur.fetchall()
+            if rows:
+                for row in rows:
+                    if row:
+                        row=list(row)
+                        # print(row)
+                        for i in row:
+                            dr_all.append(i)
+            else:
+                dr_all.append('0')
+                dr_all.append('0')
+
+            sql = "SELECT * FROM tf \
+               WHERE gene = '%s'" % (name_2)
+            cur.execute(sql)
+            rows=cur.fetchall()
+            if rows:
+                for row in rows:
+                    if row:
+                        row=list(row)
+                        # print(row)
+                        for i in row:
+                            dr_all.append(i)
+            else:
+                dr_all.append('0')
+                dr_all.append('0')
+
+            sql = "SELECT * FROM mrnaseq \
+               WHERE enst = '%s'" % (code_1)
+            cur.execute(sql)
+            rows=cur.fetchall()
+            if rows:
+                for row in rows:
+                    if row:
+                        row=list(row)
+                        # print(row)
+                        for i in row:
+                            dr_all.append(i)
+            else:
+                dr_all.append('0')
+                dr_all.append('0')
+                dr_all.append('0')
+
+            sql = "SELECT * FROM mrnaseq \
+               WHERE enst = '%s'" % (code_2)
+            cur.execute(sql)
+            rows=cur.fetchall()
+            if rows:
+                for row in rows:
+                    if row:
+                        row=list(row)
+                        # print(row)
+                        for i in row:
+                            dr_all.append(i)
+            else:
+                dr_all.append('0')
+                dr_all.append('0')
+                dr_all.append('0')
+
+            sql = "SELECT * FROM variant \
+               WHERE name = '%s'" % (name_1)
+            cur.execute(sql)
+            rows=cur.fetchall()
+            if rows:
+                for row in rows:
+                    if row:
+                        row=list(row)
+                        # print(row)
+                        for i in row:
+                            dr_all.append(i)
+                    count_1=count_1+1
+            else:
+                count_1=0
+
+
+            sql = "SELECT * FROM variant \
+               WHERE name = '%s'" % (name_2)
+            cur.execute(sql)
+            rows=cur.fetchall()
+            if rows:
+                for row in rows:
+                    if row:
+                        row=list(row)
+                        # print(row)
+                        for i in row:
+                            dr_all.append(i)
+                    count_2=count_2+1
+            else:
+                count_2=0
+
+            dr_all.append(count_1)
+            dr_all.append(count_2)
+            #print(len(g1info))
+            if len(dr2_info)==0:
+                codeempty=1
+                # print("empty")
+            k=0
+            if codeempty==0:
+                print(dr_all)
+                for i in range(len(dr_all)):
+                    dr_info[k]=dr_all[i]
+                    k=k+1
+                
+        con.close()
+        if codeempty==0:
+            self.write(dr_info)
+        else:
+            print("empty")
+            self.write('no') 
+        # self.write('yes')
 
 class AjaxHandler(tornado.web.RequestHandler):
     def post(self):
@@ -49,7 +406,7 @@ class AjaxHandler(tornado.web.RequestHandler):
         print(g2)
         g1_n=g1
         g2_n=g2
-        con=pymysql.connect('127.0.0.1','fusiongdb','K3j?mxyVRJjK','fusiongdb')
+        con=pymysql.connect('127.0.0.1','root','KEyiya19960302','kyy')
         with con:
             cur=con.cursor()
             sql = "SELECT * FROM g_enst \
@@ -196,8 +553,10 @@ class AjaxHandler(tornado.web.RequestHandler):
 
 
 application = tornado.web.Application([
-    (r"/FGviewer/tornado", MainHandler),
+    (r"/", MainHandler),
     (r"/test", AjaxHandler),
+    (r"/myfeature", FeatureHandler),
+    (r"/kdinfo", KdinfoHandler),
     ],
     static_path = os.path.join(os.path.dirname(__file__), "static"),
     )
@@ -206,14 +565,5 @@ if __name__ == '__main__':
     settings = {
         "static_path": os.path.join(os.path.dirname(__file__), "static"),
     }
-
-    http_server = tornado.httpserver.HTTPServer(application, ssl_options={
-        "certfile": "/home/pkim1/ssl/ccsm_uth_edu_cert.cer",
-        "keyfile": "/home/pkim1/ssl/ccsm.uth.edu.key",
-    })
-
-    http_server.listen(8888)
-    #application.listen(8888)
+    application.listen(80)
     tornado.ioloop.IOLoop.instance().start()
-
-

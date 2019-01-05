@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -6,51 +6,49 @@
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>  
         <script src="js/color.js"></script>
         <!--<script src="js/getleft.js"></script>-->
-        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js""></script>
         <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta3/html2canvas.min.js"></script>
 　　       <script src="js/canvas2image.js"></script>
 　　       <script src="js/base64.js"></script>
          <script src="js/jspdf.debug.js"></script>
-      <link href="css/gene.css" rel="stylesheet">  
+      <link href="css/gene.css"" rel="stylesheet">  
 
 	</head>
 	<body>
 	<div id="ct">
+		
 	  <div id="middle" >
+	  	
 		  <div id="m_bp" style="width:800px ;margin: auto;margin-bottom: 5px;">
-		  	<div class="label_title0">Fusion gene search</div>
+		  	<H2>Fusion gene search</H2>
 			  <form >
 			  <div>
 			  <div style="float: left;margin-left: 10%">
 			  	5'-Gene:
-				    <input name="" value="BCR" id="sect_g1" style="width: 80px">
-			    <input id="g1_bp" value="0" placeholder="Input breakpoint" maxlength="10000" style="width: 50px" type="hidden"/>			  </div>
+				<input name="" value="EWSR1" id="sect_g1" style="width: 80px">
+			    <input id="g1_bp" value="0" placeholder="Input breakpoint" maxlength="10000" style="width: 50px" type="hidden"/>			 
+			  </div>
+			 
 			  <div style="float: left;margin-left: 10px">
 			  	3'-Gene:
-				    <input name="" value="ABL1" id="sect_g2" style="width: 80px">
+				<input name="" value="FLI1" id="sect_g2" style="width: 80px">
 			    <input id="g2_bp" value="0" placeholder="Input breakpoint" maxlength="10000" style="width: 50px" type="hidden"/> 
 			  </div>
 			  <input id="fusion_btn" type="button" value="Search"/>
-			 
-			 <script type="text/javascript">
-			   
-			
-			
-			</script>
 			 <!-- <button id="fusion_bt">Draw Fusion Gene</button>-->
 			  </div>
 			  </form>
 			  </div>
-               <div class="space">
-	  	        </div>
-	  	      <div id="fgvieweristext" style="width:780px ;margin: auto;margin-bottom: 5px">
-                                <div class="label_title">FGviewer</div>
-                                <div style="width:780px ;margin: auto; font-size: 14px">A visualization tool for functional features of fusion genes.
+			  
+          <div class="space">
+	  	  </div>
+              <div id="fgvieweristext" style="width:780px ;margin: auto;margin-bottom: 5px">
+                <H2>FGviewer</H2>
+                <div style="width:780px ;margin: auto; font-size: 14px">A visualization tool for functional features of fusion genes.
                 </div>
               </div>
-              
 			  <div id="abouttext" style="width:800px ;margin: auto;margin-bottom: 5px">
-			  	<div class="label_title">BACKGROUND</div>
+			  	<H2>BACKGROUND</H2>
 			  	<div style="width:780px ;margin: auto; font-size: 14px">Due to the uniqueness composed of the two different genes, 
 			  		the typical gene browser has the clear limitation to show the fusion gene structure and the related feature information. 
 			  		FGviewer is aiming the effective visualization of the functional features of fusion genes for better prioritization and therapeutic target selection. 
@@ -59,18 +57,17 @@
 			  		and understanding the functional landscape of fusion gene at a glance.
                 </div>
 			  </div>
-			  
 			  <div id="organizationtext" style="width:780px ;margin: auto;margin-bottom: 5px;">
-			  	<div class="label_title">ORGANIZATION OF VIEWS</div>
-			  	<a href="img/img2.png" target="_blank"><img style="width: 780px;" src="img/img2.png" /></a>
+			  	<H2>ORGANIZATION OF VIEWS</H2>
+			  	<a href="img/img2.png" target="_blank"><img alt="organization" style="width: 780px;" src="img/img2.png" /></a>
 			  </div>
               <div id="downloadtext" style="width:780px ;margin: auto;margin-bottom: 5px; font-size: 14px">
-			  	<div class="label_title">DOWNLOAD</div>
+			  	<H2>DOWNLOAD</H2>
 			  	<div style="width:780px ;margin: auto">You can download the src of FGviewer from the <a href="https://github.com/a56132470/tornado" target="_blank">GitHub</a>
                 </div>
 			  </div>
 			  <div id="prerequisitetext" style="width:780px ;margin: auto;margin-bottom: 5px;">
-                     <div class="label_title">PREREQUISITE</div>
+                     <H2>PREREQUISITE</H2>
                <div style="width:780px ;margin: auto; font-size: 14px">
 				If you want to build a stand-alone version, then follow these intructions. <br>
 				1. You need install <a href="https://www.tornadoweb.org/en/stable/" target="_blank">Tornado</a>, a Python web framework with the corresponding version of Python. <br>
@@ -79,9 +76,8 @@
 				4. You need to run the server.py  
                 </div>
               </div>
-			  
 			  <div id="exampletext" style="width:780px ;margin: auto;margin-bottom: 5px">
-			  	<div class="label_title">SEARCH EXAMPLES</div>
+			  	<H2>SEARCH EXAMPLES</H2>
 			  	<div style="width:780px ;margin: auto; font-size: 14px">Each category lists the representative fusion genes with tumorigenesis. You can try to search FGviewer using these fusion gene names. Furthermore, you can go to the FusionGDB to get the intensive functional annotation of each fusion gene. <br>
 				1. Kinase fusion genes<br>
 				  &nbsp;&nbsp;BCR-ABL1, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=4081" target=_blank>FusionGDB for this fusion gene</a><br>
@@ -105,43 +101,44 @@
 				  &nbsp;&nbsp;TMPRSS2-ERG, go to <a href="https://ccsm.uth.edu/FusionGDB/gene_search_result.cgi?page=page&type=quick_search&quick_search=38748" target=_blank>FusionGDB for this fusion gene</a><br>
                 </div>
 			  </div>
-			  
-              <div id="helptext" style="width:780px ;margin: auto;margin-bottom: 5px; font-size: 14px">
-			  	<div class="label_title">HELP</div>
+               <div id="helptext" style="width:780px ;margin: auto;margin-bottom: 5px; font-size: 14px">
+			  	<H2>HELP</H2>
                <div style="width:780px ;margin: auto; font-size: 14px">- Understanding FGviewer functions.<br>
-				1. Search, example: BCR and ABL1 fusion gene. <br>
-				Input query: Official HUGO gene symbols. 
-                                <a href="help_images/1.png" target="_blank"><img style="border:1px solid #021a40" src="help_images/1.png" /></a><br><br>
-				2. Legends of protein features. <br>
-                                Protean sequence annotation (features) information<br>
-				UniProt database provides 39 protein sequence annotation features based on individual protein sequence including six molecule processing features, 13 region features, four site features, six amino acid modification features, two natural variation features, five experimental info features, and 3 secondary structure features. Detailed information about all of the protein features is in <a href="https://www.uniprot.org/help/sequence_annotation" target="_blank">UniProt page </a>.<br>
-                                <a href="help_images/2.png" target="_blank"><img src="help_images/2.png" style="border:1px solid #021a40" /></a><br><br>
-				3. Protein-level viewer. <br>
+				1. Search, example: EWSR1 and FLI1 fusion gene. <br>
+				Input query: Official HUGO gene symbols. To see the result of query, please click the 'submit' button twice for better function (for example, for the shaded background and application to the new query).<br><br>
+				2. FGviewer is composed of four levels including DNA-, RNA-, protein-, and pathogenic-levels. <br>
 				For each gene, it provides the representative accessions of UniProt and Ensembl transcript. <br>
-				1) The user can move the breakpoint line by dragging. This line is consistent along the three level viewers. See point (a).<br>
-                                <a href="help_images/3.png" target="_blank"><img src="help_images/3.png" style="border:1px solid #021a40" width="718px" /></a><br><br>
+				1) The user can move the breakpoint line by dragging. This line is consistent along the three different bio-molecular levels. See point (a).<br>
+                                <a href="help_images/3.png" target="_blank"><img alt="viewer" src="help_images/3.png" style="border:1px solid #021a40" width="718px" /></a><br><br>
                                 2) When you click the button of 'Save image', then it will provide the option to download png or pdf files as below. See point (b) of image 3. 1). <br>
-                                <a href="help_images/4.png" target="_blank"><img src="help_images/4.png" style="border:1px solid #021a40" width="718px" /></a><br><br>
-				3) When you click the protein structure bar, then it let you download the broken sequence of amino acids. This sequence is created based on the breakpoint location which is dragged by the user as below. See point (c) of image 3. 1). <br>
-                                <a href="help_images/5.png" target="_blank"><img src="help_images/5.png" style="border:1px solid #021a40" width="300"/></a><br><br>
-				4) When you click the bar of each protein feature, then you can see the detailed information for that feature as below. See point (d) of image 3. 1).<br>
-                                <a href="help_images/6.png" target="_blank"><img src="help_images/6.png" style="border:1px solid #021a40" width="300"/></a><br><br>
+                                <a href="help_images/4.png" target="_blank"><img alt="save" src="help_images/4.png" style="border:1px solid #021a40" width="718px" /></a><br><br>
+				3) When you click the transcript or protein structure bars, then it let you download the broken sequence of nucleotides or amino acids. This sequence is created based on the breakpoint location which is dragged by the user as below. See point (c) of image 3. 1). <br>
+                                <a href="help_images/5.png" target="_blank"><img alt="seq" src="help_images/5.png" style="border:1px solid #021a40" width="300"/></a><br><br>
+				4) When you click the bar of individual functional features, then you can see the detailed information for that feature as below. See point (d) of image 3. 1).<br>
+                                <a href="help_images/6.png" target="_blank"><img alt="feature" src="help_images/6.png" style="border:1px solid #021a40" width="300"/></a><br><br>
 				5) When you click the button of 'Download information', then you can download all information of the protein feature retention based on the current breakpoints for both of the genes as below. See point (e) of image 3. 1).<br>
-                                <a href="help_images/7.png" target="_blank"><img src="help_images/7.png" style="border:1px solid #021a40" /></a><br>
-
-
+                                <a href="help_images/7.png" target="_blank"><img alt="download" src="help_images/7.png" style="border:1px solid #021a40" width="718px" /></a><br><br>
+				3. Used data.<br><br>
+				1) Used gene structure model: GENCODE (v28 of GRCh38)<br><br>
+				2) Representative protein accessions and sequences: We have downloaded information of 18,963 protein accessions using the query of 'Reviewed human proteins' from UniProt database.<br><br>
+				3) Representative transcript accessions and sequences: we have downloaded transcript sequences of 28,860 corresponding transcripts to these protein accessions from Ensembl (GRCh38)<br><br>
+				4) Protein feature information for protein-level: We downloaded the protein information in general feature format (GFF) of 18,963 accessions of UniProt database provides 39 protein sequence annotation features based on individual protein sequence including six molecule processing features, 13 region features, four site features, six amino acid modification features, two natural variation features, five experimental info features, and 3 secondary structure features. Detailed information about all of the protein features is in <a href="https://www.uniprot.org/help/sequence_annotation" target="_blank">UniProt page </a>. See point (f) of image 3. 1) <br><br>
+				5) Transcription factor and target gene pair information for DNA-level: TF-target relationship information were downloaded from TRRUST (version 2), which is a manually curated database of human transcriptional regulatory networks. From TRRUST, we obtained 8427 pairs between 795 TFs and 2492 target genes.<br><br>
+				6) microRNA and target gene pair information for mRNA-level: We downloaded the conserved human miRNA-target gene interaction information from TargetScan (release 7.2). For more reliable interactions, we have filtered out the miRNA-target pairs when the context++ score and percent identity were bigger than -0.4 and less than 97%, respectively. <br><br>
+				7) Pathogenic variant information of individual genes for pathogenic-level: We downloaded ClinVar data (August 14, 2018) and selected pathogenic variants only. <br>
                 </div>
 			  </div>
 			  
 			  <div id="licensetext" style="width:780px ;margin: auto;margin-bottom: 5px;">
-                                <div class="label_title">LICENSE</div>
+                                <H2>LICENSE</H2>
                <div style="width:780px ;margin: auto; font-size: 14px">FGviewer is free for non-commercial use. Please contact the authors for commercial use.<br>
                </div>
-               </div>
-			  
+              </div>
+			   
+				  
 			  <div id="contacttext" style="width:780px ;margin: auto;margin-bottom: 5px; font-size: 14px">
-			  	<div class="label_title">CONTACT</div>
-			  	<div style="width:780px ;margin: auto; font-size: 14px">
+			  	<H2>CONTACT</H2>
+				<div style="width:780px ;margin: auto; font-size: 14px">
 			  	1. Cite<br>
 			  	&nbsp;&nbsp;Pease quote the following:<br>
 			  	&nbsp;&nbsp;"Kim P, Ke Y, Zhou X, FGviewer: an online visualization tool for functional features of fusion genes."<br>
@@ -159,15 +156,18 @@
 
                 </div>
 			  </div>
-
-			  <div id="fusion_img" hidden="true" style="width:800px ;margin: auto; visibility: hidden;">
+              <div id="fusion_label" hidden="true">
+              	<div class="label_title" id="dna_level_t">DNA-Level(NT)</div>
+              	<div class="label_title" id="rna_level_t">mRNA-level(NT)</div>
+              	<div class="label_title" id="protein_level_t">Protein-level(AA)</div>
+              	<div class="label_title" style="font-size: 12px; margin-bottom: 5px;">LEGENDS OF PROTEIN FEATURES</div>
+	  	        <div id="legant">
+				  </div>
+				<div class="label_title" id="Path_level_t">Pathogeinc-level</div>
+              </div>
+			  <div id="fusion_img" hidden="true" style="width:960px ;visibility: hidden;">
 			    <div class="space">
 	  	        </div>
-	  	        <div class="label_title">Legends of protein features</div>
-	  	        <div id="legant">
-	  	        </div>
-	  	        <div class="label_title">Protein-level FGviewer</div>
-
 	  	         <input id="btnSave" type="button" value="Save image"/>
 	  	         <input id="btntxt" type="button" value="Download information"/>
 	  	        <div id="fusion_ct">
@@ -180,12 +180,80 @@
 	  	        	<div id="line_box"></div>
 	  	        	<div id="line_3"></div>
 	  	        	<div id="line_2"></div>
-	  	        	<div id="left_g">
-	  	        		<div class="gene_title">
-	  	        			<div class="gene_t" >Gene symbol:<span id="g1_name">BCR</span></div>
+	  	        	<div id="line_5"></div>
+	  	        	<div id="line_6"></div>
+	  	        	<div id="line_5_utr"></div>
+	  	        	<div id="line_6_utr"></div>
+	  	        	<div id="line_7"></div>
+	  	        	<div id="line_8"></div>
+	  	        	<div id="line_7_utr"></div>
+	  	        	<div id="line_8_utr"></div>
+	  	        	<div id="all_left">
+	  	        		<div class="gene_title" id="title_all1"  style="height:90px;">
+	  	        			<div class="gene_t" style="white-space:pre">Gene symbol:<span id="g1_name">BCR</span><span style="font-size:15px;"> (Original strand:<span id="g1_strand">+</span>)</span></div>
 	  	        			<div class="gene_ud" >UniProt accession:<span id="g1_ud">P1112</span></div>
 	  	        			<div class="gene_rank" >Ensembl transcript ID:<span id="g1_code">ENST00000305877</span> </div>
+	  	        			<div class="gene_chr" >Chromosome:<span id="g1_chrtitle">chr17</span> </div>
+	  	        			<div class="gene_kbp" style="font-size:14px; width:450px"><strong>Known genomic BP(s):</strong><span id="g1_kbp">62711344, 62760006, 62788599,62801752,62711344, 62760006, 62788599,62801752,62711344, 62760006, 62788599,62801752</span> </div>
 	  	        		</div>
+	  	        		<div class="dna_level" id="g1_dna">
+	  	        			<div id="g1_half_circur"></div>
+	  	        			<div class="mrna_text_label" >
+	  	        				<div id="dna1_bp" >
+	  	        				1808661	
+	  	        				</div>
+	  	        				
+	  	        			</div>
+	  	        			<div class="dna_bar">
+	  	        				
+	  	        				<div id="g1_dna_line1"></div>
+	  	        				<div id="g1_dna_utr5"></div>
+	  	        				<div id="g1_dna_bar"></div>
+	  	        				<div id="g1_dna_utr3"></div>
+	  	        				<div id="g1_dna_line2"></div>
+	  	        			</div>
+	  	        			<div class="mrna_text_label" >
+	  	        				<div id="dna1_cds_start"><span id="g1_start_chr">chr4</span>:<span id="g1_txstart"> 1723265</span></div>
+	  	        			    <div id="dna1_cds_end"><span id="g1_end_chr">chr4</span>:<span id="g1_txend"> 1723265</span></div>
+	  	        			</div>
+	  	        		    <div class="mrna_text_label" id="tf1_info_">TFs:  <span id="tfs1">  SP4, STAT</span></div>
+	  	        		</div>
+	  	        		<div class="rna_level" id="g1_rna">
+	  	        			
+	  	        			<div class="mrna_text_label">
+	  	        				<div id="g1_mrna_bp" style="margin-left: 45%;">
+	  	        					2000
+	  	        				</div>
+	  	        				
+	  	        			</div>
+	  	        			<div class="mrna_bar" id="g1_mrna">
+	  	        				<div id="label1_5utr" style="float: left; font-size: 9px;">5'UTR</div>
+	  	        				<div id="g1_mrna_utr5"></div>
+	  	        				<div id="g1_mrna_bar">
+	  	        					<div id="g1_no_retain_bar"></div>
+	  	        				</div>
+	  	        				<div id="g1_mrna_utr3"></div>
+	  	        				<div id="label1_3utr" style="float: left; font-size: 9px;">3'UTR</div>
+	  	        			</div>
+	  	        			<div class="mrna_text_label">
+	  	        				<div id="g1_mrna_start">1</div>
+	  	        				<div id="g1_mrna_end">4000</div>
+	  	        			</div>
+	  	        			<div class="mrna_text_label">
+	  	        				<div id="label_1" style="width: 20px; height:5px;background-color: red;margin-top: 5px;">
+	  	        				</div>
+	  	        			</div>
+	  	        			<div class="mrna_text_label" >
+	  	        				<div id="mir_label">
+	  	        					miR-99a
+	  	        				</div>
+	  	        				
+	  	        			</div>
+	  	        			
+						</div>
+						  
+	  	        	<div id="left_g">
+	  	        		
 	  	        		<!--<div id="link_line1" class="space">
 	  	                 </div>-->
 	  	        		<div class="gene_bar">
@@ -208,13 +276,88 @@
 	  	        			<div class="f" id="b_f_2"></div>
 	  	        			<div class="f" id="b_f_3"></div>-->
 	  	        		</div>
+					
+					
+					</div>
+					<div class="pathogeinc_level" id="p_g1">
+						<div id="p_cont1">
+		                       <div id="p_bar1"></div>
+		                       <div id="p_dot_bar1"></div>
+                        </div>
+                    </div>
+                    <div class="disease_level" id="di_g1">
+                    <p>Disease information:</p>
+						<div id="d1_cont">
+		                       
+                        </div>
+					</div>
 	  	        	</div>
-	  	        	<div id="right_g">
-	  	        		<div class="gene_title">
-	  	        			<div class="gene_t" >Gene symbol:<span id="g2_name">BCR</span></div>
+	  	        	<div id="all_right">
+	  	        		<div class="gene_title"  id="title_all2"  style="height:90px;">
+	  	        			<div class="gene_t" style="white-space:pre">Gene symbol:<span id="g2_name">BCR</span><span style="font-size:15px;"> (Original strand:<span id="g2_strand">-</span>)</span></div>
 	  	        			<div class="gene_ud" >UniProt accession:<span id="g2_ud">P1112</span></div>
 	  	        			<div class="gene_rank" >Ensembl transcript ID: <span id="g2_code">ENST00000305877</span></div>
+	  	        			<div class="gene_chr" >Chromosome:<span id="g2_chrtitle">chr17</span> </div>
+	  	        			<div class="gene_kbp" style="font-size:14px; width:450px"><strong>Known genomic BP(s):</strong><span id="g2_kbp">62711344, 62760006, 62788599,62801752</span> </div>
 	  	        		</div>
+	  	        		<div class="dna_level" id="g2_dna">
+	  	        			<div id="g2_half_circur"></div>
+	  	        			<div class="mrna_text_label" >
+	  	        				<div id="dna2_bp" style="margin-left: 45%;">1737000</div>
+	  	        				
+	  	        			</div>
+	  	        			<div class="dna_bar">
+	  	        				
+	  	        				<div id="g2_dna_line1"></div>
+	  	        				<div id="g2_dna_utr5"></div>
+	  	        				<div id="g2_dna_bar">
+	  	        					
+	  	        				</div>
+	  	        				<div id="g2_dna_utr3"></div>
+	  	        				<div id="g2_dna_line2"></div>
+	  	        			</div>
+	  	        			<div class="mrna_text_label" >
+	  	        				<div id="dna2_cds_start"><span id="g2_start_chr">chr4</span>:<span id="g2_txstart"> 1723265</span></div>
+	  	        			    <div id="dna2_cds_end"><span id="g2_end_chr">chr4</span>:<span id="g2_txend"> 1723265</span></div>
+	  	        			</div>
+	  	        		    <div class="mrna_text_label" id="tf2_info_">TFs: <span id="tfs2">  SP4, STAT</span></div>
+	  	        		</div>
+	  	        		<div class="rna_level" id="g2_rna">
+	  	        			
+	  	        			<div class="mrna_text_label"> 
+	  	        				<div id="g2_mrna_bp" style="margin-left: 45%;">
+	  	        					1800
+	  	        				</div>
+	  	        				
+	  	        			</div>
+	  	        			<div class="mrna_bar" id="g2_mrna">
+	  	        				<div id="label2_5utr" style="float: left; font-size: 9px;">5'UTR</div>
+	  	        				<div id="g2_mrna_utr5"></div>
+	  	        				<div id="g2_mrna_bar">
+	  	        					<div id="g2_no_retain_bar"></div>
+	  	        				</div>
+	  	        				<div id="g2_mrna_utr3"></div>
+	  	        				<div id="label2_3utr" style="float: left; font-size: 9px;">3'UTR</div>
+	  	        			</div>
+	  	        			<div class="mrna_text_label">
+	  	        				<div id="g2_mrna_start">1</div>
+	  	        				<div id="g2_mrna_end">4000</div>
+	  	        			</div>
+	  	        			<div class="mrna_text_label">
+	  	        				<div id="label_2" style="width: 20px; height:5px;background-color: red;margin-top: 5px;">  	        					
+	  	        				</div>
+	  	        			</div>
+	  	        			<div class="mrna_text_label" >
+	  	        				<div id="mir_label2">
+	  	        					miR-200
+	  	        				</div>
+	  	        				
+	  	        			</div>
+	  	        			
+	  	        		</div>
+	  	        		
+	  	        	<div id="right_g">
+	  	        		
 	  	        		<!--<div id="link_line2" class="space">
 	  	                 </div>-->
 	  	        		<div class="gene_bar">
@@ -233,26 +376,41 @@
 	  	        			</div>
 	  	        		</div>
 	  	        		<div id="f_bar2" class="feature_bar">
-	  	        			<!--<div class="f" id="a_f_1"></div>
+	  	        			<!--<!--<div class="f" id="a_f_1"></div>
 	  	        			<div class="f" id="a_f_2"></div>
 	  	        			<div class="f" id="a_f_3"></div>-->
 	  	        		</div>
+					</div>
+					<div class="pathogeinc_level" id="p_g2">
+						<div id="p_cont">
+		                       <div id="p_bar"></div>
+		                       <div id="p_dot_bar"></div>
+                       </div>
+					</div>
+					<div class="disease_level" id="di_g2">
+					    <p>Disease information:</p>
+						<div id="d_cont">
+		                       
+                       </div>
+					</div>
+                    </div>
+	  	        	<div class="clr">
 	  	        	</div>
-
-	  	        	<div class="clr"></div>
 	  	        	
 	  	        </div>
 		      </div>
-		       <div id="footer" style="text-align: center;margin-top: 20px; font-size: 13px">
+		       
+            </div>
+
+	    <div id="buttom">
+	    	<div id="footer" style="text-align: center;margin-top: 20px; font-size: 13px">
                         <a href="https://www.uth.edu/" style="float: right; padding: 5px;"><img alt="UTHealth" src="//www.uth.edu/global/gfx/uthealth-logo-color-small.png" alt="count"></a>
                         <strong> Copyright 2018-Present -The University of Texas Health Science Center at </strong>
                          <div><strong>Houston (<a href="https://www.uth.edu/">UTHealth</a>)</strong></div>
                           <div><a href="https://www.uth.edu/index/file-viewing-information.htm">Web File Viewing</a> | <a href="How ://www.uthealthemergency.org">Emergency Information</a> |<a href="https://www.uth.edu/index/policies.htm">Site Policies</a></div>
                           <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/399043/t/9" align="right"></script>
-                    </div>
-                </div>
-
-	</div>
+               </div>
+	    </div>
 	</div>
 	<div id="img_levei">
 		
@@ -270,17 +428,17 @@
     	<div id="dialog">
     		<div id="f_show">
 	    	<p id="feature_title"><strong>Protein feature information:</strong></p>
-	    	<p>Name:<span id="f_name"></span></p>
-	    	<p>Start:<span id="f_start">256</span></p>
-	    	<p>End:<span id="f_end">265</span></p>
-	    	<p>Description:<span id="f_desc"></span></p>
+	    	<p><span id="title_1">Name:</span>  <span id="f_name"></span></p>
+	    	<p><span id="title_2">Start:</span> <span id="f_start">256</span></p>
+	    	<p><span id="title_3">End:</span><span id="f_end">265</span></p>
+	    	<p><span id="title_4">Description:</span><span id="f_desc"></span></p>
 	    	
     		</div>
     		<div id="g_show" hidden="hidden">
-	    	<p id="gene_title"><strong>Broken protein's sequence:</strong></p>
-	    	<p>★Broken <span id="g_name1"></span>'s AA sequence:</p>
-	    	<textarea id="aas"></textarea>
-	    
+	    	<p id="pop_title"><strong>Broken protein's sequence:</strong></p>
+	    	<p>★Broken <span id="g_name1"></span>'s <span id="broken_title">AA</span>  sequence:</p>
+	    	<textarea id="aas" style="width: 80%"></textarea>
+	    	
     		</div>
     		<button id="infobtn">OK</button>
     	</div>
@@ -437,6 +595,11 @@
 	</body>
 </html> 
 <script type="text/javascript">	
+	
+	var  DEBUG=1;
+	
+	var title_all1=document.getElementById('title_all1');
+	var title_all2=document.getElementById('title_all2');
 	var fgvieweristext=document.getElementById('fgvieweristext');
     var abouttext=document.getElementById('abouttext');
 	var organizationtext=document.getElementById('organizationtext');
@@ -446,12 +609,14 @@
 	var helptext=document.getElementById('helptext');
     var licensetext=document.getElementById('licensetext');	
     var contacttext=document.getElementById('contacttext');
+    
 	var allinfo={}
 	var g1_info=[]
 	var g2_info=[]
 	var g1_arr=[]
 	var g2_arr=[]
-   
+    //var line_top=290;
+    var line_top=49;
     var flag=0;
     //var scrollTop
     var g1_ud=document.getElementById('g1_ud');
@@ -465,6 +630,8 @@
 	var g2_name=document.getElementById('g2_name');
 	var g2_code=document.getElementById('g2_code');
     var fusion_img=document.getElementById('fusion_img');
+    var buttom=document.getElementById('buttom');
+    var fusion_label=document.getElementById('fusion_label');
     var sect_g2=document.getElementById('sect_g2');
     var bp_label=document.getElementById('bp_label');
     var bp_label_2=document.getElementById('bp_label_2');
@@ -478,8 +645,8 @@
     var bar_blue=document.getElementById('bar_blue');
     var gene_2_begin=document.getElementById('gene_2_begin');
     var line_draw=document.getElementById('line_draw');
-    var bcr_len=1272;
-    var abl1_len=1131;
+    var bcr_len=0;
+    var abl1_len=0;
     var f_bar1=document.getElementById('f_bar1');
     var f_bar2=document.getElementById('f_bar2');
     var line_1=document.getElementById('line_1');
@@ -499,17 +666,21 @@
     var aas=document.getElementById('aas');
     var trs=document.getElementById('trs');
     var g_name1=document.getElementById('g_name1');
-    //var g_name2=document.getElementById('g_name2');
+    var g_name2=document.getElementById('g_name2');
     var f_show=document.getElementById('f_show');
     var g_show=document.getElementById('g_show');
     var line_3=document.getElementById('line_3');
     var line_4=document.getElementById('line_4');
+    var line_5=document.getElementById('line_5');
+    var line_6=document.getElementById('line_6');
+    var line_7=document.getElementById('line_7');
+    var line_8=document.getElementById('line_8');
     var legant=document.getElementById('legant')
-    var k=0.3;
+    var k=0.1;
     var gene1_len=0;
     var gene2_len=0;
-    var gene1_name='BCR';
-    var gene2_name='ABL1';
+    var gene1_name='EWSR1 ';
+    var gene2_name='FLI1';
     var gene1_arr=[];
     var gene2_arr=[];
     var gene1_code='';
@@ -524,9 +695,13 @@
     var fusion_img=document.getElementById('fusion_img');
     var ct=document.getElementById('ct');
     var btntxt=document.getElementById('btntxt');
+    var all_left=document.getElementById('all_left');
+    var all_right=document.getElementById('all_right');
     //var label=document.getElementById('label');
     var result1={};
     var result2={};
+    var left_box_pos={};
+    var right_box_pos={};
     var img_line1=0;
     var img_line2=0;
     var txtcontent="";
@@ -537,21 +712,223 @@
     var islink=0;
     var pagew=document.documentElement.clientWidth;
     var indexpage=0;
+    //////////////mrna
+    var g1_mrna_bar=document.getElementById('g1_mrna_bar');
+	var g1_mrna_utr5=document.getElementById('g1_mrna_utr5');
+	var g1_mrna=document.getElementById('g1_mrna');
+	var label1_5utr=document.getElementById('label1_5utr');
+	
+	var g2_mrna_bar=document.getElementById('g2_mrna_bar');
+	var g2_mrna_utr5=document.getElementById('g2_mrna_utr5');
+	var g2_mrna=document.getElementById('g2_mrna');
+	var label2_5utr=document.getElementById('label2_5utr');
+	
+	var line_5_utr=document.getElementById('line_5_utr');
+	var line_6_utr=document.getElementById('line_6_utr');
+	var line_7_utr=document.getElementById('line_7_utr');
+	var line_8_utr=document.getElementById('line_8_utr');
+	var g1_mrna_start=document.getElementById('g1_mrna_start');
+	var g1_mrna_end=document.getElementById('g1_mrna_end');
+	var label_1=document.getElementById('label_1');
+	var mir_label=document.getElementById('mir_label');
+	var g2_no_retain_bar=document.getElementById('g2_no_retain_bar');
+	var g1_no_retain_bar=document.getElementById('g1_no_retain_bar');
+   
+	////////dna/////
+	var g1_dna_line1=document.getElementById('g1_dna_line1');
+    var g1_dna_line2=document.getElementById('g1_dna_line2');
+	var g1_dna_bar=document.getElementById('g1_dna_bar');
+	var g1_dna_utr5=document.getElementById('g1_dna_utr5');
+    var g1_dna=document.getElementById('g1_dna');
+    var dna1_cds_start=document.getElementById('dna1_cds_start');
+    var dna1_cds_end=document.getElementById('dna1_cds_end');
+    var g1_mrna_start=document.getElementById('g1_mrna_start');
+    var g1_mrna_end=document.getElementById('g1_mrna_end');
+    var g1_exon_num=2;
+    
+    
+    var g2_dna_line1=document.getElementById('g2_dna_line1');
+    var g2_dna_line2=document.getElementById('g2_dna_line2');
+    var g2_dna_bar=document.getElementById('g2_dna_bar');
+	var g2_dna_utr5=document.getElementById('g2_dna_utr5');
+    var g2_dna=document.getElementById('g2_dna');
+    var dna2_cds_start=document.getElementById('dna2_cds_start');
+    var dna2_cds_end=document.getElementById('dna2_cds_end');
+    var g2_mrna_start=document.getElementById('g2_mrna_start');
+    var g2_mrna_end=document.getElementById('g2_mrna_end');
+    var label_2=document.getElementById('label_2');
+    var mir_label2=document.getElementById('mir_label2');
+    var g2_exon_num=2;
+    
+    var g1_starts=[]
+    var g1_ends=[]
+    var g2_starts=[]
+    var g2_ends=[]
+    var g1_strand=document.getElementById('g1_strand');
+    var g2_strand=document.getElementById('g2_strand');
+    var strand_1=''
+    var strand_2=''
+    var g1_chr=''
+    var g2_chr=''
+    var txstart_1=0;
+    var txend_1=0;
+    var g1_cdsstart=0;
+    var g1_cdsend=0;
+    var txstart_2=0;
+    var txend_2=0;
+    var g2_cdsstart=0;
+    var g2_cdsend=0;
+    
+    
+    var g1_start_chr=document.getElementById('g1_start_chr');
+    var g1_end_chr=document.getElementById('g1_end_chr');
+    var g1_txstart=document.getElementById('g1_txstart');
+    var g1_txend=document.getElementById('g1_txend');
+    var g1_start_len=10;
+    var g1_end_len=10;
+    var count1=1;
+    var count2=1;
+    var g2_start_chr=document.getElementById('g2_start_chr');
+    var g2_end_chr=document.getElementById('g2_end_chr');
+    var g2_txstart=document.getElementById('g2_txstart');
+    var g2_txend=document.getElementById('g2_txend');
+    var g2_start_len=10;
+    var g2_end_len=10;
+    
+    
+    
+    var cds_start_len1=0;
+    var cds_end_len1=0;
+    var cds_start_len2=0;
+    var cds_end_len2=0;
+    var mrna_long1=0;
+    var mrna_long2=0;
+    var mrna_bp1=0;
+    var mrna_bp2=0;
+    var dna_bp1=0;
+    var dna_bp2=0;
+    var g1_mrna_bp=document.getElementById('g1_mrna_bp');
+    var g2_mrna_bp=document.getElementById('g2_mrna_bp');
+    var dna1_bp=document.getElementById('dna1_bp');
+    var dna2_bp=document.getElementById('dna2_bp');
+    
+    var g1_chrtitle=document.getElementById('g1_chrtitle');
+    var g2_chrtitle=document.getElementById('g2_chrtitle');
+    
+    var rna1_mir='';
+    var rna2_mir='';
+    
+	var g1_tfs='';
+	var g2_tfs='';
+
+	var tfs1=document.getElementById('tfs1');
+	var tfs2=document.getElementById('tfs2');
+
+	var mrna1_seq='jkhsdkjfhgjkskjdhfjkh';
+	var mrna2_seq='';
+	var mrna1_retain='';
+	var mrna1_noretain='';
+	var mrna2_retain='';
+	var mrna2_noretain='';
+
+
+	var g1_dna_utr5=document.getElementById('g1_dna_utr5');
+	var g1_dna_utr3=document.getElementById('g1_dna_utr3');
+	var g2_dna_utr5=document.getElementById('g2_dna_utr5');
+	var g2_dna_utr3=document.getElementById('g2_dna_utr3');
+
+	var g1_mrna_utr5=document.getElementById('g1_mrna_utr5');
+	var g1_mrna_utr3=document.getElementById('g1_mrna_utr3');
+	var g2_mrna_utr5=document.getElementById('g2_mrna_utr5');
+	var g2_mrna_utr3=document.getElementById('g2_mrna_utr3');
+	var g1_utr5_len=20;
+	var g1_utr3_len=10;
+	var g2_utr5_len=15;
+	var g2_utr3_len=25; 
+	
+	var g1_f_count=5;
+	var g2_f_count=5;
+
+	var krna=0.01;
+	
+	var p_len1=0;
+	var p_len2=0;
+
+	var g1_puta=[];
+	var g1_pos=[];
+	var g1_pinfo=[];
+	var g2_puta=[];
+	var g2_pos=[];
+	var g2_pinfo=[];
+	
+	
+	var p_g2=document.getElementById('p_g2');
+	var p_g1=document.getElementById('p_g1');
+	var tmp_box_width_g=0;
+	
+	var Path_level_t=document.getElementById('Path_level_t');
+	var p_cont=document.getElementById('p_cont');
+	var p_dot_bar=document.getElementById('p_dot_bar');
+	var p_bar=document.getElementById('p_bar');
+	
+	var p_cont1=document.getElementById('p_cont1');
+	var p_dot_bar1=document.getElementById('p_dot_bar1');
+	var p_bar1=document.getElementById('p_bar1');
+	
+	var feature_title=document.getElementById('feature_title');
+	var title_1=document.getElementById('title_1');
+	var title_2=document.getElementById('title_2');
+	var title_3=document.getElementById('title_3');
+	var title_4=document.getElementById('title_4');
+	
+	var label2_3utr=document.getElementById('label2_3utr');
+	
+	var known_bp_line=2;
+	var line_top_utr=120+known_bp_line*15;
+	
+	
+	var known_bp1='';
+	var known_bp2='';
+	
+	var g2_kbp=document.getElementById('g2_kbp');
+	var g1_kbp=document.getElementById('g1_kbp');
+	var dna_level_t=document.getElementById('dna_level_t');
+	var rna_level_t=document.getElementById('rna_level_t');
+	var protein_level_t=document.getElementById('protein_level_t');
+	
+	
+	var disease_1=[];
+	var disease_2=[];
+	
+	var d1_cont=document.getElementById('d1_cont');
+	var d_cont=document.getElementById('d_cont');
+	// //     <!--g1_start_chr.innerHTML=g1_chr;
+//  g1_end_chr.innerHTML=g1_chr;
+//  g1_strand.innerHTML=strand_1;BCR
+//  g2_start_chr.innerHTML=g2_chr;
+//  g2_end_chr.innerHTML=g2_chr;
+//  g2_strand.innerHTML=strand_2;
+//  g1_txstart.innerHTML=g1_txstart;
+//  g1_txend.innerHTML=g1_txend;
+//  g2_txstart.innerHTML=g2_txstart;-->
+    
+    
     function update(canshujuti){
 				//document.getElementById("canshu").innerHTML = canshujuti;
 				indexpage=canshujuti;
 				console.log(indexpage);
 				//fusion_img.style.visibility="hidden"
+				fusion_label.hidden=true;
 				fusion_img.hidden=true;
 				fgvieweristext.hidden=false;
 				abouttext.hidden=false;
                 prerequisitetext.hidden=false;
-                licensetext.hidden=false;
-		     	        organizationtext.hidden=false;
-		     	        helptext.hidden=false;
-		     	        contacttext.hidden=false;
-		     	        exampletext.hidden=false;
-		     	        downloadtext.hidden=false;
+	            licensetext.hidden=false;		     	 
+				organizationtext.hidden=false;
+		     	 helptext.hidden=false;
+		     	 contacttext.hidden=false;
+		     	 exampletext.hidden=false;
+		     	 downloadtext.hidden=false;
 
 				if(indexpage==0){
 					window.scroll(0,0);
@@ -567,9 +944,9 @@
 				}else if (indexpage==5){
                     window.scroll(0,1250);
 				}else if (indexpage==6){
-                    window.scroll(0,1630);
+                    window.scroll(0,1700);
 				}else if (indexpage==7){
-                    window.scroll(0,4500);
+                    window.scroll(0,4800);
 				}
 				
 	}
@@ -579,7 +956,8 @@
     window.onload=function()//用window的onload事件，窗体加载完毕的时候
     {
       linkdata();
-      console.log('jiajiajijiajijiajijiajijaijaijaijijaija')
+      f_data();
+      //console.log('jiajiajijiajijiajijiajijaijaijaijijaija')
     }
 
     function settop(){
@@ -617,7 +995,7 @@
        console.log(islink)
 
     });
-    ///////////
+
     function changeGeneO(){
     	alert("change")
         islink=0;
@@ -625,8 +1003,13 @@
     function changeGeneT(){
     	islink=0;
     }
-    /////////////////////////////////////////////////////////
+
+    
+    
+    
+ 
     function linkdata(){
+    	//console.log("跑了linkdata");
     	var word =gene1_name; //获取文本框的输入
 			        word=word+'+'+gene2_name; 
 			        //把word发给后台php程序
@@ -648,7 +1031,7 @@
 			            	gene1_arr=[];
 			            	gene2_arr=[];
 			            	var i=0;
-			            	console.log(Object.keys(allinfo).length)
+			            	//console.log(Object.keys(allinfo).length)
 			            	for(var i=0;i<6;i++){
                                g1_info.push(allinfo[i])
                                //console.log(g1_info)
@@ -751,15 +1134,218 @@
 			                alert("Ajax 失败");
 			            }
 			        });
-    }
+     }
+    function kd_data(){
+    	var word=gene1_name+'+'+gene2_name;
+			$.post("/kdinfo",{message:word}, function(data,status){
+			            if(status == "success")
+			            {
+			            	var drinfo=data
+			            	console.log("传来的数据是");
+			            	console.log(drinfo);
+			            	var len_info=Object.keys(drinfo).length;
+			            	var bp1_c=drinfo[len_info-2];
+			            	console.log(bp1_c+'g1有几个bp');
+			            	var bp2_c=drinfo[len_info-1];
+			            	console.log(bp2_c+'g2有几个bp');
+			            	known_bp1=drinfo[0];
+			            	known_bp2=drinfo[1];
+			            	var disstr = drinfo[2];
+                            disease_1 = disstr.split(',');
+                            disstr = drinfo[3];
+                             disease_2 = disstr.split(',');
+			            	var known_bp_line1=parseInt((bp1_c-5)/7)+2;
+			            	var known_bp_line2=parseInt((bp2_c-5)/7)+2;
+			            	known_bp_line=(known_bp_line1>known_bp_line2)?known_bp_line1:known_bp_line2;
+	                        g1_kbp.innerHTML=known_bp1; 
+	                        g2_kbp.innerHTML=known_bp2;
+			            	//console.log(Object.keys(drinfo).length+'yiyayiyayiyayiyayiya')
 
+			            	//console.log(drinfo.length+'yiyayiyayiyayiyayiya')
+
+
+			            	}
+			            else
+			            {
+			                alert("Ajax 失败");
+			            }
+			        });
+    }
+    
+    function f_data(){
+    	    //console.log("跑了fdata");
+    	    var word=gene1_name+'+'+gene2_name;
+			$.post("/myfeature",{message:word}, function(data,status){
+			            if(status == "success")
+			            {
+			            	var drinfo=data
+			            	//console.log("传来的数据是");
+			            	//console.log(drinfo);
+			            	//console.log(Object.keys(drinfo).length+'yiyayiyayiyayiyayiya')
+			            	var len_info=Object.keys(drinfo).length;
+			            	var p1_info=[];
+			            	var p2_info=[];
+			            	//console.log(drinfo.length+'yiyayiyayiyayiyayiya')
+			            	var exon_starts=''
+			            	exon_starts=exon_starts+drinfo[9]
+			            	var exon_ends=''
+			            	exon_ends=exon_ends+drinfo[10]
+			            	g1_starts=exon_starts.split(",");
+			            	g1_ends=exon_ends.split(",");
+			            	//console.log(g1_starts)
+			            	strand_1=drinfo[3]+'';
+			            	g1_chr=drinfo[2]+'';
+			            	count1=parseInt(drinfo[8]);
+			            	//console.log("数据传过来，分成了："+count1)
+			            	txstart_1=parseInt(drinfo[4]);
+			            	txend_1=parseInt(drinfo[5]);
+			            	g1_cdsstart=parseInt(drinfo[6]);
+			            	g1_cdsend=parseInt(drinfo[7]);
+			            	cds_start_len1=g1_cdsstart-txstart_1;
+			            	cds_end_len1=txend_1-g1_cdsend;
+							
+
+
+			            	var exon2_starts=''
+			            	exon2_starts=exon_starts+drinfo[24]
+			            	var exon2_ends=''
+			            	exon2_ends=exon_ends+drinfo[25]
+			            	g2_starts=exon_starts.split(",");
+			            	g2_ends=exon_ends.split(",");
+			            	//console.log(g1_starts)
+			            	strand_2=drinfo[18]+'';
+			            	g2_chr=drinfo[17]+'';
+			            	count2=parseInt(drinfo[23]);
+			            	//console.log("数据传过来，分成了："+count2)
+			            	txstart_2=parseInt(drinfo[19]);
+			            	txend_2=parseInt(drinfo[20]);
+			            	g2_cdsstart=parseInt(drinfo[21]);
+			            	g2_cdsend=parseInt(drinfo[22]);
+			            	cds_start_len2=g2_cdsstart-txstart_2;
+							cds_end_len2=txend_2-g2_cdsend;
+							//g2_utr5_len=cds_start_len2;
+							//g2_utr3_len=cds_end_len2;
+
+			            	if(drinfo[32]=='0'){
+			            		rna1_mir='';  
+			            	     
+			            	}else{
+			            		rna1_mir=drinfo[32]+'';  
+			            	}
+			            	if(drinfo[35]=='0'){
+			            		rna2_mir=''; 
+			            	}else{
+			            		
+			            	    rna2_mir=drinfo[35]+''; 
+			            	}
+							g1_tfs=drinfo[37];
+							g2_tfs=drinfo[39];
+							if(g1_tfs=='0'){
+								g1_tfs='';
+							}else{
+								g1_tfs=drinfo[37];
+							}
+							if(g2_tfs=='0'){
+								g2_tfs='';
+							}else{
+								g2_tfs=drinfo[39];
+							}
+							
+							if(drinfo[42]=='0'){
+								mrna1_seq='';
+							}else{
+								mrna1_seq=drinfo[42];
+								var m1_len=drinfo[41];
+								mrna_long1=m1_len;
+								
+							}
+							if(drinfo[45]=='0'){
+								mrna2_seq='';
+							}else{
+								mrna2_seq=drinfo[45];
+								var m2_len=drinfo[44];
+								mrna_long2=m2_len;
+								console.log('mrna2的 长都势：'+m2_len);
+							}
+                            p_len2=drinfo[len_info-1];
+                            p_len1=drinfo[len_info-2];
+                            
+                            var g_p={puta:"aa", pos:"10", info:"uuu"};
+                            var puta=[];
+                            var pos=[];
+                            var info=[];
+                            if(p_len1!=0){
+                            	for(i=0;i<p_len1;i++){
+                            		g_p.puta=drinfo[45+i*6+4];
+                                    g_p.pos=drinfo[45+i*6+5];
+                                    g_p.info=drinfo[45+i*6+6];
+                                    //console.log(g_p);
+                                    puta.push(g_p.puta);
+                                    pos.push(g_p.pos);
+                                    info.push(g_p.info);
+                                   
+                                    //p_g1.push(g_p);
+                                    
+                            	}
+                            	    g1_puta=puta;
+                                    g1_pos=pos;
+                                    g1_pinfo=info;
+                                    var puta2=[];
+                                    var pos2=[];
+                                    var info2=[];
+                            	if(p_len2!=0){
+                            		for(i=0;i<p_len2;i++){
+                            		g_p.puta=drinfo[45+(i+p_len1)*6+4];
+                                    g_p.pos=drinfo[45+(i+p_len1)*6+5];
+                                    g_p.info=drinfo[45+(i+p_len1)*6+6];
+                                    //console.log(g_p);
+                                    puta2.push(g_p.puta);
+                                    pos2.push(g_p.pos);
+                                    info2.push(g_p.info);
+                                    
+                                    //p_g2.push(g_p);
+                            	}
+                            		g2_puta=puta2;
+                                    g2_pos=pos2;
+                                    g2_pinfo=info2;
+                            	}
+                            }else {
+                            	for(i=0;i<p_len2;i++){
+                            		g_p.puta=drinfo[45+i*6+4];
+                                    g_p.pos=drinfo[45+i*6+5];
+                                    g_p.info=drinfo[45+i*6+6];
+                                    puta.push(g_p.puta);
+                                    pos.push(g_p.pos);
+                                    info.push(g_p.info);
+                                    g2_puta=puta;
+                                    g2_pos=pos;
+                                    g2_pinfo=info;
+                            	}
+                            }
+                            
+                           // console.log("gi有几个paohua"+p_len1);
+                            //console.log("g2有几个paohua"+p_len2);
+                            //console.log("p1的数组有："+g1_puta[0]+','+g1_pos[0]+','+g1_info[0]);
+                            //console.log("p2的数组有："+g2_puta[0]+','+g2_pos[0]+','+g2_info[0]);
+
+			            	}
+			            else
+			            {
+			                alert("Ajax 失败");
+			            }
+			        });
+    }
+    
      $("#fusion_btn").click(function()
 			    {
 			        if(islink==0){
 			        	   console.log('重新连接数据库')
                            linkdata();
+                           f_data();
+                           kd_data();
                            setTimeout("clickbtn();",300)//在函数体里面写入你想要等待执行的代码
 			        }else if(islink==1){
+			        	   
                            clickbtn();
 			        }
 
@@ -854,17 +1440,17 @@
            	line_2.style.left=oevent.clientX - distanceX+ 'px';
          	if(oevent.clientX - distanceX <result2.x){
          		obj.style.left=result2.x+'px';
-         		img_line2=result2.x;
+         		img_line2=result2.x+8;
          		//oevent.clientX - distanceX =674; 
          		g2_bp.value=0;
          	}else if(oevent.clientX - distanceX>result2.x+gene2_len*k){
          		obj.style.left=result2.x+gene2_len*k+'px';
-         		img_line2=result2.x+gene2_len*k;
+         		img_line2=result2.x+gene2_len*k+8;
          		//oevent.clientX - distanceX=674+gene2_len*0.3;
          		g2_bp.value=gene2_len;
          	}else{
          		obj.style.left = oevent.clientX - distanceX + 'px';
-         		img_line2=oevent.clientX - distanceX;
+         		img_line2=oevent.clientX - distanceX+8;
          		g2_bp.value=parseInt((oevent.clientX - distanceX-result2.x)/k);
          	}
 //         	
@@ -874,17 +1460,17 @@
            	//label.innerHTML=label.innerHTML+"移动的位置11："+oevent.clientX - distanceX ;
          	if(oevent.clientX - distanceX <result1.x){
          		obj.style.left=result1.x+'px';
-         		img_line1=result1.x;
+         		img_line1=result1.x+8;
          		//oevent.clientX - distanceX=274;
          		g1_bp.value=0;
          	}else if(oevent.clientX - distanceX>result1.x+gene1_len*k){
          		obj.style.left=result1.x+gene1_len*k+'px';
-         		img_line1=result1.x+gene1_len*k;
+         		img_line1=result1.x+gene1_len*k+8;
          		//oevent.clientX - distanceX=gene2_len*0.3;
          		g1_bp.value=gene1_len;
          	}else{
          		obj.style.left = oevent.clientX - distanceX + 'px';
-         		img_line1= oevent.clientX - distanceX;
+         		img_line1= oevent.clientX - distanceX+8;
          		g1_bp.value=parseInt((oevent.clientX - distanceX-result1.x)/k);
          	}
          	
@@ -904,6 +1490,7 @@
     　　　　document.onmouseup = null;
           update_transbox();
           clickbtn();
+   
           //removediv();
           //f_Draw(gene1_arr,f_bar1);
 		  //f_Draw(gene2_arr,f_bar2);
@@ -940,7 +1527,39 @@
 			console.log(sect_g2.value)
 		}
 	}
+	g1_mrna_bar.onclick=function(){
+//		               /mrna1_retain
+                       var pop_title=document.getElementById('pop_title');
+                       pop_title.innerHTML='Broken mRNA information'
+                       var broken_title=document.getElementById('broken_title');
+                       broken_title.innerHTML='NT';
+                       g_name1.innerHTML=gene1_name;
+                       aas.innerHTML=mrna1_retain;
+				       // trs.innerHTML=gene1_seq.transeq;
+				        dialog.style.visibility="visible";
+				        f_show.hidden="hidden";
+				        g_show.hidden=false;
+	                	back_box.style.visibility="visible";
+	}
+	g2_mrna_bar.onclick=function(){
+//		               /mrna1_retain
+                       var pop_title=document.getElementById('pop_title');
+                       pop_title.innerHTML='Broken mRNA information:'
+                       var broken_title=document.getElementById('broken_title');
+                       broken_title.innerHTML='NT';
+                       g_name1.innerHTML=gene2_name;
+                       aas.innerHTML=mrna2_retain;
+				       // trs.innerHTML=gene1_seq.transeq;
+				        dialog.style.visibility="visible";
+				        f_show.hidden="hidden";
+				        g_show.hidden=false;
+	                	back_box.style.visibility="visible";
+	}
 	red_bp.onclick=function(){
+		               var pop_title=document.getElementById('pop_title');
+                       pop_title.innerHTML="Broken protein's sequence:"
+                       var broken_title=document.getElementById('broken_title');
+                       broken_title.innerHTML='AA';
 		                var str='ID=VAR_031727;Note=I->V;Ontology_term=ECO:0000269,ECO:0000269,ECO:0000269;'
 		                var index1=str.indexOf('Note=');
 		                if(index1==-1){
@@ -965,7 +1584,7 @@
 		                //console.log(noteinfo);
 		                g_name1.innerHTML=gene1_name;
 		                //g_name2.innerHTML=gene1_name;
-		                var newseq=gene1_seq.substr(0,g1_bp.value);
+                        var newseq=gene1_seq.substr(0,g1_bp.value);
 				        aas.innerHTML=newseq;
 				       // trs.innerHTML=gene1_seq.transeq;
 				        dialog.style.visibility="visible";
@@ -975,10 +1594,15 @@
 		
 	}
 	blue_bp.onclick=function(){
+		               var pop_title=document.getElementById('pop_title');
+                       pop_title.innerHTML="Broken protein's sequence:"
+                       var broken_title=document.getElementById('broken_title');
+                       broken_title.innerHTML='AA';
 		                g_name1.innerHTML=gene2_name;
 		                //g_name2.innerHTML=gene2_name;
-		                var newseq=gene2_seq.substr(g2_bp.value,gene2_len-g2_bp.value);
-                        aas.innerHTML=newseq;
+                        var newseq=gene2_seq.substr(g2_bp.value,gene2_len-g2_bp.value);
+                        
+						aas.innerHTML=newseq;
                        // trs.innerHTML=gene2_seq.transeq;
                         dialog.style.visibility="visible";
                         f_show.hidden="hidden";
@@ -997,9 +1621,9 @@
 		
 		var line_margin=ct.style.marginLeft+fusion_img.style.marginLeft;
 		//line_1.style.left=result.left;
-		
-		line_box.style.marginLeft=g1_bp.value*k+1+"px";
-		line_box.style.width=g2_bp.value*k+400-g1_bp.value*k+"px";
+		line_box.style.marginLeft=result1.x-left_box_pos.x+g1_bp.value*k+1+"px";
+		//line_box.style.marginLeft=g1_bp.value*k+1+"px";
+		line_box.style.width=g2_bp.value*k+result2.x-result1.x-g1_bp.value*k+"px";
 		//console.log(result);
 		//console.log(line_1.style.left);
 		//line_2.style.left=line_margin+654+"px";
@@ -1012,7 +1636,9 @@
 	}
      function clickbtn(){
      	//console.log(pagew+'页面宽度');
+     	 buttom.hidden=true;
          fusion_img.hidden=false;
+         fusion_label.hidden=false;
      	 abouttext.hidden=true;
          fgvieweristext.hidden=true;
          prerequisitetext.hidden=true;
@@ -1024,7 +1650,7 @@
      	 downloadtext.hidden=true;
      	txtcontent="";
      	no_retain="";
-     	no_retain3="";
+        no_retain3="";
      	retain_3="";
      	retain_5="";
 		//////////////////////////
@@ -1057,28 +1683,32 @@
 			gene2_ua=g2_info[1];
 			//gene1_arr=g1_arr;
             gene1_len=g1_info[3];
+            if (DEBUG)  
+            {
+            	//console.log("g1_info", g1_info);
+            }
             gene2_len=g2_info[3];
            // console.log(gene2_len+"长度")
            if(gene1_len>4000||gene2_len>4000){
-                   k=0.08;
+                   k=0.06;
            }else if(gene1_len>3000||gene2_len>3000){
-                   k=0.1;
+                   k=0.07;
            }else if (gene1_len>2000||gene2_len>2000){
-           	      k=0.12;
+           	      k=0.1;
 
            }else if(gene1_len>1600||gene2_len>1600){
-           	   k=0.2;
+           	   k=0.15;
 
            }else if(gene1_len>1300||gene2_len>1300){
-                     k=0.25;
+                     k=0.18;
            }else if (gene1_len>1000||gene2_len>1000){
-           	      k=0.3;
+           	      k=0.22;
            }else if (gene1_len>600||gene2_len>600){
-           	      k=0.4;
+           	      k=0.3;
            }else if (gene1_len>300||gene2_len>300){
-           	      k=0.6;
+           	      k=0.5;
            }else{
-           	   K=1;
+           	   k=1;
            }
             
             //gene1_arr=g1_arr;
@@ -1123,13 +1753,57 @@
             fusion_img.style.visibility='visible';
             //bp_posi.innerHTML=g1_bp.value;
             bp_label.style.marginLeft=gene1_len*k/2-20+"px";
-            //line_1.style.marginLeft=274+gene1_len*k-1+"px";
+//          dna1_bp.style.marginLeft=gene1_len*k/2-20+"px";
+//          dna2_bp.style.marginLeft=gene2_len*k/2-20+"px";
+//          g1_mrna_bp.style.marginLeft=gene1_len*k/2-20+"px";
+//          g2_mrna_bp.style.marginLeft=gene2_len*k/2-20+"px";
+           
             //line_box.style.marginLeft=g1_bp.value*k+1+"px";
            
             
             updateposi();
 
+				   
+		var length1=parseFloat(mrna_long1);
+		//console.log('长度杰弗森：'+length1)
+								
+         b=parseFloat(gene1_len);
+         				
+         //krna=(2/100).toFixed(4);
+		//krna=(gene1_len*k/length1).toFixed(4);
+		krna=0.010;
+		//console.log('比例：'+gene1_len*k);
+		//console.log('比例：'+length1);
+		//console.log('比例：'+krna);
+		//console.log('mrna1的 长都势：'+length1);
+        //console.log(islink)
+       //buttom.hidden=false;
+
+	    g1_utr5_len=cds_start_len1*krna;
+        g1_utr3_len=cds_end_len1*krna;
+	 	g2_utr5_len=cds_start_len2*krna;
+	 	g2_utr3_len=cds_end_len2*krna;
+       	console.log('啊回家恢复健康的韩国进口的符合：'+g1_utr5_len+','+g1_utr3_len+','+g2_utr5_len+','+g2_utr3_len);
+
+		g1_mrna_utr5.style.width=g1_utr5_len+"px";
+		g1_dna_utr5.style.width=g1_utr5_len+"px";
+		g1_mrna_utr3.style.width=g1_utr3_len+"px";
+		g1_dna_utr3.style.width=g1_utr3_len+"px";
+		g2_mrna_utr5.style.width=g2_utr5_len+"px";
+		g2_dna_utr5.style.width=g2_utr5_len+"px";
+		g2_mrna_utr3.style.width=g2_utr3_len+"px";
+		g2_dna_utr3.style.width=g2_utr3_len+"px";
             //bp_posi2.innerHTML=g2_bp.value;
+      if(g1_utr3_len>20){
+      	label1_3utr.innerHTML='';
+      	g1_mrna_utr3.style.fontSize="6px";
+      	g1_mrna_utr3.innerHTML="3'UTR";
+     }
+        if(g2_utr3_len>20){
+        	label2_3utr.innerHTML='';
+        	g2_mrna_utr3.style.fontSize="6px"
+        	g2_mrna_utr3.innerHTML="3'UTR";
+        }
             
 		    g1_name.innerHTML=sect_g1.value;
 		    ///////////////
@@ -1139,7 +1813,9 @@
 		    gene_1_lenth.innerHTML=gene1_len;
 		    gene_1_lenth.style.marginLeft=gene1_len*k-40+"px";
 		    bar_red.style.width=gene1_len*k+"px";
-		    f_Draw(gene1_arr,f_bar1,'gone');
+			
+			g1_f_count=gene1_arr.length;
+			//console.log(g1_f_count+"第一个基音有多少个feature");
 		    g2_name.innerHTML=sect_g2.value;
 		    g2_code.innerHTML=gene2_code;
 		   	gene_2_lenth.innerHTML=gene2_len+'';
@@ -1148,40 +1824,81 @@
 		   	//line_box.style.width=g2_bp.value*k+400-g1_bp.value*k+"px";
 		    bar_blue.style.width=gene2_len*k+"px";
 		    	//blue_bp.style.marginLeft=400-abl1_len*0.3+g2_bp.value*0.3+"px";
-		    gene_2_lenth.style.marginRight=400-gene2_len*k+"px";
+		    gene_2_lenth.style.marginRight=300-gene2_len*k+"px";//400
 		    blue_bp.style.width=gene2_len*k-g2_bp.value*k+"px";
-		    f_Draw(gene2_arr,f_bar2,'gtwo');
+		    g2_no_retain_bar.style.width=g2_bp.value*k-2+"px";
+		    g1_no_retain_bar.style.width=gene1_len*k-g1_bp.value*k-1+"px";
+		    //..console.log(g2_bp.value*k-2);
+			
+			g2_f_count=gene2_arr.length;
+			//console.log(g2_f_count+"第二个基音有多少个feature");
 		    //console.log()
 		  var box_len=(gene1_arr.length>gene2_arr.length)?gene1_arr.length:gene2_arr.length;
+		  f_Draw(gene1_arr,f_bar1,'gone',box_len);
+		  f_Draw(gene2_arr,f_bar2,'gtwo',box_len);
 //		  var zhezhaolen=(f_bar1.style.height>f_bar2.style.height)?f_bar1.style.height:f_bar2.style.height;
 //		  console.log("fbar长："+zhezhaolen);
 //		  console.log("旧的遮罩长"+box_len);
 //		  line_1.style.height=f_bar1.style.height;
 //		  line_2.style.height=f_bar1.style.height;
 //		  line_box.style.height=f_bar1.style.height;
-
+//       p_g2.style.marginTop=box_len*15+100+"px";
+//       p_g1.style.marginTop=box_len*15+100+"px";
+         p_g2.style.marginTop=20+"px";
+         p_g1.style.marginTop=20+"px";
+         Path_level_t.style.marginTop=(box_len-15)*15+"px";
          //var h2=document.defaultView.getComputedStyle(f_bar1,null).height;
          
 		  //var h = f_bar1.currentStyle.offsetHeight;
-		  line_1.style.height=(box_len)*15+50+"px";
-		  line_2.style.height=(box_len)*15+50+"px";
-		  line_box.style.height=(box_len)*15+50+"px";
-		  line_1.style.marginTop="90px";
-		  line_2.style.marginTop="90px";
-		  line_box.style.marginTop="90px";
-		  line_3.style.height=(box_len)*15+"px";
-		  line_4.style.height=(box_len)*15+"px";
+		  title_all1.style.height=90+known_bp_line*15+"px";
+		  title_all2.style.height=90+known_bp_line*15+"px";
+		  line_top_utr=120+known_bp_line*15;
+		  line_top=29+known_bp_line*15;
+		  //protein_level_t.style.marginTop=150+known_bp_line*15+"px";
+		  //dna_level_t.style.marginTop=110+known_bp_line*15+"px";
+		  dna_level_t.style.marginTop=170+(known_bp_line+1)*15+"px";
+		  
+		  var p_len=(p_len1>p_len2)?p_len1:p_len2;
+		  line_1.style.height=(box_len)*15+50+280+50+p_len*15+"px";
+		  line_2.style.height=(box_len)*15+50+280+50+p_len*15+"px";
+		  line_box.style.height=(box_len)*15+50+280+50+p_len*15+"px";
+		  line_1.style.marginTop=line_top+90+"px";
+		  line_2.style.marginTop=line_top+90+"px";
+		  line_box.style.marginTop=line_top+90+"px";
+		  line_3.style.height=(box_len)*15+50+280+50+p_len*15+"px";
+		  line_4.style.height=(box_len)*15+50+280+50+p_len*15+"px";
+		  line_3.style.marginTop=line_top+90+"px";
+		  line_4.style.marginTop=line_top+90+"px";
+		  line_5.style.marginTop=line_top_utr+"px";
+		  line_6.style.marginTop=line_top_utr+"px";
+		  line_7.style.marginTop=line_top_utr+"px";
+		  line_8.style.marginTop=line_top_utr+"px";
+		  line_5_utr.style.marginTop=line_top_utr+"px";
+		  line_6_utr.style.marginTop=line_top_utr+"px";
+		  line_7_utr.style.marginTop=line_top_utr+"px";
+		  line_8_utr.style.marginTop=line_top_utr+"px";
 
 		  
 		  
 		}
 		
+		////////////////////////
 		clickfeature();
+		
 		strtoint(gene1_arr);
         strtoint(gene2_arr);
 		line_box.style.visibility="visible";
 		result1=GetPos(bar_red);
         result2=GetPos(bar_blue);
+        left_box_pos=GetPos(all_left);
+        right_box_pos=GetPos(all_right);
+        line_3.style.marginLeft=result2.x-left_box_pos.x+"px";
+        line_4.style.marginLeft=result1.x-left_box_pos.x+"px";
+        line_5.style.marginLeft=result1.x-left_box_pos.x-1+"px";
+        line_6.style.marginLeft=result1.x-left_box_pos.x-1+gene1_len*k+"px";
+        line_7.style.marginLeft=result2.x-left_box_pos.x-1+"px";
+        line_8.style.marginLeft=result2.x-left_box_pos.x+gene2_len*k-1+"px";
+     
 		if((g1_bp.value==0)&&(g2_bp.value==0)){
         	line_1.style.visibility="visible";
         	line_2.style.visibility="visible";
@@ -1189,17 +1906,17 @@
         	red_bp.style.width=gene1_len*k+"px";
         	line_1.style.left=result1.x+"px";
 		    line_2.style.left=result2.x+"px";
-		    img_line1=result1.x;
-		    img_line2=result2.x;
+		    img_line1=result1.x+8;
+		    img_line2=result2.x+8;
 		   // console.log(red_bp.style.width);
         }else{
-        	line_1.style.visibility="visible";
+        	line_1.style.visibility="visible";                    
         	line_2.style.visibility="visible";
         	line_box.style.visibility="visible";
         	line_1.style.left=result1.x+g1_bp.value*k+"px";
 		    line_2.style.left=result2.x+g2_bp.value*k+"px";
-		    img_line1=result1.x+g1_bp.value*k;
-		    img_line2=result2.x+g2_bp.value*k;
+		    img_line1=result1.x+g1_bp.value*k+8;
+		    img_line2=result2.x+g2_bp.value*k+8;
         }
 
         if(g1_bp.value>gene1_len||g2_bp.value>gene2_len){
@@ -1210,16 +1927,17 @@
 		if((g1_bp.value==0)&&(g2_bp.value==0)){
 	    //alert("00");
         red_bp.style.width=gene1_len*k+"px";
+        
         red_bp.marginLeft="0px";
         //console.log(red_bp.style.width);
         img_line1=result1.x+8;
             }else{
             	 red_bp.style.width=g1_bp.value*k+1+"px";
-            	 img_line1=result1.x+g1_bp.value*k;
+            	 img_line1=result1.x+g1_bp.value*k+8;
             }
         if((g1_bp.value==0)&&(g2_bp.value!=0)){
         	red_bp.style.width=0+"px";
-        	img_line2=result2.x+g2_bp.value*k;
+        	img_line2=result2.x+g2_bp.value*k+8;
         }
     	
         darg(line_2,2);
@@ -1227,7 +1945,133 @@
         var h = fusion_ct.clientHeight||fusion_ct.offsetHeight;
        // console.log(h);
         islink=1;
-       // console.log(islink)
+        /////////////////////////
+        //////mrna///
+		var mrna1_pos=GetPos(g1_mrna);
+		var dna1_pos=GetPos(g1_dna);
+		var noteoff=""
+		var textw=textSize("10px","Arial","5"+","+"UTR"); 
+		g1_dna_line1.style.width=result1.x-dna1_pos.x-g1_utr5_len-2+"px";
+		g1_dna_line2.style.width=430-(result1.x-dna1_pos.x-g1_utr5_len-2)-gene1_len*k-g1_utr5_len-g1_utr3_len-4+"px";//20是两个utr的长度
+		label1_5utr.style.marginLeft=result1.x-mrna1_pos.x-29-g1_utr5_len+"px";//10是5utr的长度
+		g1_dna_utr5.style.marginLeft=0+"px";
+		g1_dna_bar.style.width=gene1_len*k+"px";
+		g1_mrna_bar.style.width=gene1_len*k-2+"px";
+		dna1_cds_start.style.marginLeft=result1.x-left_box_pos.x-50+"px";
+		dna1_cds_end.style.marginLeft=gene1_len*k*3/5+"px";
+	    g1_mrna_start.style.marginLeft=result1.x-dna1_pos.x-30+"px";
+	    var w1=textSize("9px","Arial",mrna_long1);
+        g1_mrna_end.style.marginLeft=gene1_len*k+"px";
+        label_1.style.marginLeft=result1.x-dna1_pos.x-30+gene1_len*k+15+"px";
+		mir_label.style.marginLeft=result1.x-dna1_pos.x-30+gene1_len*k+"px";
+		
+		
+        
+		line_5_utr.style.marginLeft=result1.x-left_box_pos.x-g1_utr5_len-2-1+"px";
+        line_6_utr.style.marginLeft=result1.x-left_box_pos.x+gene1_len*k+g1_utr3_len+2-1+"px";//10是utr3的长度
+        g1_exon_num=count1;
+		        //console.log("到达绘图这里的时候是几个："+g1_exon_num)
+	    exon_box(g1_exon_num,1);
+		//////mrna2
+		var mrna2_pos=GetPos(g2_mrna);
+		var dna2_pos=GetPos(g2_dna);
+		g2_dna_line1.style.width=result2.x-dna2_pos.x-g2_utr5_len-2+"px";
+		g2_dna_line2.style.width=430-(result2.x-dna2_pos.x-g2_utr5_len-2)-gene2_len*k-g2_utr5_len-g2_utr3_len+"px";
+		label2_5utr.style.marginLeft=result2.x-mrna2_pos.x-29-g2_utr5_len+"px";//10是5utr的长度
+		g2_dna_utr5.style.marginLeft=0+"px";
+		g2_dna_bar.style.width=gene2_len*k+"px";
+		g2_mrna_bar.style.width=gene2_len*k-2+"px";
+		dna2_cds_start.style.marginLeft=result2.x-right_box_pos.x-50+"px";
+		dna2_cds_end.style.marginLeft=gene2_len*k*3/5+"px";
+		g2_mrna_start.style.marginLeft=result2.x-dna2_pos.x-30+"px";
+		var w=textSize("9px","Arial",mrna_long2);
+        g2_mrna_end.style.marginLeft=gene2_len*k+"px";
+        mir_label2.style.marginLeft=result2.x-dna2_pos.x-30+gene2_len*k+"px";  
+        label_2.style.marginLeft=result2.x-dna2_pos.x-30+gene2_len*k+15+"px";
+		line_7_utr.style.marginLeft=result2.x-left_box_pos.x-g2_utr5_len-2-1+"px";
+        line_8_utr.style.marginLeft=result2.x-left_box_pos.x+gene2_len*k+g2_utr3_len+2-1+"px";//10是utr3的长度     
+        g2_exon_num=count2;
+        //console.log(g2_exon_num+"传过来的高2box");
+        
+        var textw=textSize("9px","Arial","3"+","+"UTR"); 
+        
+        
+        
+        p_cont.style.width=gene2_len*k+"px";
+        p_dot_bar.style.width=gene2_len*k+"px";
+        p_bar.style.width=gene2_len*k+"px";
+        
+        p_cont1.style.width=gene2_len*k+"px";
+        p_dot_bar1.style.width=gene2_len*k+"px";
+        p_bar1.style.width=gene2_len*k+"px";
+        
+        exon_box(g2_exon_num,2);
+        
+		g1_start_chr.innerHTML=g1_chr;
+		g1_end_chr.innerHTML=g1_chr;
+		g1_strand.innerHTML=strand_1;
+		g1_txstart.innerHTML=txstart_1;
+		g1_txend.innerHTML=txend_1;
+		g2_start_chr.innerHTML=g2_chr;
+		g2_end_chr.innerHTML=g2_chr;
+		g2_strand.innerHTML=strand_2;
+
+		g2_txstart.innerHTML=txstart_2;
+		g2_txend.innerHTML=txend_2;
+		
+		//mrna_long2=cds_end_len2+cds_start_len2+gene2_len*3;
+		//mrna_long1=cds_end_len1+cds_start_len1+gene1_len*3;
+		g1_mrna_end.innerHTML=mrna_long1+'';
+		g2_mrna_end.innerHTML=mrna_long2+'';
+		mrna_bp1=g1_bp.value*3+cds_start_len1;
+		mrna_bp2=g2_bp.value*3+cds_start_len2;
+		
+		
+		g1_mrna_bp.innerHTML=mrna_bp1+'';
+		g2_mrna_bp.innerHTML=mrna_bp2+'';
+		
+		
+		dna_bp1=txstart_1+mrna_bp1;
+		dna_bp2=txstart_2+mrna_bp2;
+		dna1_bp.innerHTML=g1_chr+":"+dna_bp1;
+		dna2_bp.innerHTML=g2_chr+":"+dna_bp2;
+		
+		g1_chrtitle.innerHTML=g1_chr+"";
+		g2_chrtitle.innerHTML=g2_chr+"";
+		
+		mir_label.innerHTML=rna1_mir;
+		mir_label2.innerHTML=rna2_mir;
+       
+       d_draw(1);
+       d_draw(2);
+		tfs1.innerHTML=g1_tfs;
+		tfs2.innerHTML=g2_tfs;
+       if(p_len1==0){
+       	if(p_len2==0){
+       		
+       	}else{
+       		p_draw(2);
+       	}
+       	
+       }else{
+       	if(p_len2==0){
+       		p_draw(1);
+       	}else{
+       		p_draw(3);
+       	}
+       }
+        
+      clickp();
+	         dna1_bp.style.marginLeft="45%";
+            dna2_bp.style.marginLeft="45%";
+            g1_mrna_bp.style.marginLeft="45%";
+            g2_mrna_bp.style.marginLeft="45%";
+            
+        mrna1_retain=mrna1_seq.substr(0,g1_bp.value*3+cds_start_len1);
+		mrna1_noretain=mrna1_seq.substr(g1_bp.value*3+cds_start_len1,mrna1_seq.length-(g1_bp.value*3+cds_start_len1));
+		mrna2_noretain=mrna2_seq.substr(0,g2_bp.value*3+cds_start_len2);
+		mrna2_retain=mrna2_seq.substr(g2_bp.value*3+cds_start_len2,mrna2_seq.length-(g2_bp.value*3+cds_start_len2));
+            //line_1.style.marginLeft=274+gene1_len*k-1+"px";
 	}
 	function removediv(){
 		while(f_bar2.hasChildNodes()){ 
@@ -1242,6 +2086,30 @@
 			legant.removeChild(legant.firstChild);
 	
 		}
+		var elements = document.getElementsByClassName('exon1_box');
+
+		
+		while(g1_dna_bar.hasChildNodes()){
+			g1_dna_bar.removeChild(g1_dna_bar.firstChild);
+	
+		}
+		while(g2_dna_bar.hasChildNodes()){
+			g2_dna_bar.removeChild(g2_dna_bar.firstChild);
+	
+		}
+		while(p_dot_bar.hasChildNodes()){
+			p_dot_bar.removeChild(p_dot_bar.firstChild);
+		}
+		while(p_dot_bar1.hasChildNodes()){
+			p_dot_bar1.removeChild(p_dot_bar1.firstChild); 
+		}
+        while(d1_cont.hasChildNodes()){
+        	d1_cont.removeChild(d1_cont.firstChild); 
+        }
+        while(d_cont.hasChildNodes()){
+        	d_cont.removeChild(d_cont.firstChild); 
+        }
+
        // window.location.reload();*/
 	}
 	function removecanvas(){
@@ -1252,6 +2120,91 @@
 	}
 	line_box.onclick=function(){
 		line_box.style.visibility="hidden";
+	}
+	
+	function exon_box(box_num,g){	
+		for(var i=0;i<box_num;i++){
+			var div=document.createElement("div");
+			if(g==1){
+				div.className="exon1_box";
+			    div.id="box1"+i;
+			    tmp_box_width_g=(gene1_len*k-box_num*2)/box_num;
+			    if (DEBUG)
+			    {
+			    	//console.log("gene1_len",gene1_len,"k", k, "box_num", box_num);
+			    }
+			    	
+			    
+			    
+			    div.style.width=tmp_box_width_g+"px";
+			   // console.log("box宽度111111："+tmp_box_width_g)
+			    var box_color_num=parseInt(g1_bp.value*k/(tmp_box_width_g+2));
+			    //console.log("第一条有颜色的格子："+box_color_num)
+			    //console.log("有颜的块块从这里开始"+box_color_num)
+			    if(i>box_color_num){
+			    	div.style.backgroundColor="white";
+			    	div.style.opacity="0.5";
+			    }
+			    
+			    g1_dna_bar.appendChild(div);
+			    if(i==box_color_num){
+			      var div_white=document.createElement("div");
+			      
+			      
+			      
+			      div_white.style.height="100%";
+			      div_white.style.width=(tmp_box_width_g+2)*(i+1)-g1_bp.value*k-2+"px";
+			      //div_white.style.width=(box_width+2)*i-g1_bp.value*k+"px";
+			   
+			      div_white.style.backgroundColor="white";
+			      div_white.style.opacity="0.5";
+			      div_white.style.float="right";
+			      div.appendChild(div_white);
+			    }
+			    
+			}else if(g==2){
+				div.className="exon2_box";
+			    div.id="box2"+i;
+			     //console.log("box宽度222数量："+box_num);
+			    // console.log("box宽度222总数量："+gene2_len*k-box_num*2);
+			     //console.log("gene2_len", gene2_len, "k", k, box_num, box_num);
+			    var box_width=(gene2_len*k-box_num*2)/box_num;
+			    div.style.width=box_width+"px";
+			    console.log("box宽度222222："+box_width);
+			    var box_color_num=parseInt(g2_bp.value*k/(box_width+2));
+			    //console.log("第二条有颜色的格子："+box_color_num)
+			    //console.log("有颜的块块从这里开始"+box_color_num)
+			    if(i<box_color_num){
+			    	div.style.backgroundColor="white";
+			    	div.style.opacity="0.5";
+			    }
+			    g2_dna_bar.appendChild(div);
+			    if(i==box_color_num){
+			      var div_white=document.createElement("div");
+			      
+			      
+			      
+			      div_white.style.height="100%";
+			      //div_white.style.width=20+"px";
+			      div_white.style.width=g2_bp.value*k-(box_width+2)*i+"px";
+			      //console.log("nayige的长度是")
+			      //console.log(g2_bp.value*k-(box_width+2)*i)
+			      //div_white.style.width=(box_width+2)*i-g1_bp.value*k+"px";
+			   
+			      div_white.style.backgroundColor="white";
+			      div_white.style.opacity="0.5";
+			      div_white.style.float="left";
+			      div.appendChild(div_white);
+			    }
+			}
+			
+			//legant.appendChild(div);
+			//g2_dna_bar
+
+			///////////////
+
+			
+		}
 	}
 	
 	function box_Draw(){
@@ -1331,7 +2284,7 @@
 	}
 	if((g1_bp.value==0)&&(g2_bp.value!=0)){
 		
-		no_retain=no_retain+gene1_name+'    '+"Not-retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
+			no_retain=no_retain+gene1_name+'    '+"Not-retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
 	}
 	if(g1_bp.value==gene1_len){
 		retain_5=retain_5+gene1_name+'    '+"Retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
@@ -1353,7 +2306,119 @@
       }
       //console.log(textSize("20px","Arial","abcdefg"));
      // console.log(textSize("20px","Arial","abcdefg"));
-	function f_Draw(arr,fbar,str){
+    function d_draw(g){
+    	if(g==1){
+    		for(var i=0;i<disease_1.length;i++){ 
+    			var dtextbar=document.createElement("div");//big l
+	            dtextbar.className="d_item";
+	            dtextbar.innerHTML=disease_1[i];
+	            d1_cont.appendChild(dtextbar);
+	           }
+    	}
+    	if(g==2){
+    		for(var i=0;i<disease_2.length;i++){ 
+    			var dtextbar=document.createElement("div");//big l
+	            dtextbar.className="d_item";
+	            dtextbar.innerHTML=disease_2[i];
+	            d_cont.appendChild(dtextbar);
+    	}
+     }
+    }
+    function p_draw(g){
+    	if(g==2){
+    		for(var i=0;i<g2_puta.length;i++){
+    			var dotbar=document.createElement("div");//big l
+	            dotbar.className="pbox";
+	            p_dot_bar.appendChild(dotbar);
+	            
+	            var dotdiv=document.createElement("div");//big l
+	            dotdiv.className="pdot2";
+	            var divtext=document.createElement("div");//big l
+	            divtext.className="ftext";
+	            divtext.innerHTML=g2_puta[i];
+	            dotbar.appendChild(dotdiv);
+	             //dotbar.appendChild(divtext);	
+	            dotdiv.style.marginLeft=parseInt(g2_pos[i])*k+"px";
+	            divtext.style.marginLeft="10px"
+	            dotdiv.appendChild(divtext);	
+	            if(g2_pos[i]<g2_bp.value){
+	            	dotdiv.style.opacity="0.5";
+	            }
+	            
+	            //dotbar.appendChild(divtext);	
+    		}
+    	}
+    	if(g==1){
+    		for(var i=0;i<g1_puta.length;i++){
+    			var dotbar=document.createElement("div");//big l
+	            dotbar.className="pbox";
+	            p_dot_bar1.appendChild(dotbar);
+	            
+	            var dotdiv=document.createElement("div");//big l
+	            dotdiv.className="pdot1";
+	            dotbar.appendChild(dotdiv);
+	            var divtext=document.createElement("div");//big l
+	            divtext.className="ftext";
+	            divtext.innerHTML=g1_puta[i];
+	             divtext.style.marginLeft="10px"
+	            dotdiv.appendChild(divtext);
+	            dotdiv.style.marginLeft=parseInt(g1_pos[i])*k+"px";
+	            var bp_p=parseInt(g1_pos[i]);
+	             if(bp_p>g1_bp.value){
+	            	dotdiv.style.opacity="0.5";
+	            	
+	            }
+	            console.log('g1位置：',bp_p,'断电：',g1_bp.value)
+    		}
+    	}
+    	if(g==3){
+    		console.log('俩能改变都de话圈圈',p_len1,'he',p_len2)
+    		console.log(g1_pos);
+    		console.log(g2_pos)
+    		for(var i=0;i<g2_pos.length;i++){
+    			var dotbar=document.createElement("div");//big l
+	            dotbar.className="pbox";
+	            p_dot_bar.appendChild(dotbar);
+	            
+	            var dotdiv=document.createElement("div");//big l
+	            dotdiv.className="pdot2";
+	            dotbar.appendChild(dotdiv);
+	            dotdiv.style.marginLeft=parseInt(g2_pos[i])*k+"px";
+	             if(g2_pos[i]<g2_bp.value){
+	            	dotdiv.style.opacity="0.5";
+	            }
+	            //console.log(i,':',g2_pos[i])
+	            var divtext=document.createElement("div");//big l
+	            divtext.className="ftext";
+	            divtext.innerHTML=g2_puta[i];
+	            divtext.style.marginLeft="10px"
+	            dotdiv.appendChild(divtext);
+    		}
+    		for(var i=0;i<g1_pos.length;i++){
+    			var dotbar=document.createElement("div");//big l
+	            dotbar.className="pbox";
+	            
+	            p_dot_bar1.appendChild(dotbar);
+	            
+	            var dotdiv=document.createElement("div");//big l
+	            dotdiv.className="pdot1";
+	            dotbar.appendChild(dotdiv);
+	            var divtext=document.createElement("div");//big l	
+	            divtext.className="ftext";
+	            divtext.innerHTML=g1_puta[i];
+	            divtext.style.marginLeft="10px"
+	            dotdiv.style.marginLeft=parseInt(g1_pos[i])*k+"px";
+	            var bp_p=parseInt(g1_pos[i]);
+	            if(bp_p>g1_bp.value){
+	            	dotdiv.style.opacity="0.5";
+	            }
+	            dotdiv.appendChild(divtext);
+	            //console.log(i,':',g1_pos[i])
+	            
+    		}
+    	}
+    }
+	function f_Draw(arr,fbar,str,count){
 		//var back=0;
 		for(var i=0;i<arr.length;i++){
 //			if(arr[i].name=='Sequence conflict'||arr[i].name=='Sequence uncertainty'){
@@ -1403,7 +2468,7 @@
 		// }   
 		//console.log(noteinfo);
 		///////////
-	    var contdiv=document.createElement("div");//big line
+	    var contdiv=document.createElement("div");//big l
 	    contdiv.className="f";
 	    //contdiv.id=fbar+i+"";
 		var div=document.createElement("div");
@@ -1462,6 +2527,19 @@
 		if(fbar==f_bar1){
 			div.className="fa";
 			div.id="fa"+i;
+			//console.log('啊啊啊'+g1_f_count+g2_f_count);
+		    if(g1_f_count<g2_f_count){
+				
+				var divh=count*15/g1_f_count;
+				contdiv.style.height=divh+"px";
+			 	div.style.height=divh+"px";
+			 	//console.log('高的feature的高度：'+divh);
+				
+			 }
+			 else{
+				contdiv.style.height=15+"px";
+			 	div.style.height=15+"px";
+			 }
 			//console.log(div.id);
 //			if(gene1_name=='BCR'){
 //			if(arr[i].end*k+15>gene1_len*k){
@@ -1504,10 +2582,20 @@
 			div.className="fb";
 			div.id="fb"+i;
 			//console.log(div.id);
-			if(gene2_name=='BCR'){}
+			 if(g1_f_count>g2_f_count){
+				 var divh=count*15/g2_f_count;
+				 contdiv.style.height=divh+"px";
+				  div.style.height=divh+"px";
+				 // console.log('g2高度比较高：'+divh);
+				
+			 }else{
+				contdiv.style.height=15+"px";
+			 	div.style.height=15+"px";
+			 }
+			
 			if(g1_bp.value!=0||g2_bp.value!=0){
 			if(arr[i].end*k<=g2_bp.value*k){
-				div.style.opacity="0.5";
+			    div.style.opacity="0.5";
 				no_retain3=no_retain3+gene2_name+'    '+"Not-retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+arr[i].end+'    '+arr[i].desc+'\n';
 			}else if(arr[i].start<g2_bp.value && arr[i].end>g2_bp.value){
 				var divs=document.createElement("div");
@@ -1517,7 +2605,7 @@
 				divs.style.backgroundColor="white";
 				divs.style.opacity="0.5";
 				div.appendChild(divs);  
-				no_retain3=no_retain3+gene2_name+'    '+"Not-retained"+'    '+gene2_name+'    '+"Not-retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+g2_bp.value+'    '+arr[i].desc+'\n';
+			    no_retain3=no_retain3+gene2_name+'    '+"Not-retained"+'    '+gene2_name+'    '+"Not-retained"+'    '+arr[i].name+'    '+arr[i].start+'    '+g2_bp.value+'    '+arr[i].desc+'\n';
 				retain_3=retain_3+gene2_name+'    '+"Retained"+'    '+arr[i].name+'    '+g2_bp.value+'    '+arr[i].end+'    '+arr[i].desc+'\n';
 			}else if(i==0){
 				if(g2_bp.value==""||g2_bp.value==0){
@@ -1600,7 +2688,7 @@
 		//console.log(textw+"文字的宽度");
 		//////////
 		var textw=textSize("9px","Arial",noteinfo);
-		if(arr[i].end*k+textw>400 && arr[i].start*k>textw){
+		if(arr[i].end*k+textw>300 && arr[i].start*k>textw){
 			//console.log(arr[i].end*k+textw+'ppppppppppppppppppppppppppppppppppppp');
 			    var newmargin=arr[i].start*k-textw;
 			    divtext.style.marginLeft=arr[i].start*k-textw+"px";
@@ -1608,9 +2696,9 @@
 			    
 				contdiv.appendChild(divtext);
 				contdiv.appendChild(div);
-				//contdiv.appendChild(div);
+				//contdiv.appendChild(div);400
 				//divtext.style.marginLeft=
-		    }else if(arr[i].end*k+textw>400 && arr[i].start*k<textw){
+		    }else if(arr[i].end*k+textw>300 && arr[i].start*k<textw){
                 //div.appendChild(divtext);
         	    contdiv.appendChild(div);
 		    }else{
@@ -1620,12 +2708,25 @@
 		    }
 		  
 	}
-		txtcontent="# 5'gene:"+gene1_name+"\n\r";
+		
+        txtcontent="# 5'gene:"+gene1_name+"\n\r";
 		txtcontent=txtcontent+"# 3'gene:"+gene2_name+"\n\r";
 		txtcontent=txtcontent+"# 5'-protein length:"+gene1_len+' '+"amino acids"+"\n\r";
 		txtcontent=txtcontent+"# 3'-protein length:"+gene2_len+' '+"amino acids"+"\n\r";
 		txtcontent=txtcontent+"# BP in 5'-protein:"+g1_bp.value+' '+"amino acids"+"\n\r";
 		txtcontent=txtcontent+"# BP in 3'-protein:"+g2_bp.value+' '+"amino acids"+"\n\r";
+		txtcontent=txtcontent+"# g1 DNA TFs:"+g1_tfs+"\n\r";
+		txtcontent=txtcontent+"# g2 DNA TFs:"+g2_tfs+"\n\r";
+		txtcontent=txtcontent+"# g1 mRNA length:"+mrna_long1+"\n\r";
+		txtcontent=txtcontent+"# g2 mRNA length:"+mrna_long2+"\n\r";
+		txtcontent=txtcontent+"# g1 mRNA retained:"+"\n\r";
+		txtcontent=txtcontent+"#"+mrna1_retain+"\n\r";
+		txtcontent=txtcontent+"# g1 mRNA no-retained:"+"\n\r";
+		txtcontent=txtcontent+"#"+mrna1_noretain+"\n\r";
+		txtcontent=txtcontent+"# g2 mRNA no-retained:"+"1-"+"\n\r";
+		txtcontent=txtcontent+"#"+mrna2_retain+"\n\r";
+		txtcontent=txtcontent+"# g2 mRNA retained:"+"\n\r";
+		txtcontent=txtcontent+"#"+mrna2_noretain+"\n\r";
 		txtcontent=txtcontent+"# Protein     Retention of feature  Feature type  Start  End  Description"+"\n\r";
 		txtcontent=txtcontent+retain_5+"\n\r"+no_retain+"\n\r"+no_retain3+"\n\r"+retain_3;
 		//txtcontent=txtcontent+"Retained features in 5'gene:\n\r"+retain_5+"\n\r"+"Not Retained features:\n\r"+no_retain+"\n\r"+"Retained features in 3'gene:\n\r"+retain_3;
@@ -1643,6 +2744,67 @@
 	        }
 	   }
 	   return classElements;
+	}
+	function clickp(){
+         //console.log('click pppppppppppp');
+	     window.onscroll = function(){
+		 var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+	      //console.log('鼠标移动了'+scrollTop);
+		 back_box.style.top=scrollTop+"px";
+		 }
+       	var list_obj1 = getElementsByClassName("pdot1");  
+		var list_obj2 = getElementsByClassName("pdot2");
+		//console.log(list_objb.length);	
+		if (list_obj1.length!=0){
+			for(var i = 0; i<list_obj1.length; i++){
+			
+	        list_obj1[i].onclick = (function(i){
+	                return function () {
+	                	//console.log('click pppppppppppp')
+	                	feature_title.innerHTML='Clinvar information:';
+	                	title_1.innerHTML='Name:';
+	                	title_2.innerHTML='Location:';
+	                	title_3.innerHTML='Putation:';
+	                	title_4.innerHTML='information:';
+	                	f_desc.innerHTML=g1_puta[i];
+	                	f_name.innerHTML=gene1_name;
+	                	f_start.innerHTML=g1_pos[i];
+	                	f_end.innerHTML=g1_pinfo[i];
+	                	f_show.hidden=false;
+	                	g_show.hidden="hidden";
+	                	dialog.style.visibility="visible";
+	                	back_box.style.visibility="visible";
+	                }
+	        })(i);
+        }
+		}
+		if (list_obj2.length!=0){
+			for(var i = 0; i<list_obj2.length; i++){
+			
+	        list_obj2[i].onclick = (function(i){
+	                return function () {
+	                	//onsole.log('click pppppppppppp')
+	                	feature_title.innerHTML='Clinvar information:';
+	                	title_1.innerHTML='Name:';
+	                	title_2.innerHTML='Location:';
+	                	title_3.innerHTML='Putation:';
+	                	title_4.innerHTML='information:';
+	                	f_desc.innerHTML=g2_puta[i];
+	                	f_name.innerHTML=gene2_name;
+	                	f_start.innerHTML=g2_pos[i];
+	                	f_end.innerHTML=g2_pinfo[i];
+	                	f_show.hidden=false;
+	                	g_show.hidden="hidden";
+	                	dialog.style.visibility="visible";
+	                	back_box.style.visibility="visible";
+	                }
+	        })(i);
+        }
+		}
+		
+		
+	
+		
 	}
 	
 	function clickfeature(){
@@ -1662,6 +2824,11 @@
 			
 	        list_objb[i].onclick = (function(i){
 	                return function () {
+	                	feature_title.innerHTML='Protein feature information:';
+	                	title_1.innerHTML='Name:';
+	                	title_2.innerHTML='Start:';
+	                	title_3.innerHTML='End:';
+	                	title_4.innerHTML='Description:';
 	                	f_desc.innerHTML=gene2_arr[i].desc;
 	                	f_name.innerHTML=gene2_arr[i].name;
 	                	f_start.innerHTML=gene2_arr[i].start;

@@ -1,0 +1,28 @@
+              <div id="helptext" style="width:780px ;margin: auto;margin-bottom: 5px; font-size: 14px">
+			  	<H2>HELP</H2>
+               <div style="width:780px ;margin: auto; font-size: 14px">- Understanding FGviewer functions.<br>
+				1. Search, example: EWSR1 and FLI1 fusion gene. <br>
+				Input query: Official HUGO gene symbols. To see the result of query, please click the 'submit' button twice for better function (for example, for the shaded background and application to the new query).<br><br>
+				2. FGviewer is composed of four levels including DNA-, RNA-, protein-, and pathogenic-levels. <br>
+				For each gene, it provides the representative accessions of UniProt and Ensembl transcript. <br>
+				1) The user can move the breakpoint line by dragging. This line is consistent along the three different bio-molecular levels. See point (a).<br>
+                                <a href="help_images/3.png" target="_blank"><img alt="viewer" src="help_images/3.png" style="border:1px solid #021a40" width="718px" /></a><br><br>
+                                2) When you click the button of 'Save image', then it will provide the option to download png or pdf files as below. See point (b) of image 3. 1). <br>
+                                <a href="help_images/4.png" target="_blank"><img alt="save" src="help_images/4.png" style="border:1px solid #021a40" width="718px" /></a><br><br>
+				3) When you click the transcript or protein structure bars, then it let you download the broken sequence of nucleotides or amino acids. This sequence is created based on the breakpoint location which is dragged by the user as below. See point (c) of image 3. 1). <br>
+                                <a href="help_images/5.png" target="_blank"><img alt="seq" src="help_images/5.png" style="border:1px solid #021a40" width="300"/></a><br><br>
+				4) When you click the bar of individual functional features, then you can see the detailed information for that feature as below. See point (d) of image 3. 1).<br>
+                                <a href="help_images/6.png" target="_blank"><img alt="feature" src="help_images/6.png" style="border:1px solid #021a40" width="300"/></a><br><br>
+				5) When you click the button of 'Download information', then you can download all information of the protein feature retention based on the current breakpoints for both of the genes as below. See point (e) of image 3. 1).<br>
+                                <a href="help_images/7.png" target="_blank"><img alt="download" src="help_images/7.png" style="border:1px solid #021a40" /></a><br><br>
+				3. Used data.<br><br>
+				1) Used gene structure model: GENCODE (v28 of GRCh38)<br><br>
+				2) Representative protein accessions and sequences: We have downloaded information of 18,963 protein accessions using the query of 'Reviewed human proteins' from UniProt database.<br><br>
+				3) Representative transcript accessions and sequences: we have downloaded transcript sequences of 28,860 corresponding transcripts to these protein accessions from Ensembl (GRCh38)<br><br>
+				4) Protein feature information for protein-level: We downloaded the protein information in general feature format (GFF) of 18,963 accessions of UniProt database provides 39 protein sequence annotation features based on individual protein sequence including six molecule processing features, 13 region features, four site features, six amino acid modification features, two natural variation features, five experimental info features, and 3 secondary structure features. Detailed information about all of the protein features is in <a href="https://www.uniprot.org/help/sequence_annotation" target="_blank">UniProt page </a>. See point (f) of image 3. 1) <br><br>
+				5) Transcription factor and target gene pair information for DNA-level: TF-target relationship information were downloaded from TRRUST (version 2), which is a manually curated database of human transcriptional regulatory networks. From TRRUST, we obtained 8427 pairs between 795 TFs and 2492 target genes.<br><br>
+				6) microRNA and target gene pair information for mRNA-level: We downloaded the conserved human miRNA-target gene interaction information from TargetScan (release 7.2). For more reliable interactions, we have filtered out the miRNA-target pairs when the context++ score and percent identity were bigger than -0.4 and less than 97%, respectively. <br><br>
+				7) Pathogenic variant information of individual genes for pathogenic-level: We downloaded ClinVar data (August 14, 2018) and selected pathogenic variants only. <br>
+                </div>
+			  </div>
+			  
